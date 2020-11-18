@@ -27,18 +27,8 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    college: {
-        type: String,
-        enum: ['CCS', 'COB', 'SOE', 'BAGCED', 'GCOE', 'COS', 'COL', 'CLA'],
-        required: true
-    },
     birthday: {
         type: Date,
-        required: true
-    },
-    idnum: {
-        type: Number,
-        unique: true,
         required: true
     },
     rating: {

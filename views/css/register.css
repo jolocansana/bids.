@@ -23,9 +23,8 @@ input[type="color"]:focus,
     width:700px;
     padding-top: 50px;
     padding-bottom: 50px;
-    margin-top: 10%;
-    border-width: 3px;
-    border-color: rgb(20, 20, 20);
+    margin-top: 1%;
+    border-width: 0px;
 }
 
 .signin {
@@ -36,7 +35,9 @@ input[type="color"]:focus,
 }
 
 .title {
-    margin-top: 20px;
+    margin-top: 10%;
+    margin-left: 60px;
+    margin-bottom: 30px;
 }
 
 .register {
@@ -44,10 +45,14 @@ input[type="color"]:focus,
 }
 
 .register:hover {
-    color: rgb(87, 87, 87);
     text-decoration: none;
+    color: rgb(95, 95, 95);
 }
 
 .submit {
-    margin-top: 20px;
+    margin-top: 15px;
+}
+
+.white {
+    background-color: white;
 }
