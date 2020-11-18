@@ -1,7 +1,7 @@
 const express = require('express');
 const hbs = require('hbs');
 const routes = require('./routes/routes.js');
-const db = require('./models/db.js');
+// const db = require('./models/db.js');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);

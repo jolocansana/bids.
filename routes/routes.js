@@ -5,6 +5,8 @@ const homeController = require('../controllers/homeController.js');
 
 const app = express();
 
+module.exports = app;
+
 var storage = multer.diskStorage({
     destination:'views/uploads/',
     filename: function(req, file, cb) {
