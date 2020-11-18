@@ -2,6 +2,8 @@ const express = require('express');
 const multer  = require('multer');
 
 const homeController = require('../controllers/homeController.js');
+const loginController = require('../controllers/loginController.js');
+const registerController = require('../controllers/registerController.js');
 
 const app = express();
 
@@ -16,4 +18,6 @@ var storage = multer.diskStorage({
 });
 
 app.get('/', homeController.home);
+app.get('/login', loginController.login);
+app.get('/register', registerController.register);
 
