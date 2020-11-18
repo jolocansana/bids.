@@ -16,42 +16,36 @@
 });
 </script> --}}
 
-<nav class="navbar sticky-top navbar-expand-lg justify-content-center">
-    <ul class="nav d-flex align-items-center">
-        <li class="nav-item">
-            <a class="nav-link navlink" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link navlink" href="about">About Us</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link navlink" href="contact">Contact Us</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link navlink" href="faq">FAQ</a>
-        </li>
-        <li class="nav-item">
-            <div class="d-flex justify-content-center align-content-center h-100" style="margin-top:-13px">
-                <form class="searchbar" method="get" action="/search">
-                    <input class="search_input" type="text" name="searchInput" id="searchInput" placeholder="Search...">
-                    <i class="fa fa-search"></i>
-                </form>
+<div class="container">
+    <div class="row fixed-top">
+            <div class="col-3 d-flex justify-content-start">
+                <a href="/" class="logolink"><h1 class="logo">Bids.</h1></a>
             </div>
-        </li>
-        <li class="nav-item" id="navNoSession">
-            <a class="nav-link navlink" href="login">Login</a>
-        </li>
-        {{!-- <li class="nav-item dropdown" id="navSession" hidden>
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                <p id="navName" style="display:inline"> </p>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/orderPending">Order History</a>
-            <a class="dropdown-item" href="/logout">Logout</a>
+            
+            <div class="col-6 d-flex justify-content-center">
+                <div class="d-flex justify-content-center align-content-center h-100" style="margin-top:-13px">
+                    <form class="searchbar" method="get" action="/search">
+                        <input class="search_input" type="text" name="searchInput" id="searchInput" placeholder="Search...">
+                        <a href="#"><i class="fa fa-search searchicon"></i></a>
+                    </form>
+                </div>
             </div>
-        </li> --}}
-    </ul>
-</nav>
-<nav class="navbar fixed-top navbar-expand-lg bg-transparent navlogo" style="width:100px">
-    <a href="/" class="logolink"><h1 class="logo">Bids.</h1></a>
-</nav>
+
+            <div class="col-3 d-flex justify-content-end userNav" >
+                <div class="navNoSession">
+                    <a class="logolink" href="login">Login</a>              
+                </div>
+                {{!-- <div class="dropdown" id="navSession" >
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        <p id="navName" style="display:inline"> </p>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/orderPending">Order History</a>
+                    <a class="dropdown-item" href="/logout">Logout</a>
+                    </div>
+                </div> --}}
+            </div>
+
+    </div>
+    
+</div>

@@ -13,7 +13,7 @@
 
 .nav-link {
     color: black;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .navlink:hover {
@@ -28,7 +28,7 @@
 .searchbar {
     border-radius: 30px;
     padding: 10px;
-    margin-top: 14px;
+
 }
 
 .logo {
@@ -44,14 +44,16 @@
     border: 0;
     outline: 0;
     background: none;
-    width: 0;
-    caret-color:transparent;
+    width: 360px;
+    caret-color:rgb(0, 0, 0);
     line-height: 30px;
     transition: width 0.4s linear;
 }
 
 .logolink {
     color: black;
+    margin-left: 20px;
+    margin-top: 14px;
 }
 
 .logolink:hover {
@@ -59,19 +61,24 @@
     color: rgb(75, 75, 75);
 }
 
-.search_icon {
-    height: 30px;
-    width: 30px;
+.searchicon {
+    margin-top: 6px;
+    margin-right: 5px;
     color: black;
     border-radius: 50%;
+    float: right;
 }
 
-.searchbar:hover > .search_input {
+.searchicon:hover {
+    color: rgb(109, 109, 109);
+}
+
+.searchbar{
     padding: 0 20px;
     width: 450px;
     caret-color:rgb(0, 0, 0);
-    transition: width 0.4s linear;
     color: rgb(0, 0, 0);
+    margin-top: 30px;
     border-radius: 30px;
     border-width: 100px;
     background-color: rgb(223, 223, 223);
@@ -80,3 +87,22 @@
 .navlogo {
     margin-left: 20px;
 }
+
+.userNav {
+    margin-top: 20px;
+    margin-left: -30px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-text-fill-color: rgb(0, 0, 0);
+    -webkit-box-shadow: 0 0 0px 0px #000 inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
