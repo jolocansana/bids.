@@ -1,20 +1,3 @@
-{{!-- <script>
-    $(document).ready(function() {
-    $.get('/getNavbar', null, function (result) {
-        if(result){
-            $("#navNoSession").prop('hidden', true);
-            $("#navSession").prop('hidden', false);
-            $.get('/getName', null, function (result) {
-                $("#navName").text(result);
-            });
-        }
-        else{
-            $("#navNoSession").prop('hidden', false);
-            $("#navSession").prop('hidden', true);
-        }
-    });
-});
-</script> --}}
 
 <div class="container">
     <div class="row fixed-top">
@@ -35,7 +18,7 @@
                 <div class="navNoSession">
                     <a class="nav-link" href="login">Login</a>              
                 </div>
-                {{!-- <div class="dropdown" id="navSession" >
+                <div class="dropdown" id="navSession" >
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                         <p id="navName" style="display:inline"> </p>
                     </a>
@@ -43,7 +26,7 @@
                     <a class="dropdown-item" href="/orderPending">Order History</a>
                     <a class="dropdown-item" href="/logout">Logout</a>
                     </div>
-                </div> --}}
+                </div>
             </div>
 
     </div>
