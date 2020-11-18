@@ -1,0 +1,59 @@
+.body {
+    font-family: 'Open Sans';
+}
+
+.logosize{
+    height:100%;
+}
+
+.nav-link:hover {
+    color: white;
+    /* font-weight: bold; */
+}
+
+.nav-link {
+    color: white;
+    font-size: 18px;
+}
+
+.navlink:hover {
+    color: rgb(110, 110, 110);
+}
+
+.navbar {
+    background-color: black;
+    height: 70px;
+}
+
+.searchbar {
+    border-radius: 30px;
+    padding: 10px;
+    margin-top: 14px;
+}
+
+.search_input {
+    color: black;
+    font-size: 12px;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    caret-color:transparent;
+    line-height: 30px;
+    transition: width 0.4s linear;
+}
+
+.search_icon {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.searchbar:hover > .search_input {
+    padding: 0 20px;
+    width: 450px;
+    caret-color:red;
+    transition: width 0.4s linear;
+    background-color: white;
+    border-radius: 30px;
+}

@@ -1,0 +1,64 @@
+<script>
+    $(document).ready(function() {
+    $.get('/getNavbar', null, function (result) {
+        if(result){
+            $("#navNoSession").prop('hidden', true);
+            $("#navSession").prop('hidden', false);
+            $.get('/getName', null, function (result) {
+                $("#navName").text(result);
+            });
+        }
+        else{
+            $("#navNoSession").prop('hidden', false);
+            $("#navSession").prop('hidden', true);
+        }
+    });
+});
+</script>
+
+<nav class="navbar sticky-top navbar-expand-lg justify-content-center">
+    <ul class="nav d-flex align-items-center">
+        <li class="nav-item">
+            <a class="nav-link navlink" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link navlink" href="about">About Us</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link navlink" href="contact">Contact Us</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link navlink" href="faq">FAQ</a>
+        </li>
+        <li class="nav-item">
+            <div class="d-flex justify-content-center align-content-center h-100" style="margin-top:-13px">
+                <form class="searchbar" method="get" action="/search">
+                    <input class="search_input" type="text" name="searchInput" id="searchInput" placeholder="Search...">
+                    <a class="search_icon" id="searchbtn">
+                        <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.7965 16.9215C19.7558 15.5864 20.3188 13.9521 20.3188 12.1937C20.3188 7.70622 16.6813 4.06873 12.1938 4.06873C7.70626 4.06873 4.06876 7.70622 4.06876 12.1937C4.06876 16.6812 7.70626 20.3187 12.1938 20.3187C13.9521 20.3187 15.5864 19.7557 16.9215 18.7965L24.0688 25.9312L25.9313 24.0687L18.7965 16.9215ZM6.56876 12.1937C6.56876 15.3062 9.08126 17.8187 12.1938 17.8187C15.3063 17.8187 17.8188 15.3062 17.8188 12.1937C17.8188 9.08123 15.3063 6.56873 12.1938 6.56873C9.08126 6.56873 6.56876 9.08123 6.56876 12.1937Z" fill="#F2F2F2"/>
+                        </svg>
+                    </a>
+                </form>
+            </div>
+        </li>
+        <li class="nav-item" id="navNoSession" hidden>
+            <a class="nav-link navlink" href="login">Login</a>
+        </li>
+        <li class="nav-item dropdown" id="navSession" hidden>
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                <p id="navName" style="display:inline"> </p>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/orderPending">Order History</a>
+            <a class="dropdown-item" href="/logout">Logout</a>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link navlink" href="shoppingCart">Cart</a>
+        </li>
+    </ul>
+</nav>
+<nav class="navbar fixed-top navbar-expand-lg bg-transparent" style="width:100px">
+    <a class="nav-link navlink" href="/"><img class="logosize" style="width:100px" src="\../images/coverphoto1.png"></a>
+</nav>
