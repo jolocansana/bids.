@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var ParticipationSchema = new mongoose.Schema({
-    archerUsername: {
+    email: {
         type: String,
         required: true
     },
@@ -11,6 +11,10 @@ var ParticipationSchema = new mongoose.Schema({
     },
     bid: {
         type: Number,
+        required: true
+    },
+    status: {
+        type: String,
         required: true
     }
 });

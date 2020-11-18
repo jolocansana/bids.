@@ -81,7 +81,6 @@ const database = {
         });
     },
 
-
     deleteMany: function(model, conditions) {
         model.deleteMany(conditions, function (error, result) {
             if(error) return result

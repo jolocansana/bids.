@@ -1,11 +1,6 @@
 var mongoose = require('mongoose');
 
 var PinnedSchema = new mongoose.Schema({
-    id: {
-        type: String,
-        unique: true,
-        required: false
-    },
     archerUsername: {
         type: String,
         required: true

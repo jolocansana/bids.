@@ -25,7 +25,7 @@ var ListingSchema = new mongoose.Schema({
         type: [String],
         required: false
     },
-    startDate: { // Validation?
+    startDate: { 
         type: Date,
         required: true
     },
