@@ -35,6 +35,14 @@ var UserSchema = new mongoose.Schema({
         type: Number,
         required: false
     },
+    address: {
+        type: String,
+        required: true
+    },
+    city: {
+        type: String,
+        required: true
+    },
     description: {
         type: String,
         required: false

@@ -61,6 +61,8 @@ var userDummy = {
     password: 'test',
     birthday: new Date(1990, 12, 15),
     rating: 10,
+    address: 'test address',
+    city: 'Manila',
     description: 'test',
     profilePic: 'https://coconuts.co/wp-content/uploads/2019/03/archer_4212_032118-960x540.jpg'
 }

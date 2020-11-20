@@ -39,7 +39,7 @@
         <div class="row">
             <div class="col-1"></div>
             <div class="col-10">
-                <form>
+                <form method='POST' action='/postRegister'>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputFName">First Name</label>
@@ -53,6 +53,10 @@
                     <div class="form-group">
                         <label for="InputEmail">Email address</label>
                         <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="InputUsername">Username</label>
+                        <input type="text" class="form-control" id="InputUsername" aria-describedby="emailHelp" placeholder="Enter username" name="username">
                     </div>
                     <div class="form-group">
                         <label for="InputPhone">Phone number</label>
