@@ -29,7 +29,8 @@ const database = {
     insertOne: function(model, doc, callback) {
         model.create(doc, function(error, result) {
             if(error) return callback(false);
-            //console.log('Added ' + result);
+            // console.log('Added ' + result);
+            console.log(error);
             return callback(result);
         });
     },

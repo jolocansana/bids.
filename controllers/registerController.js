@@ -20,7 +20,6 @@ const registerController = {
 		var address = req.body.address
 		var city = req.body.address
 		var description = ''
-
         bcrypt.hash(password, saltRounds, function(err, hash) {
             var user = {
 				email: email,
@@ -35,6 +34,7 @@ const registerController = {
 				city: city,
 				description: description
 			}
+			console.log(user)
             db.insertOne(User, user, function(){
                 res.redirect('/')
             })

@@ -8,49 +8,49 @@ const Pinned = require('./models/PinnedModel.js')
 const Rating = require('./models/RatingModel.js')
 const User = require('./models/UserModel.js')
 
-var listingDummy = {
-    name: 'test',
-    brand: 'test',
-    startPrice: 100,
-    buyOutPrice: 200,
-    description: 'test',
-    images: null,
-    startDate: new Date(2020, 11, 13),
-    endDate: new Date(2020, 12, 15),
-    highestBidder: 'test',
-    highestBid: 150,
-    listingOwner: 'test',
-    productType: 'clothes',
-    status: 'active'
-}
+// var listingDummy = {
+//     name: 'test',
+//     brand: 'test',
+//     startPrice: 100,
+//     buyOutPrice: 200,
+//     description: 'test',
+//     images: null,
+//     startDate: new Date(2020, 11, 13),
+//     endDate: new Date(2020, 12, 15),
+//     highestBidder: 'test',
+//     highestBid: 150,
+//     listingOwner: 'test',
+//     productType: 'clothes',
+//     status: 'active'
+// }
 
-db.insertOne(Listing, listingDummy, function(flag){});
+// db.insertOne(Listing, listingDummy, function(flag){});
 
-var participationDummy = {
-    email: 'test@yahoo.com',
-    listingId: 'test',
-    bid: 1000,
-    status: 'active'
-}
+// var participationDummy = {
+//     email: 'test@yahoo.com',
+//     listingId: 'test',
+//     bid: 1000,
+//     status: 'active'
+// }
 
-db.insertOne(Participation, participationDummy, function(flag){});
+// db.insertOne(Participation, participationDummy, function(flag){});
 
-var pinnedDummy = {
-    archerUsername: 'test',
-    listingId: 'test',
-    pinStatus: 'active'
-}
+// var pinnedDummy = {
+//     email: 'test',
+//     listingId: 'test',
+//     pinStatus: 'active'
+// }
 
-db.insertOne(Pinned, pinnedDummy, function(flag){});
+// db.insertOne(Pinned, pinnedDummy, function(flag){});
 
-var ratingdummy = {
-    rater: 'test',
-    rated: 'test',
-    rating: 10,
-    comment: 'good'
-}
+// var ratingdummy = {
+//     rater: 'test',
+//     rated: 'test',
+//     rating: 10,
+//     comment: 'good'
+// }
 
-db.insertOne(Rating, ratingdummy, function(flag){});
+// db.insertOne(Rating, ratingdummy, function(flag){});
 
 var userDummy = {
     email: 'test',
