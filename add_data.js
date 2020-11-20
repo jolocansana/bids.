@@ -1,4 +1,7 @@
 const db = require('./models/db.js');
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 db.connect();
 
@@ -53,7 +56,7 @@ const User = require('./models/UserModel.js')
 // db.insertOne(Rating, ratingdummy, function(flag){});
 
 var userDummy = {
-    email: 'test',
+    email: 'test22',
     phonenum: '09200909090',
     firstname: 'Test',
     lastname: 'Test',
@@ -67,4 +70,6 @@ var userDummy = {
     profilePic: 'https://coconuts.co/wp-content/uploads/2019/03/archer_4212_032118-960x540.jpg'
 }
 
-db.insertOne(User, userDummy, function(flag){});
+db.insertOne(User, userDummy, function(flag){
+    console.log("added: " + flag);
+});
