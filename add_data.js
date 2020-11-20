@@ -54,7 +54,7 @@ const User = require('./models/UserModel.js')
 
 var userDummy = {
     profilePic: 'https://coconuts.co/wp-content/uploads/2019/03/archer_4212_032118-960x540.jpg',
-    email: 'test',
+    email: 'test2',
     phonenum: '09209171889',
     firstname: 'Test',
     lastname: 'Test',
