@@ -116,15 +116,24 @@ $(document).ready(function() {
         }
     }
 
-    $("#firstname").keyup(function(){
+    $("#firstName").keyup(function(){
         validateField($('#firstname'));
     })
 
-    $("#lastname").keyup(function(){
+    $("#lastName").keyup(function(){
         validateField($('#lastname'))
     })
+
     $("#email").keyup(function(){
         validateField($('#email'));
+    })
+
+    $("#username").keyup(function(){
+        validateField($('#username'));
+    })
+
+    $("#phonenum").keyup(function(){
+        validateField($('#phonenum'));
     })
 
     $("#password").keyup(function(){
@@ -133,6 +142,14 @@ $(document).ready(function() {
 
     $("#cpassword").keyup(function(){
         validateField($('#cpassword'))
+    })
+
+    $("#address").keyup(function(){
+        validateField($('#address'));
+    })
+
+    $("#city").keyup(function(){
+        validateField($('#city'));
     })
 });
 

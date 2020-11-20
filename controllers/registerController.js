@@ -40,6 +40,12 @@ const registerController = {
                 res.redirect('/')
             })
         })
+	},
+	getCheckEmail: function(req, res) {
+        var email = req.query.email;
+		db.findOne(User, {email:email}, 'email', function(result) {
+			res.send(result);
+		}) 
 	}
 }
 
