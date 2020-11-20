@@ -105,7 +105,7 @@ $(document).ready(function() {
                 $('#cpassword').removeClass('is-valid');
                 $('#cpassword').addClass('is-invalid');
                 $("#submitbtn").prop('disabled', true);
-                $("#msg").text("Passwords should match and must contain a combination of alphabets and number. Minimum of 7 characters.");
+                $("#msg").text("Passwords should match and must contain a combination of alphabets and numbers. Minimum of 7 characters.");
             }
             return false;
         }
