@@ -13,7 +13,8 @@
     "multer": "^1.4.2",
     "node": "^15.2.1",
     "nodemailer": "^6.4.16",
-    "supervisor": "^0.12.0"
+    "supervisor": "^0.12.0",
+    "validator-js": "^0.2.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"

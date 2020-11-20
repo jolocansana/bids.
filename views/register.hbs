@@ -21,6 +21,10 @@
     <link rel="stylesheet" type="text/css" href="/css/footer.css">
     <link rel="stylesheet" href="css/register.css">
 
+    <!-- Local CSS -->
+    <script src="javascript/validator.min.js" type="text/javascript"></script>
+    <script src="javascript/register.js"></script>
+
 </head>
 <body>
     <div class="row fixed-top white">
@@ -82,7 +86,7 @@
                         <label for="InputCity">City</label>
                         <input type="text" class="form-control" id="city" placeholder="Enter the city where you live" name="city">
                     </div>
-                    <button type="submit" class="btn btn-dark submit">Register</button>
+                    <button type="submit" class="btn btn-dark submit" id="submitbtn" disabled>Register</button>
                 </form>
             </div>
             <div class="col-1"></div>

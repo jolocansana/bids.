@@ -117,11 +117,11 @@ $(document).ready(function() {
     }
 
     $("#firstName").keyup(function(){
-        validateField($('#firstname'));
+        validateField($('#firstName'));
     })
 
     $("#lastName").keyup(function(){
-        validateField($('#lastname'))
+        validateField($('#lastName'))
     })
 
     $("#email").keyup(function(){
