@@ -34,7 +34,6 @@ const registerController = {
 				city: city,
 				description: description
 			}
-			console.log(user)
             db.insertOne(User, user, function(){
                 res.redirect('/')
             })

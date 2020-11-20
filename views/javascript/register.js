@@ -35,7 +35,6 @@ $(document).ready(function() {
                     if(field.is($('#email'))) {
                         $('#email').removeClass('is-invalid');
                         $('#email').addClass('is-valid');
-                        console
                     }
                    return callback(true);
                    
@@ -139,9 +138,10 @@ $(document).ready(function() {
             field.removeClass('is-invalid');
             field.addClass('is-valid');
             var pass = isValidPassword(field);
-            isValidPhone(field, function(validPhone){
-                isValidEmail(field, function(validEmail) {
-                    if(isFilled() && pass && validEmail && validPhone){
+            
+            isValidEmail(field, function(validEmail){
+                isValidPhone(field, function(validPhone) {
+                    if(pass && validEmail && validPhone){
                         $("#submitbtn").prop('disabled', false);
                     }
                     else {
