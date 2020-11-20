@@ -19,12 +19,12 @@ app.use(express.urlencoded({extended:true}));
 
 app.use(express.static('public'));
 
-// app.use(session({
-//     'secret': 'bids-session',
-//     'resave': false,
-//     'saveUninitialized': false,
-//     store: new MongoStore({mongooseConnection: mongoose.connection})
-// }));
+app.use(session({
+    'secret': 'bids-session',
+    'resave': false,
+    'saveUninitialized': false,
+    store: new MongoStore({mongooseConnection: mongoose.connection})
+}));
 
 app.use('/', routes);
 

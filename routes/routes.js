@@ -20,6 +20,8 @@ var storage = multer.diskStorage({
 
 app.get('/login', loginController.login);
 app.get('/register', registerController.register);
+app.post('/postRegister', registerController.postRegister);
+app.get('/getCheckEmail', registerController.getCheckEmail);
 
 // home
 app.get('/', homeController.home);
