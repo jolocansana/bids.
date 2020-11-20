@@ -9,7 +9,7 @@ const User = require('./UserModel.js')
 
 //connect to database
 
-const url = "mongodb+srv://ots:ots123@offthestreet.xz337.mongodb.net/local_library?retryWrites=true&w=majority";
+const url = "mongodb+srv://bidsph:bidsph123@bidsph.empil.mongodb.net/database";
 
 const options = {
     useUnifiedTopology: true,
