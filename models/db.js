@@ -19,7 +19,7 @@ const options = {
 const database = {
     connect: function () {
         mongoose.connect(url, options, function(error) {
-            if(error) 
+            if(error)
                 throw error;
             else
                 console.log('Connected to: ' + url);
