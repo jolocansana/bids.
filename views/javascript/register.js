@@ -72,13 +72,30 @@ $(document).ready(function() {
     function isValidPassword(field) {
         var password = validator.trim($('#password').val());
         var confirmpassword = validator.trim($('#cpassword').val());
-        if(password == confirmpassword && (!validator.isEmpty(password) && !validator.isEmpty(confirmpassword))){ // cpass matches pass
+
+        var flag = true;
+
+
+        if (password.length < 7) {
+            flag = false;
+        } else if (password.length > 50) {
+            flag = false;
+        } else if (password.search(/\d/) == -1) {
+            flag = false;
+        } else if (password.search(/[a-zA-Z]/) == -1) {
+            flag = false;
+        } else if (password.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\+]/) != -1) {
+            flag = false;
+        }
+
+        if(password == confirmpassword && (!validator.isEmpty(password) && !validator.isEmpty(confirmpassword)) && flag){ 
             if(field.is($('#cpassword')) || field.is($('#password'))) {
                 $('#password').removeClass('is-invalid');
                 $('#password').addClass('is-valid');
                 $('#cpassword').removeClass('is-invalid');
                 $('#cpassword').addClass('is-valid');
                 $("#submitbtn").prop('disabled', false);
+                $("#msg").text("");
             }
             return true;
         }
@@ -89,10 +106,31 @@ $(document).ready(function() {
                 $('#cpassword').removeClass('is-valid');
                 $('#cpassword').addClass('is-invalid');
                 $("#submitbtn").prop('disabled', true);
+                $("#msg").text("Passwords should match and must contain a combination of alphabets and number. Minimum of 7 characters.");
             }
             return false;
         }
     }
+
+    function isValidPhone(field, callback) {
+        var phonenum = validator.trim($('#phonenum').val());
+
+        if(phonenum.length != 11) {
+            if(field.is($('#phonenum'))) {
+                $('#phonenum').removeClass('is-valid');
+                $('#phonenum').addClass('is-invalid');
+            }
+            return false;
+        }
+        else {
+            if(field.is($('#phonenum'))) {
+                $('#phonenum').removeClass('is-invalid');
+                $('#phonenum').addClass('is-valid');
+            }
+            return true;
+        }
+    }
+
     function validateField(field){
         var value = validator.trim(field.val());
         var empty = validator.isEmpty(value);
@@ -101,14 +139,16 @@ $(document).ready(function() {
             field.removeClass('is-invalid');
             field.addClass('is-valid');
             var pass = isValidPassword(field);
-            isValidEmail(field, function(validEmail) {
-                if(isFilled() && pass && validEmail){
-                    $("#submitbtn").prop('disabled', false);
-                }
-                else {
-                    $("#submitbtn").prop('disabled', true);
-                }
-            })
+            isValidPhone(field, function(validPhone){
+                isValidEmail(field, function(validEmail) {
+                    if(isFilled() && pass && validEmail && validPhone){
+                        $("#submitbtn").prop('disabled', false);
+                    }
+                    else {
+                        $("#submitbtn").prop('disabled', true);
+                    }
+                })
+            })    
         }
         else{
             field.removeClass('is-valid');

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var PinnedSchema = new mongoose.Schema({
-    archerUsername: {
+    email: {
         type: String,
         required: true
     },
