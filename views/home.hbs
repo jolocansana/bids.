@@ -31,11 +31,10 @@
            <h2 class="d-flex justify-content-end subtitle">closing</h2>
            <h2 class="d-flex justify-content-end subtitle">soon</h2>
 
-           <div class="row product-row">
-                {{> productCard }}
-                {{> productCard }}
-                {{> productCard }}
-                {{> productCard }}
+           <div class="row product-row d-flex flex-wrap" id="list"> 
+                {{#each listings}}
+                    {{> productCard name=name highestBid=highestBid images=images}}
+                {{/each}}
            </div>
 
     </div>

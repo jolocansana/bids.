@@ -1,14 +1,16 @@
 $(document).ready(function() {
-    console.log('hello');
-    $.get('/getListings', {}, function(data, status) {
-        console.log("the data is: " + data);
-    });
+    // console.log('hello');
+    // loadProducts();
 });
 
 
 // Load the products
-function loadProducts() {
-    $.get('/getListings', {}, function(data, status) {
-        console.log("the data is: " + data);
-    });
-}
+// function loadProducts() {
+//     var list = $("#list");
+//     $.get('/getListings', {}, function(data, status) {
+//        for(var i = 0; i < data.length; i++) {
+//            list.append("{{> productCard}}");
+//        }
+     
+//     });
+// }
