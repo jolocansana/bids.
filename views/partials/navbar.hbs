@@ -1,3 +1,20 @@
+<script>
+    $(document).ready(function() {
+        $.get('/getNavbar', null, function (result) {
+            if(result){
+                $("#navNoSession").prop('hidden', true);
+                $("#navSession").prop('hidden', false);
+                $.get('/getName', null, function (result) {
+                    $("#navName").text(result);
+                });
+            }
+            else{
+                $("#navNoSession").prop('hidden', false);
+                $("#navSession").prop('hidden', true);
+            }
+        });
+    });
+</script>
 
 <div class="container">
     <nav>
@@ -16,10 +33,10 @@
             </div>
 
             <div class="col-3 d-flex justify-content-end userNav" >
-                <div class="navNoSession">
+                <div class="navNoSession" hidden>
                     <a class="nav-link" href="login">Login</a>              
                 </div>
-                <div class="dropdown" id="navSession" >
+                <div class="dropdown" id="navSession" hidden>
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                         <p id="navName" style="display:inline"> </p>
                     </a>
@@ -31,6 +48,4 @@
             </div>
         </div>
     </nav>
-    
-    
 </div>

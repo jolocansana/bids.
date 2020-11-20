@@ -73,7 +73,7 @@ $(document).ready(function() {
         var password = validator.trim($('#password').val());
         var confirmpassword = validator.trim($('#cpassword').val());
         if(password == confirmpassword && (!validator.isEmpty(password) && !validator.isEmpty(confirmpassword))){ // cpass matches pass
-            if(field.is($('#cpassword'))) {
+            if(field.is($('#cpassword')) || field.is($('#password'))) {
                 $('#password').removeClass('is-invalid');
                 $('#password').addClass('is-valid');
                 $('#cpassword').removeClass('is-invalid');
@@ -83,7 +83,7 @@ $(document).ready(function() {
             return true;
         }
         else{
-            if(field.is($('#cpassword'))) {
+            if(field.is($('#cpassword')) || field.is($('#password'))) {
                 $('#password').removeClass('is-valid');
                 $('#password').addClass('is-invalid');
                 $('#cpassword').removeClass('is-valid');
@@ -117,11 +117,11 @@ $(document).ready(function() {
     }
 
     $("#firstName").keyup(function(){
-        validateField($('#firstname'));
+        validateField($('#firstName'));
     })
 
     $("#lastName").keyup(function(){
-        validateField($('#lastname'))
+        validateField($('#lastName'))
     })
 
     $("#email").keyup(function(){

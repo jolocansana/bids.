@@ -28,14 +28,13 @@ const registerController = {
 				firstname: firstname,
 				lastname: lastname,
 				username: username,
-				password: password,
+				password: hash,
 				birthday: birthday,
 				rating: rating,
 				address: address,
 				city: city,
 				description: description
 			}
-			console.log(user)
             db.insertOne(User, user, function(){
                 res.redirect('/')
             })
