@@ -2,11 +2,11 @@
     $(document).ready(function() {
         $.get('/getNavbar', null, function (result) {
             if(result){
-                $("#navNoSession").prop('hidden', true);
-                $("#navSession").prop('hidden', false);
                 $.get('/getName', null, function (result) {
                     $("#navName").text(result);
                 });
+                $("#navNoSession").prop('hidden', true);
+                $("#navSession").prop('hidden', false);
             }
             else{
                 $("#navNoSession").prop('hidden', false);
