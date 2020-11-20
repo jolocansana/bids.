@@ -52,6 +52,7 @@ var UserSchema = new mongoose.Schema({
         required: true,
         default: 'https://coconuts.co/wp-content/uploads/2019/03/archer_4212_032118-960x540.jpg'
     }
+
 });
 
 module.exports = mongoose.model('User', UserSchema);

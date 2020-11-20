@@ -53,8 +53,9 @@ const User = require('./models/UserModel.js')
 // db.insertOne(Rating, ratingdummy, function(flag){});
 
 var userDummy = {
+    profilePic: 'https://coconuts.co/wp-content/uploads/2019/03/archer_4212_032118-960x540.jpg',
     email: 'test',
-    phonenum: '09200909090',
+    phonenum: '09209171889',
     firstname: 'Test',
     lastname: 'Test',
     username: 'Test',
@@ -63,8 +64,7 @@ var userDummy = {
     rating: 10,
     address: 'test address',
     city: 'Manila',
-    description: 'test',
-    profilePic: 'https://coconuts.co/wp-content/uploads/2019/03/archer_4212_032118-960x540.jpg'
+    description: 'test'
 }
 
 db.insertOne(User, userDummy, function(flag){});
