@@ -4,6 +4,8 @@ const multer  = require('multer');
 const homeController = require('../controllers/homeController.js');
 const loginController = require('../controllers/loginController.js');
 const registerController = require('../controllers/registerController.js');
+const navbarController = require('../controllers/navbarController.js');
+const logoutController = require('../controllers/logoutController.js');
 
 const app = express();
 
@@ -17,7 +19,21 @@ var storage = multer.diskStorage({
     }
 });
 
-app.get('/', homeController.home);
+// Register and Login
 app.get('/login', loginController.login);
+app.post('/postLogin', loginController.postLogin);
+app.get('/getCheckLogin', loginController.getCheckLogin);
 app.get('/register', registerController.register);
+app.post('/postLogin', loginController.postLogin);
+app.post('/postRegister', registerController.postRegister);
+app.get('/getCheckEmail', registerController.getCheckEmail);
+app.get('/logout', logoutController.getLogout);
+
+// Navbar
+app.get('/getNavbar', navbarController.getNavbar);
+app.get('/getName', navbarController.getName);
+
+// home
+app.get('/', homeController.home);
+app.get('/getListings', homeController.getListings);
 

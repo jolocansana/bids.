@@ -49,5 +49,9 @@ input[type="color"]:focus,
 }
 
 .submit {
+    margin-left: 10px;
+}
+
+.buttons {
     margin-top: 20px;
 }

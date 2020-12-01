@@ -9,7 +9,7 @@ const User = require('./UserModel.js')
 
 //connect to database
 
-const url = "mongodb+srv://ots:ots123@offthestreet.xz337.mongodb.net/local_library?retryWrites=true&w=majority";
+const url = "mongodb+srv://bidsph:bidsph123@bidsph.empil.mongodb.net/database";
 
 const options = {
     useUnifiedTopology: true,
@@ -19,7 +19,7 @@ const options = {
 const database = {
     connect: function () {
         mongoose.connect(url, options, function(error) {
-            if(error) 
+            if(error)
                 throw error;
             else
                 console.log('Connected to: ' + url);
@@ -27,9 +27,10 @@ const database = {
     },
 
     insertOne: function(model, doc, callback) {
+        console.log(doc)
         model.create(doc, function(error, result) {
             if(error) return callback(false);
-            //console.log('Added ' + result);
+            console.log('Added ' + result);
             return callback(result);
         });
     },

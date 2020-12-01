@@ -3,7 +3,6 @@ var mongoose = require('mongoose');
 var UserSchema = new mongoose.Schema({
     email: {
         type: String,
-        unique: true,
         required: true
     },
     phonenum: {
@@ -20,7 +19,6 @@ var UserSchema = new mongoose.Schema({
     },
     username: {
         type: String,
-        unique: true,
         required: true
     },
     password: {
@@ -34,6 +32,14 @@ var UserSchema = new mongoose.Schema({
     rating: {
         type: Number,
         required: false
+    },
+    address: {
+        type: String,
+        required: true
+    },
+    city: {
+        type: String,
+        required: true
     },
     description: {
         type: String,
