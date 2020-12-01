@@ -6,13 +6,18 @@
                 <a href="/" class="logolink"><h1 class="logo">Bids.</h1></a>
             </div>
             
-            <div class="col-6 d-flex justify-content-center">
-                <div class="d-flex justify-content-center align-content-center h-100" style="margin-top:-13px">
+            <div class="col-6 d-flex justify-content-center align-items-center">
+                {{!-- <div class="d-flex" >
                     <form class="searchbar" method="get" action="/search">
                         <input class="search_input" type="text" name="searchInput" id="searchInput" placeholder="Search...">
                         <a href="#"><i class="fa fa-search searchicon"></i></a>
                     </form>
-                </div>
+                    <!-- Button trigger modal -->
+                    
+                </div> --}}
+                <button type="button" class="btn btn-light" style="padding: .5em 10em;" data-toggle="modal" data-target="#exampleModal">
+                      Search
+                </button>
             </div>
 
             <div class="col-3 d-flex justify-content-end userNav" >
@@ -32,5 +37,30 @@
         </div>
     </nav>
     
-    
+</div>
+
+<!-- Search Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document" style='max-width: 50vw'>
+    <div class="modal-content">
+      <div class="modal-header" style='padding: 0'>
+        <input type='text' placeholder='Search...' style='width:100%; padding: 1em; border: 0; border-radius: .3rem'/>
+      </div>
+      <div class="modal-body">
+        <div class="flex" style='margin: 3em; max-width: 100%'>
+          <h4>categories</h4>
+          <div class="row mt-4">
+            <div class='col-4'>top</div>
+            <div class='col-4'>bottom</div>
+            <div class='col-4'>shoes</div>
+          </div>
+          <div class="row mt-4">
+            <div class='col-4'>electornics</div>
+            <div class='col-4'>decorative</div>
+            <div class='col-4'>atheletic</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
