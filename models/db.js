@@ -8,7 +8,6 @@ const Rating = require('./RatingModel.js')
 const User = require('./UserModel.js')
 
 //connect to database
-
 const url = "mongodb+srv://bidsph:bidsph123@bidsph.empil.mongodb.net/database";
 
 const options = {

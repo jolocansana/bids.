@@ -18,7 +18,7 @@ const bidController = {
 
         req.files.forEach(element => {
             images.push(element.filename);
-        })
+        });
 
         req.body.listingOwner = req.session._id;
         req.body.images = images;

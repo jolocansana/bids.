@@ -47,6 +47,5 @@ app.post('/postListing', upload.array('images', 10), listingConrtoller.postListi
 app.post('/listing/addBidding/:_id', listingConrtoller.postBidding);
 app.post('/listing/buyoutBidding/:_id', listingConrtoller.buyoutBidding);
 app.post('/listing/closeBidding/:_id', listingConrtoller.closeBidding);
-// app.get('/bid/item/:id', bidController.page);
 
 
