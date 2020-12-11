@@ -23,7 +23,7 @@
     "nodemon": "^2.0.6"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --watchAll",
     "dev": "nodemon index.js -e js,hbs"
   },
   "repository": {

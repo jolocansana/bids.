@@ -9,7 +9,8 @@ function outputAndCloseBiddings(biddings) {
 
     var highestBid = biddings[0];
     
-    $('#highest-bid').html(`
+    if(biddings.length > 0) {
+        $('#highest-bid').html(`
         <div class="row mt-2">
             <div class="col-lg-6">
                 <h3 class="font-weight-bold">${highestBid.user.firstname} ${highestBid.user.lastname}</h3>
@@ -23,6 +24,7 @@ function outputAndCloseBiddings(biddings) {
             </div>
         </div>
     `);
+    }
 
     let otherBids = '';
 
@@ -123,20 +125,22 @@ function outputBiddings(biddings) {
 
     var highestBid = biddings[0];
     
-    $('#highest-bid').html(`
-        <div class="row mt-2">
-            <div class="col-lg-6">
-                <h3 class="font-weight-bold">${highestBid.user.firstname} ${highestBid.user.lastname}</h3>
-            </div>
-            <div class="col-lg-6 text-right">
+    if(biddings.length > 0) {
+        $('#highest-bid').html(`
+                <div class="row mt-2">
+                    <div class="col-lg-6">
+                        <h3 class="font-weight-bold">${highestBid.user.firstname} ${highestBid.user.lastname}</h3>
+                    </div>
+                    <div class="col-lg-6 text-right">
 
-                <h3 class="font-weight-bold">
-                    <span class="badge badge-secondary mr-3">Highest</span>
-                    PHP ${highestBid.bid}.00
-                </h3>
-            </div>
-        </div>
-    `);
+                        <h3 class="font-weight-bold">
+                            <span class="badge badge-secondary mr-3">Highest</span>
+                            PHP ${highestBid.bid}.00
+                        </h3>
+                    </div>
+                </div>
+            `);
+    }
 
     let otherBids = '';
 
@@ -165,20 +169,38 @@ $(function () {
 
     var listingStatus = $('#listing-status').val();
     var listingId = $('#listing-id').val();
+    var startDate = $('#listing-start-date').val();
     var endDate = $('#listing-end-date').val();
     var user_id = $('#user-id').val();
 
-    if(listingStatus == 'active') {
-        $('#bid-card').show();
 
-        const deadline = new Date(Date.parse(endDate));
-        initializeClock('clockdiv', deadline);
+    const start_date = new Date(Date.parse(startDate));
+    const today = new Date();
+
+
+    if(listingStatus == 'active') {
+        if(start_date > today) {
+            $('#time-left-display').html('BIDDING START DATE');
+            $('#clockdiv').html(`
+                <div class="col-12 text-center">
+                    <h4>${moment(start_date).format('lll')}</h4>
+                </div>
+            `);
+
+            $('#bid-closed').show();
+        } else {
+            $('#bid-card').show();
+
+            const deadline = new Date(Date.parse(endDate));
+            initializeClock('clockdiv', deadline);
+        }
+        
 
     } else {
 
         $('#clockdiv').html(`
             <div class="col-12 text-center">
-                <h3 class="text-uppercase">Bidding CLosed</h3>
+                <h3 class="text-uppercase">Bidding Closed</h3>
             </div>
         `)
 

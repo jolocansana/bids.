@@ -41,7 +41,7 @@ $(function() {
             headers: { 'Content-Type': 'multipart/form-data' }
         }).then((result) => {
             console.log(result);
-            location(`/listingItem?id=${result.data._id}`)
+            location.replace(`/listingItem?id=${result.data._id}`)
         }).catch((err) => {
 
             $('#save-spinner').hide();
