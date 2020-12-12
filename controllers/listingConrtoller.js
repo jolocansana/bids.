@@ -7,12 +7,16 @@ const listingValidation = require('../utils/listingValidation');
 
 const bidController = {
     postListing: function (req, res) {
+
+        console.log('in post');
         
         const { error } = listingValidation(req.body);
         if(error) {
             console.log(error.details[0].message);
             return res.status(400).json(error.details[0].message);
-        } 
+        }
+
+        if(req.body.bidIncrease < 5) return res.status(400).json(`"buy-out price" field requries value to be greater than or equal to 5`);
 
         let images = [];
 
@@ -22,11 +26,14 @@ const bidController = {
 
         req.body.listingOwner = req.session._id;
         req.body.images = images;
-        req.body.highestBid = req.body.startPrice
+        req.body.highestBid = 0;
 
-        db.insertOne(Listing, req.body, function (result) {
-            return res.send(result);
-        });
+        Listing.create(req.body)
+            .then((result) => {
+                console.log('created listing: ', result);
+                return res.send(result);
+            })
+            .catch(err => console.log('error: ', err));
     },
     createListingPage: function (req, res) {
         res.render('create-listing');
@@ -47,6 +54,7 @@ const bidController = {
                             listing: listing,
                             cond1: listing.images.length > 3 ? true : false,
                             cond2: listing.images.length > 6 ? true : false,
+                            cond3: listing.highestBid == 0 ? true : false,
                             owner: owner,
                             participation: participation,
                             participant: req.session._id

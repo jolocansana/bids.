@@ -53,10 +53,16 @@
                         <input type="text" id="listing-end-date" style="display: none;" value="{{ listing.endDate }}">
                         <input type="text" id="user-id" style="display: none;" value="{{ participant }}">
                         <input type="text" id="bid-increase-amount" style="display: none;" value="{{ listing.bidIncrease }}">
-                        <input type="text" id="current-highest-bid" style="display: none;" value="{{ listing.highestBid }}">
                         <input type="text" id="buyout-price" style="display: none;" value="{{ listing.buyOutPrice }}">
                         <input type="text" style="display: none;" id="listing-status" value="{{ listing.status }}">
                         <input type="text" id="listing-start-date" style="display: none;" value="{{ listing.startDate }}">
+                        {{#if cond3 }}
+                        <input type="text" id="current-highest-bid" style="display: none;" value="{{ listing.startPrice }}">
+                        {{/if }}
+
+                        {{#unless cond3 }}
+                        <input type="text" id="current-highest-bid" style="display: none;" value="{{ listing.highestBid }}">
+                        {{/unless}}
                         <!-- Images Carousel -->
                         <section>
                             <div class="rt-container">
@@ -158,9 +164,13 @@
                                             <span class="h4 font-weight-bold">tags</span>
                                             <span class="ml-5 h4 font-weight-normal">{{ listing.tags }}</span>
                                         </p>
-                                        <p>
+                                        <p class="mb-4">
                                             <span class="h4 font-weight-bold">bids</span>
                                             <span class="ml-5 h4 font-weight-normal">PHP {{ listing.bidIncrease }}.00 (+increments) </span>
+                                        </p>
+                                        <p>
+                                            <span class="h4 font-weight-bold">buy-out price</span>
+                                            <span class="ml-3 h4 font-weight-normal">PHP {{ listing.buyOutPrice }}.00</span>
                                         </p>
                                     </div>
                                     <div class="col-lg-4">
@@ -216,7 +226,14 @@
                                         <div class="form">
                                             <div class="row">
                                                 <div class="col-lg-8 text-right">
+
+                                                    {{#if cond3 }}
+                                                    <h1>PHP <span id="bid-amount">{{ listing.startPrice }}</span>.00</h1>
+                                                    {{/if }}
+
+                                                    {{#unless cond3 }}
                                                     <h1>PHP <span id="bid-amount">{{ listing.highestBid }}</span>.00</h1>
+                                                    {{/unless }}
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <button type="button" id="increase-bid-btn" class="btn btn-sm btn-dark mt-2" style="font-size: 20px; width: 30px;">+</button>
