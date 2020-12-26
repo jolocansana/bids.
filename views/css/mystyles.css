@@ -30,12 +30,18 @@
 }
 
 .seller-img {
-  min-width: 100%;
-  max-width: 100%;
-  border: 1px solid black;
   border-radius: 50%;
   margin: 0;
   padding: 1px;
+  height:150px;
+  width: 150px;
+  object-fit: cover;
+}
+
+.item-pic {
+  height: 720px;
+  width: 1280px;
+  object-fit: cover;
 }
 
 .bid-area {
