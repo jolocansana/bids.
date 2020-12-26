@@ -111,16 +111,7 @@
                                                 </label>
                                             </div>
                                             <div class='carousel__screen'>
-                                                {{!-- <div class='carousel__track'>
-                                                    {{#each listing.images as | url | }}
-                                                        <div
-                                                            class='carousel__item carousel__item--mobile-in-1 carousel__item--tablet-in-2 carousel__item--desktop-in-3'>
-                                                            <div class="demo-content">
-                                                                <img src="/uploads/{{ url }}" alt="">
-                                                            </div>
-                                                        </div>
-                                                    {{/each }}
-                                                </div> --}}
+                                              
                                                 <div id="carouselExampleControls" class="carousel slide"
                                                     data-bs-ride="carousel">
                                                     <div class="carousel-inner">
@@ -133,6 +124,13 @@
                                                         <div class="carousel-item item-pic">
                                                             <img src="https://preview.redd.it/22it5d8adf761.jpg?width=640&crop=smart&auto=webp&s=5cd2dd5064a1216e150f32bfad445dc84c1d3566" class="d-block w-100" alt="...">
                                                         </div>
+
+                                                        {{!-- {{#each listing.images as | url | }}
+                                                            <div class="carousel-item item-pic">
+                                                                <img src="/uploads/{{ url }}" class="d-block w-100" alt="...">
+                                                            </div>
+                                                        {{/each }} --}}
+
                                                     </div>
                                                     <a class="carousel-control-prev" href="#carouselExampleControls"
                                                         role="button" data-bs-slide="prev">
