@@ -1,5 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap");
 
+.form-control:focus { 
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 1px 1px rgba(255, 255, 255, 0.075) inset, 0 0 8px rgba(139, 139, 139, 0.6);
+  outline: 0 none;}
+
+
+.signin {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 55px;
+  margin-left: 30px;
+  line-height: 95.68%;
+}
+
+.title {
+  margin-top: 10%;
+  margin-left: 60px;
+  margin-bottom: 30px;
+}
+
 .rounded-img {
   width: 50px;
   height: 50px;
