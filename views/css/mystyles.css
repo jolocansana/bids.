@@ -38,6 +38,18 @@
   object-fit: cover;
 }
 
+#time-left {
+  height: 90px;
+}
+
+#seller-info{
+  height: 310px;
+}
+
+#dp {
+  margin-top: 30px;
+}
+
 .item-pic {
   height: 720px;
   width: 1280px;
