@@ -116,7 +116,7 @@
                                                 <div id="carouselExampleControls" class="carousel slide"
                                                     data-ride="carousel">
                                                     <div class="carousel-inner">
-                                                        <div class="carousel-item active item-pic">
+                                                        {{!-- <div class="carousel-item active item-pic">
                                                             <img src="https://preview.redd.it/hw03avf7cc761.jpg?width=960&crop=smart&auto=webp&s=34c623b2e20b0111cd82fdf50d1be2c96952c1ba" class="d-block w-100" alt="...">
                                                         </div>
                                                         <div class="carousel-item item-pic">
@@ -124,7 +124,20 @@
                                                         </div>
                                                         <div class="carousel-item item-pic">
                                                             <img src="https://preview.redd.it/22it5d8adf761.jpg?width=640&crop=smart&auto=webp&s=5cd2dd5064a1216e150f32bfad445dc84c1d3566" class="d-block w-100" alt="...">
-                                                        </div>
+                                                        </div> --}}
+                                                        {{!-- {{#each images}}
+                                                            <div class="carousel-item item-pic">
+                                                            <img src="{{ this }}" class="d-block w-100" alt="...">
+                                                            </div>
+
+                                                        {{>each}} --}}
+
+                                                        {{#each listing.images as | url | }}
+                                                            <div class="carousel-item item-pic active">
+                                                                <img src="{{url}}" class="d-block w-100" alt="...">
+                                                            </div>
+                                                        {{/each }}
+                                                        
                                                     </div>
                                                     <a class="carousel-control-prev" href="#carouselExampleControls"
                                                         role="button" data-slide="prev">
@@ -139,22 +152,13 @@
                                                         <span class="sr-only">Next</span>
                                                     </a>
                                                 </div>
-
-                                                {{!-- {{#each listing.images as | url | }}
-                                                            <div class="carousel-item item-pic">
-                                                                <img src="/uploads/{{ url }}" class="d-block w-100" alt="...">
-                                                            </div>
-                                                        {{/each }} --}}
-
-
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </section>
-
+                        
                         <!-- Item Details -->
                         <div class="item-details mt-5">
                             <div class="container-fluid" style="margin: 0; padding: 0;">

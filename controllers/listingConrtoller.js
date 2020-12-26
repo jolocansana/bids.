@@ -57,7 +57,8 @@ const bidController = {
                             cond3: listing.highestBid == 0 ? true : false,
                             owner: owner,
                             participation: participation,
-                            participant: req.session._id
+                            participant: req.session._id, 
+                           
                         })
                     })
                     
