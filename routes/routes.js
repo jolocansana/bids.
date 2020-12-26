@@ -6,6 +6,9 @@ const loginController = require('../controllers/loginController.js');
 const registerController = require('../controllers/registerController.js');
 const navbarController = require('../controllers/navbarController.js');
 const logoutController = require('../controllers/logoutController.js');
+const biddingHistoryActive = require('../controllers/biddingHistoryActiveController.js');
+const biddingHistoryCompleted = require('../controllers/biddingHistoryCompletedController.js');
+const biddingHistoryLost = require('../controllers/biddingHistoryLostController.js');
 
 const app = express();
 
@@ -33,7 +36,12 @@ app.get('/logout', logoutController.getLogout);
 app.get('/getNavbar', navbarController.getNavbar);
 app.get('/getName', navbarController.getName);
 
-// home
+// Home
 app.get('/', homeController.home);
 app.get('/getListings', homeController.getListings);
+
+// Bidding History
+app.get('/biddingHistoryActive', biddingHistoryActive.getActive);
+app.get('/biddingHistoryCompleted', biddingHistoryCompleted.getCompleted);
+app.get('/biddingHistoryLost', biddingHistoryLost.getLost);
 
