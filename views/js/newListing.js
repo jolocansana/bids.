@@ -63,13 +63,13 @@ $(function() {
 $(document).ready(function() {
 
     function isValidBuyOut(field, callback) {
-        var start = validator.trim($('#startPrice').val());
-        var buyout = validator.trim($('#buyOutPrice').val());
+        var start = parseInt(validator.trim($('#startPrice').val()));
+        var buyout = parseInt(validator.trim($('#buyOutPrice').val()));
         if(start<1){
             if(field.is($('#startPrice'))) {
                 $('#startPrice').removeClass('is-valid');
                 $('#startPrice').addClass('is-invalid');
-                return callback(true);
+                return callback(false);
             }
         }
         if(buyout<1){
@@ -80,7 +80,7 @@ $(document).ready(function() {
             }
         }
         if(start<=buyout){ 
-            if(field.is($('#buyOutPrice'))) {
+            if(field.is($('#buyOutPrice'))||field.is($('#startPrice'))) {
                 $('#buyOutPrice').removeClass('is-invalid');
                 $('#buyOutPrice').addClass('is-valid');
             }
@@ -88,7 +88,7 @@ $(document).ready(function() {
             return callback(true);
         }
         else{
-            if(field.is($('#buyOutPrice'))) {
+            if(field.is($('#buyOutPrice'))||field.is($('#startPrice'))) {
                 $('#buyOutPrice').removeClass('is-valid');
                 $('#buyOutPrice').addClass('is-invalid');
             }
@@ -139,10 +139,30 @@ $(document).ready(function() {
         var start = validator.trim($('#startDate').val());
         var end = validator.trim($('#endDate').val());
 
-        var flag = true
-
         var today = new Date()
-        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+'T'+today.getHours() + ":" + today.getMinutes()
+        console.log(today.getMonth())
+        if(today.getMonth()>=0 && today.getMonth()<=8)
+            var date = today.getFullYear()+'-0'+(today.getMonth()+1)
+        else
+            var date = today.getFullYear()+'-'+(today.getMonth()+1)
+
+        if(today.getDate()>=1 && today.getDate()<=9)
+            date = date + '-0'+today.getDate()+'T'
+        else
+            date = date + '-'+today.getDate()+'T'
+
+        if(today.getHours()>=1 && today.getHours()<=9)
+            date = date + '0' + today.getHours() + ":"
+        else
+            date = date + today.getHours() + ":"
+
+        if (today.getMinutes()>= 1 && today.getMinutes()<=9)
+            date = date + "0" + today.getMinutes()
+        else
+            date = date + today.getMinutes()
+
+        console.log(start)
+        console.log(date)
 
         if(start<date){
             if(field.is($('#startDate'))){
