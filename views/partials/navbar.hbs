@@ -7,14 +7,24 @@
                 });
                 $("#navNoSession").prop('hidden', true);
                 $("#navSession").prop('hidden', false);
+
+                $.get('/getNotifications', null, function (result) {
+                    for(var i = 0; i < result.length; i++) {
+                        $("#notifs").append('<a class="dropdown-item" href="listingItem?id="' + result[i].listingID'">'+ result[i].description + '</a>')
+                    }
+                });
             }
             else{
                 $("#navNoSession").prop('hidden', false);
                 $("#navSession").prop('hidden', true);
             }
         });
+
+       
     });
 </script>
+
+<script src="https://use.fontawesome.com/ace75e1302.js"></script>
 
 <div class="container">
     <nav>
@@ -46,9 +56,11 @@
                         <div class="dropdown">
                             <a class="" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                Notifications
+                                <i class="far fa-bell" style="font-size: 24px; color: black; margin-top: 10px"></i>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="notificationDropdown">
+                            <div class="dropdown-menu" aria-labelledby="notificationDropdown" id="notifs">
+
+
                                 <a class="dropdown-item" href="#">Action</a>
                                 <a class="dropdown-item" href="#">Another action</a>
                                 <a class="dropdown-item" href="#">Something else here</a>

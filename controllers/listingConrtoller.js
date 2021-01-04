@@ -3,6 +3,7 @@ const db = require('../models/db.js');
 const Listing = require('../models/ListingModel');
 const Participation = require('../models/ParticipationModel');
 const User = require('../models/UserModel');
+const Notification = require('../models/NotificationModel');
 const listingValidation = require('../utils/listingValidation');
 
 const bidController = {
