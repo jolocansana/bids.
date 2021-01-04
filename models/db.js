@@ -6,6 +6,7 @@ const Participation = require('./ParticipationModel.js')
 const Pinned = require('./PinnedModel.js')
 const Rating = require('./RatingModel.js')
 const User = require('./UserModel.js')
+const Notification = require('./NotificationModel.js')
 
 //connect to database
 const url = "mongodb+srv://bidsph:bidsph123@bidsph.empil.mongodb.net/database";

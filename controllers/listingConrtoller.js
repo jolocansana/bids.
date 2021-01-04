@@ -58,7 +58,6 @@ const bidController = {
                             owner: owner,
                             participation: participation,
                             participant: req.session._id, 
-                           
                         })
                     })
                     
@@ -154,6 +153,72 @@ const bidController = {
                 status: inactive,
                 soldToUser: lastParticipant.user._id
             });
+
+            //  Win notification
+            var winUserID = lastParticipant.user._id;
+            var listingID = req.params._id;
+            var date = Date.now();
+
+
+
+
+            db.findOne(Listing, { _id: listingID }, {}, function (listing){
+                var description = "You won the "+ listing.name + " bid for" + listing.highestBid;
+                var notif = {
+                    userID: winUserID, 
+                    listingID: listingID,
+                    description: description,
+                    date: date 
+                };
+
+                db.insertOne(Notification, notif, function(result) {
+
+                });
+            });
+
+            // Losers notification
+            db.findOne(Listing, { _id: listingID }, {}, function (listing){
+                db.findMany(Participation, {listingId: listingID}, function(listing) {
+                    for(var i = 0; i <listing.length; i++) {
+                        if(listing[i].user._id != winUserID) {
+                            var description = "You lost the " + listing.name + " bid";
+                            var notif = {
+                                userID: listing[i].user._id,
+                                listingID: listingID,
+                                description: description,
+                                date: date
+                            };
+
+                            db.insertOne(Notification, notif, function (result) {
+
+                            });
+                        }
+                    }
+                });
+            });
+
+            
+            db.findMany(Participation, {listingId: listingID}, function(listing) {
+                for(var i = 0; i <listing.length; i++) {
+                    if(listing[i].user._id != winUserID) {
+                        db.findOne(Listing, { _id: listingID }, {}, function (listing){
+                            var description = "You lost the "+ listing.name + " bid";
+                            var notif = {
+                                userID: listing[i].user._id, 
+                                listingID: listingID,
+                                description: description,
+                                date: date 
+                            };
+            
+                            db.insertOne(Notification, notif, function(result) {
+            
+                            });
+                        });
+
+                    }
+                }
+            });
+            
 
             return res.json(true);
 

@@ -42,13 +42,31 @@
                     <a class="nav-link" href="login">Login</a>              
                 </div>
                 <div class="dropdown" id="navSession" hidden>
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                        <p id="navName" style="display:inline"> </p>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/orderPending">Order History</a>
-                    <a class="dropdown-item" href="/logout">Logout</a>
-                    </div>
+                    <div class="row">
+                        <div class="dropdown">
+                            <a class="" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                Notifications
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="notificationDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <p id="navName" style="display:inline"> </p>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/orderPending">Order History</a>
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                            </div>
+                        </div>
+                        
+                    </div>  
                 </div>
             </div>
         </div>
