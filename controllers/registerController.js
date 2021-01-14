@@ -1,6 +1,7 @@
 const db = require('../models/db.js');
 const User = require('../models/UserModel.js');
 const bcrypt = require('bcrypt');
+const Joi = require('joi');
 const saltRounds = 10;
 
 const registerController = {
@@ -44,7 +45,36 @@ const registerController = {
 		db.findOne(User, {email:email}, 'email', function(result) {
 			res.send(result);
 		}) 
+	},
+	postChangePassword: async function(req, res) {
+
+		const user_id = req.session._id;
+		const { error } = validateNewPassword({ password: req.body.password });
+		if(error) return res.status(400).json(error.details[0].message);
+
+		if(req.body.password != req.body.confirm_password) return res.status(400).json('Confirm password does not match');
+
+		let user = await User.findOne({ _id: user_id })
+		if(!user) return res.status(400).json('user not found');
+
+		let compare = await bcrypt.compare(req.body.password, user.password);
+		if(compare) return res.status(400).json('New password is the same as your old password');
+
+		let hash = await bcrypt.hash(req.body.password, saltRounds);
+
+		let updateUser = await User.updateOne({ _id: user_id }, { password: hash })
+		if(!updateUser) return res.status(500).json('Internal Server Error');
+		
+		res.send(true);
 	}
+}
+
+function validateNewPassword(req) {
+	const schema = Joi.object({
+		password: Joi.string().min(4).max(30).required()
+	});
+	
+	return schema.validate(req);
 }
 
 module.exports = registerController;

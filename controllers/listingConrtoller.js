@@ -1,39 +1,70 @@
-
+const multer  = require('multer');
 const db = require('../models/db.js');
 const Listing = require('../models/ListingModel');
 const Participation = require('../models/ParticipationModel');
 const User = require('../models/UserModel');
 const listingValidation = require('../utils/listingValidation');
 
+var storage = multer.diskStorage({
+    destination:'views/uploads/',
+    filename: function(req, file, cb) {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9) + '-';
+        cb(null, uniqueSuffix + file.originalname);
+    }
+});
+
+const upload = multer({ storage, limits : { files: 5 } }).array('images', 5);
+
 const bidController = {
-    postListing: function (req, res) {
+    postListing: async function (req, res) {
 
-        console.log('in post');
-        
-        const { error } = listingValidation(req.body);
-        if(error) {
-            console.log(error.details[0].message);
-            return res.status(400).json(error.details[0].message);
-        }
+        upload(req, res, function (err) {
+            if (err instanceof multer.MulterError) {
+                console.log(err);
+                return res.status(400).json('Number of images must be limit up to 5');
+            } else if (err) {
+                return res.status(500).json('Internal Server Error');
+            }
 
-        if(req.body.bidIncrease < 5) return res.status(400).json(`"buy-out price" field requries value to be greater than or equal to 5`);
+            const { error } = listingValidation(req.body);
+            if(error) {
+                console.log(error.details[0].message);
+                return res.status(400).json(error.details[0].message);
+            }
 
-        let images = [];
+            if(req.body.bidIncrease < 5) return res.status(400).json(`"buy-out price" field requries value to be greater than or equal to 5`);
 
-        req.files.forEach(element => {
-            images.push(element.filename);
-        });
+            let today = new Date();
 
-        req.body.listingOwner = req.session._id;
-        req.body.images = images;
-        req.body.highestBid = 0;
+            let compareStartDate = new Date(req.body.startDate);
+            let compareEndDate = new Date(req.body.endDate);
 
-        Listing.create(req.body)
-            .then((result) => {
-                console.log('created listing: ', result);
-                return res.send(result);
-            })
-            .catch(err => console.log('error: ', err));
+            if(compareStartDate < today) {
+                return res.status(400).json('Start date must not be earlier than today');
+            }
+
+            if(compareEndDate < compareStartDate) {
+                return res.status(400).json('End date must be greater than start date');
+            }
+
+            let images = [];
+
+            req.files.forEach(element => {
+                images.push(element.filename);
+            });
+
+            req.body.listingOwner = req.session._id;
+            req.body.images = images;
+            req.body.highestBid = 0;
+
+            Listing.create(req.body)
+                .then((result) => {
+                    console.log('created listing: ', result);
+                    return res.send(result);
+                })
+                .catch(err => console.log('error: ', err));
+
+        })
     },
     createListingPage: function (req, res) {
         res.render('create-listing');
@@ -150,11 +181,11 @@ const bidController = {
             const closeListing = await Listing.updateOne({
                 _id: req.params._id
             }, {
-                status: inactive,
-                soldToUser: lastParticipant.user._id
+                status: 'inactive',
+                soldToUser: lastParticipant ? lastParticipant.user._id : null
             });
 
-            return res.json(true);
+            return res.json(lastParticipant ? lastParticipant.user._id : null);
 
         } catch (err) {
             console.log(err);

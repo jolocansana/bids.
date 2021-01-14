@@ -2,25 +2,28 @@ const Joi = require('joi');
 
 module.exports = function (req) {
     
-    const schema = Joi.object().keys({
+    const schema = Joi.object({
         name: Joi.string().min(2).max(200).required(),
         brand: Joi.string().min(2).max(200).required(),
-        startPrice: Joi.number().required().messages({
+        startPrice: Joi.number().greater(0).required().messages({
             'number.base': `"start price" should be a type of 'number'`,
             'number.empty': `"start price" cannot be an empty field`,
-            'any.required': `"start price" is required`
+            'any.required': `"start price" is required`,
+            'number.greater': `"start price" must be greater than 0`
         }),
-        buyOutPrice: Joi.number().required().messages({
+        buyOutPrice: Joi.number().greater(parseInt(req.startPrice ? req.startPrice : 0)).required().messages({
             'number.base': `"buy-out price" should be a type of 'number'`,
             'number.empty': `"buy-out price" cannot be an empty field`,
-            'any.required': `"buy-out price" is required`
+            'any.required': `"buy-out price" is required`,
+            'number.greater': `"start price" must be greater than ${req.startPrice}`
         }),
         description: Joi.string().min(5).max(200).required(),
         tags: Joi.string().min(5).max(200).required(),
-        bidIncrease: Joi.number().required().messages({
+        bidIncrease: Joi.number().greater(0).required().messages({
             'number.base': `"bid increase amount" should be a type of 'number'`,
             'number.empty': `"bid increase amount" cannot be an empty field`,
-            'any.required': `"bid increase amount" is required`
+            'any.required': `"bid increase amount" is required`,
+            'number.greater': `"bind increase amount" must be greater than 0`
         }),
         startDate: Joi.date().required().messages({
             'date.base': `"start date" should be a type of 'date'`,

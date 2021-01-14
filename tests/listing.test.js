@@ -1,5 +1,22 @@
 const listingValidation = require('../utils/listingValidation');
 
+function dateValidation(startDate, endDate) {
+    let today = new Date();
+
+    let compareStartDate = new Date(startDate);
+    let compareEndDate = new Date(endDate);
+
+    if(compareStartDate < today) {
+        return { error: true, details: 'Start date must be not earlier than today' };
+    }
+
+    if(compareEndDate < compareStartDate) {
+        return { error: true, details: 'End date must be greater than start date' };
+    }
+
+    return true;
+}
+
 describe('Create New Listing', () => {
 
     it('When "name" input is undefined, prompt "is required"', () => {
@@ -101,6 +118,16 @@ describe('Create New Listing', () => {
         expect(error.details[0].message).toContain("type of 'number'")
     });
 
+    it('When "start price" input is less than one, prompt "must be greater"', () => {
+        const { error } = listingValidation({
+            name: "Skinny Jeans",
+            brand: "Oxygen",
+            startPrice: 0,
+        });
+
+        expect(error.details[0].message).toContain("must be greater")
+    });
+
     //
 
     it('When "buy-out price" input is undefined, prompt "is required"', () => {
@@ -122,6 +149,17 @@ describe('Create New Listing', () => {
         });
 
         expect(error.details[0].message).toContain("type of 'number'")
+    });
+
+    it('When "buy-out" input is less than "start price" value, prompt "must be greater"', () => {
+        const { error } = listingValidation({
+            name: "Skinny Jeans",
+            brand: "Oxygen",
+            startPrice: 100,
+            buyOutPrice: 99,
+        });
+
+        expect(error.details[0].message).toContain("must be greater")
     });
 
     // 
@@ -282,6 +320,22 @@ describe('Create New Listing', () => {
         expect(error.details[0].message).toContain("type of 'number'")
     });
 
+    
+
+    it('When "bid increase amount" input is less than one, prompt "must be greater"', () => {
+        const { error } = listingValidation({
+            name: "Skinny Jeans",
+            brand: "Oxygen",
+            startPrice: 100,
+            buyOutPrice: 3000,
+            description: "This is a test description",
+            tags: "Clothing - Men - Small",
+            bidIncrease: 0
+        });
+
+        expect(error.details[0].message).toContain("must be greater")
+    });
+
     // 
 
     it('When "start date" input is undefined, prompt "is required"', () => {
@@ -418,5 +472,18 @@ describe('Create New Listing', () => {
 
         expect(error.details[0].message).toContain("must be one of");
     });
+
+    //
+
+    it('When "start date" input is less than today, prompt "must be not earlier than today"', () => {
+        const err = dateValidation(new Date("2015-01-01"), new Date());
+        expect(err.details).toContain("must be not earlier than today");
+    });
+
+    it('When "end date" input is less than "start date" value, prompt "must be greater than start date"', () => {
+        const err = dateValidation(new Date("2021-12-12"), new Date("2019-01-01"));
+        expect(err.details).toContain("must be greater than start date");
+    });
+
 
 });
