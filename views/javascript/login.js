@@ -45,6 +45,14 @@ $(document).ready(function() {
     $("#password").keyup(function(){
         validateField($('#password'))
     })
+
+    $("#email").onchange(function(){
+        validateField($('#email'));
+    })
+
+    $("#password").onchange(function(){
+        validateField($('#password'))
+    })
 });
 
 

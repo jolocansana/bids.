@@ -282,4 +282,39 @@ $(document).ready(function() {
     $("#images").blur(function(){
         validateField($('#images'));
     })
+
+    $("#name").onchange(function(){
+        validateField($('#name'));
+    })
+    $("#description").onchange(function(){
+        validateField($('#description'));
+    })
+    $("#brand").onchange(function(){
+        validateField($('#brand'));
+    })
+    $("#tags").onchange(function(){
+        validateField($('#tags'));
+    })
+    $("#startPrice").onchange(function(){
+        validateField($('#startPrice'));
+    })
+    $("#buyOutPrice").onchange(function(){
+        validateField($('#buyOutPrice'));
+    })
+    $("#bidIncrease").onchange(function(){
+        validateField($('#bidIncrease'));
+    })
+    $("#startDate").onchange(function(){
+        validateField($('#startDate'));
+    })
+    $("#endDate").onchange(function(){
+        validateField($('#endDate'));
+    })
+    $("#productType").onchange(function(){
+        validateField($('#productType'));
+    })
+    $("#images").onchange(function(){
+        validateField($('#images'));
+    })
+
 })

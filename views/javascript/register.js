@@ -191,6 +191,43 @@ $(document).ready(function() {
     $("#city").keyup(function(){
         validateField($('#city'));
     })
+
+    $("#firstName").onchange(function(){
+        validateField($('#firstName'));
+    })
+
+    $("#lastName").onchange(function(){
+        validateField($('#lastName'))
+    })
+
+    $("#email").onchange(function(){
+        validateField($('#email'));
+    })
+
+    $("#username").onchange(function(){
+        validateField($('#username'));
+    })
+
+    $("#phonenum").onchange(function(){
+        validateField($('#phonenum'));
+    })
+
+    $("#password").onchange(function(){
+        validateField($('#password'))
+    })
+
+    $("#cpassword").onchange(function(){
+        validateField($('#cpassword'))
+    })
+
+    $("#address").onchange(function(){
+        validateField($('#address'));
+    })
+
+    $("#city").onchange(function(){
+        validateField($('#city'));
+    })
+
 });
 
 
