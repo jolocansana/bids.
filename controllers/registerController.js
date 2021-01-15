@@ -63,8 +63,6 @@ const registerController = {
 		var regExp = /[a-zA-Z]/g;
 		if(!regExp.test(req.body.password)) return res.status(400).json("Password must contain at least one letter");
 
-		return res.status(400).json(true);
-
 		if(req.body.password != req.body.confirm_password) return res.status(400).json('Confirm password does not match');
 
 		let user = await User.findOne({ _id: user_id })
