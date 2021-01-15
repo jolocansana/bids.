@@ -53,6 +53,11 @@ $(document).ready(function() {
     $("#password").change(function(){
         validateField($('#password'))
     })
+
+    $("body").click(function(){
+        validateField($('#email'));
+        validateField($('#password'))
+    })
 });
 
 
