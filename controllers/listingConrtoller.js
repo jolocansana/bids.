@@ -195,7 +195,7 @@ const bidController = {
 
 
             db.findOne(Listing, { _id: listingID }, {}, function (listing){
-                var description = "You won the "+ listing.name + " bid for" + listing.highestBid;
+                var description = "You won the "+ listing.name + " bid for " + listing.highestBid;
                 var notif = {
                     userID: winUserID, 
                     listingID: listingID,
@@ -231,24 +231,27 @@ const bidController = {
 
             
             db.findMany(Participation, {listingId: listingID}, function(listing) {
-                for(var i = 0; i <listing.length; i++) {
-                    if(listing[i].user._id != winUserID) {
-                        db.findOne(Listing, { _id: listingID }, {}, function (listing){
-                            var description = "You lost the "+ listing.name + " bid";
-                            var notif = {
-                                userID: listing[i].user._id, 
-                                listingID: listingID,
-                                description: description,
-                                date: date 
-                            };
-            
-                            db.insertOne(Notification, notif, function(result) {
-            
+                if(listing.length != null || listing.length != 0) {
+                    for(var i = 0; i <listing.length; i++) {
+                        if(listing[i].user._id != winUserID) {
+                            db.findOne(Listing, { _id: listingID }, {}, function (listing){
+                                var description = "You lost the "+ listing.name + " bid";
+                                var notif = {
+                                    userID: listing[i].user._id, 
+                                    listingID: listingID,
+                                    description: description,
+                                    date: date 
+                                };
+                
+                                db.insertOne(Notification, notif, function(result) {
+                
+                                });
                             });
-                        });
-
+    
+                        }
                     }
                 }
+               
             });
             
             return res.json(lastParticipant ? lastParticipant.user._id : null);

@@ -24,6 +24,7 @@ app.post('/changePassword', registerController.postChangePassword);
 
 // Navbar
 app.get('/getNavbar', navbarController.getNavbar);
+app.get('/getNotifications', navbarController.getNotifications);
 app.get('/getName', navbarController.getName);
 
 // home

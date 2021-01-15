@@ -10,7 +10,8 @@
 
                 $.get('/getNotifications', null, function (result) {
                     for(var i = 0; i < result.length; i++) {
-                        $("#notifs").append('<a class="dropdown-item" href="listingItem?id="' + result[i].listingID'">'+ result[i].description + '</a>')
+                      console.log(result);
+                        $("#notifs").append('<a class="dropdown-item" href="listingItem?id=' + result[i].listingID + '">'+ result[i].description + '</a>');
                     }
                 });
             }
