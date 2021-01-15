@@ -46,11 +46,11 @@ $(document).ready(function() {
         validateField($('#password'))
     })
 
-    $("#email").onchange(function(){
+    $("#email").change(function(){
         validateField($('#email'));
     })
 
-    $("#password").onchange(function(){
+    $("#password").change(function(){
         validateField($('#password'))
     })
 });

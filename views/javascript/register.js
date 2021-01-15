@@ -93,7 +93,6 @@ $(document).ready(function() {
                 $('#password').addClass('is-valid');
                 $('#cpassword').removeClass('is-invalid');
                 $('#cpassword').addClass('is-valid');
-                $("#submitbtn").prop('disabled', false);
                 $("#msg").text("");
             }
             return true;
@@ -104,7 +103,6 @@ $(document).ready(function() {
                 $('#password').addClass('is-invalid');
                 $('#cpassword').removeClass('is-valid');
                 $('#cpassword').addClass('is-invalid');
-                $("#submitbtn").prop('disabled', true);
                 $("#msg").text("Passwords should match and must contain a combination of alphabets and numbers. Minimum of 7 characters.");
             }
             return false;
@@ -119,14 +117,14 @@ $(document).ready(function() {
                 $('#phonenum').removeClass('is-valid');
                 $('#phonenum').addClass('is-invalid');
             }
-            return false;
+            return callback(false);
         }
         else {
             if(field.is($('#phonenum'))) {
                 $('#phonenum').removeClass('is-invalid');
                 $('#phonenum').addClass('is-valid');
             }
-            return true;
+            return callback(true);
         }
     }
 
@@ -141,7 +139,7 @@ $(document).ready(function() {
             
             isValidEmail(field, function(validEmail){
                 isValidPhone(field, function(validPhone) {
-                    if(pass && validEmail && validPhone){
+                    if(pass && validEmail && validPhone && isFilled()){
                         $("#submitbtn").prop('disabled', false);
                     }
                     else {
@@ -192,39 +190,43 @@ $(document).ready(function() {
         validateField($('#city'));
     })
 
-    $("#firstName").onchange(function(){
+    $("#firstName").change(function(){
         validateField($('#firstName'));
     })
 
-    $("#lastName").onchange(function(){
+    $("#lastName").change(function(){
         validateField($('#lastName'))
     })
 
-    $("#email").onchange(function(){
+    $("#email").change(function(){
         validateField($('#email'));
     })
 
-    $("#username").onchange(function(){
+    $("#username").change(function(){
         validateField($('#username'));
     })
 
-    $("#phonenum").onchange(function(){
+    $("#phonenum").change(function(){
         validateField($('#phonenum'));
     })
 
-    $("#password").onchange(function(){
+    $("#password").change(function(){
         validateField($('#password'))
     })
 
-    $("#cpassword").onchange(function(){
+    $("#cpassword").change(function(){
         validateField($('#cpassword'))
     })
 
-    $("#address").onchange(function(){
+    $("#birthday").blur(function(){
+        validateField($('#birthday'))
+    })
+
+    $("#address").change(function(){
         validateField($('#address'));
     })
 
-    $("#city").onchange(function(){
+    $("#city").change(function(){
         validateField($('#city'));
     })
 

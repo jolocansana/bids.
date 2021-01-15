@@ -283,37 +283,37 @@ $(document).ready(function() {
         validateField($('#images'));
     })
 
-    $("#name").onchange(function(){
+    $("#name").change(function(){
         validateField($('#name'));
     })
-    $("#description").onchange(function(){
+    $("#description").change(function(){
         validateField($('#description'));
     })
-    $("#brand").onchange(function(){
+    $("#brand").change(function(){
         validateField($('#brand'));
     })
-    $("#tags").onchange(function(){
+    $("#tags").change(function(){
         validateField($('#tags'));
     })
-    $("#startPrice").onchange(function(){
+    $("#startPrice").change(function(){
         validateField($('#startPrice'));
     })
-    $("#buyOutPrice").onchange(function(){
+    $("#buyOutPrice").change(function(){
         validateField($('#buyOutPrice'));
     })
-    $("#bidIncrease").onchange(function(){
+    $("#bidIncrease").change(function(){
         validateField($('#bidIncrease'));
     })
-    $("#startDate").onchange(function(){
+    $("#startDate").change(function(){
         validateField($('#startDate'));
     })
-    $("#endDate").onchange(function(){
+    $("#endDate").change(function(){
         validateField($('#endDate'));
     })
-    $("#productType").onchange(function(){
+    $("#productType").change(function(){
         validateField($('#productType'));
     })
-    $("#images").onchange(function(){
+    $("#images").change(function(){
         validateField($('#images'));
     })
 
