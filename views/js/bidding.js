@@ -1,5 +1,7 @@
 let globalBids = [];
 
+const socket = io();
+
 // Get username and room from URL
 const { id } = Qs.parse(location.search, {
     ignoreQueryPrefix: true
@@ -95,17 +97,26 @@ function initializeClock(id, endtime) {
         if (t.total <= 0) {
             clearInterval(timeinterval);
 
+            var listingId = $('#listing-id').val();
+
             $.ajax({
                 url: `/listing/closeBidding/${listingId}`,
                 type: 'POST',
                 data: {},
                 success: function (result) {
-    
-                    socket.emit('addedBuyoutBid', { user_id: user_id, new_bid: result, _id: listingId });
-    
-                    $('#current-highest-bid').val(buyout_price);
 
-                    outputAndCloseBiddings(globalBids);
+                    $('#bid-card').hide();
+                    $('#bid-closed').show();
+    
+                    if(result != null) {
+                        if($('#user-id').val() == result) {
+                            Swal.fire(
+                                'Congratulations!',
+                                'You won the auction to this item',
+                                'success'
+                            )
+                        }
+                    }
                 },
                 statusCode: {
                     500: function () {
@@ -210,11 +221,6 @@ $(function () {
         $('#bid-closed').show();
     } 
     
-    
-    
-
-    const socket = io();
-    
     socket.emit('getBidding', {
         user_id: user_id,
         _id: listingId
@@ -292,13 +298,22 @@ $(function () {
     $('#increase-bid-btn').on('click', function () {
         var currentBid = $('#bid-amount').html();
         var bidIncrease = $('#bid-increase-amount').val();
+        let buyout_price = $('#buyout-price').val();
 
         currentBid = parseInt(currentBid);
         bidIncrease = parseInt(bidIncrease);
 
         var increasedBid = currentBid + bidIncrease;
 
-        $('#bid-amount').html(increasedBid);
+        $('#decrease-bid-btn').prop('disabled', false);
+
+        if(increasedBid >= buyout_price) {
+            $('#bid-amount').html(buyout_price);
+            $('#increase-bid-btn').prop('disabled', true);
+
+        } else {
+            $('#bid-amount').html(increasedBid);
+        }
 
     });
 
@@ -314,8 +329,15 @@ $(function () {
 
         var decreasedBid = currentBid - bidIncrease;
 
-        if(decreasedBid > highestBid) $('#bid-amount').html(decreasedBid);
-        else $('#bid-amount').html(highestBid);
+        $('#increase-bid-btn').prop('disabled', false);
+
+        if(decreasedBid > highestBid) {
+            $('#bid-amount').html(decreasedBid);
+            
+        } else {
+            $('#decrease-bid-btn').prop('disabled', true);
+            $('#bid-amount').html(highestBid);
+        }
     });
 
     $('#buyout-btn').on('click', function () {
