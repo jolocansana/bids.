@@ -3,6 +3,13 @@ const User = require('../models/UserModel.js');
 const bcrypt = require('bcrypt');
 const Joi = require('joi');
 const saltRounds = 10;
+const passwordComplexity = require('joi-password-complexity').default;
+const passwordOptions = {
+	min: 7,
+	max: 15,
+	numeric: 1,
+	requirementCount: 1
+}
 
 const registerController = {
 	register: function(req,res){
@@ -49,8 +56,14 @@ const registerController = {
 	postChangePassword: async function(req, res) {
 
 		const user_id = req.session._id;
-		const { error } = validateNewPassword({ password: req.body.password });
+
+		const { error } = passwordComplexity(passwordOptions, "Password").validate(req.body.password);
 		if(error) return res.status(400).json(error.details[0].message);
+
+		var regExp = /[a-zA-Z]/g;
+		if(!regExp.test(req.body.password)) return res.status(400).json("Password must contain at least one letter");
+
+		return res.status(400).json(true);
 
 		if(req.body.password != req.body.confirm_password) return res.status(400).json('Confirm password does not match');
 
