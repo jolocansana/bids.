@@ -11,7 +11,7 @@ const envPort = require('./config.js')
 
 
 const app = express();
-const port = envPort.PORT || 3000;
+const port = envPort.port || 3000;
 
 app.set('view engine', 'hbs');
 app.use(express.static(__dirname + '/views'));
