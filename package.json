@@ -23,7 +23,8 @@
   },
   "scripts": {
     "test": "jest",
-    "dev": "nodemon index.js -e js,hbs"
+    "dev": "nodemon index.js -e js,hbs",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
