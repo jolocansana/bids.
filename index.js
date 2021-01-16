@@ -7,9 +7,11 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const nodemailer = require("nodemailer");
 const multer = require('multer');
+const envPort = require('./config.js')
+
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = envPort.PORT || 3000;
 
 app.set('view engine', 'hbs');
 app.use(express.static(__dirname + '/views'));
