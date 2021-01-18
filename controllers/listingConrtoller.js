@@ -3,6 +3,7 @@ const db = require('../models/db.js');
 const Listing = require('../models/ListingModel');
 const Participation = require('../models/ParticipationModel');
 const User = require('../models/UserModel');
+const Notification = require('../models/NotificationModel');
 const listingValidation = require('../utils/listingValidation');
 
 var storage = multer.diskStorage({
@@ -88,7 +89,7 @@ const bidController = {
                             cond3: listing.highestBid == 0 ? true : false,
                             owner: owner,
                             participation: participation,
-                            participant: req.session._id
+                            participant: req.session._id, 
                         })
                     })
                     
@@ -185,6 +186,74 @@ const bidController = {
                 soldToUser: lastParticipant ? lastParticipant.user._id : null
             });
 
+            //  Win notification
+            var winUserID = lastParticipant.user._id;
+            var listingID = req.params._id;
+            var date = Date.now();
+
+
+
+
+            db.findOne(Listing, { _id: listingID }, {}, function (listing){
+                var description = "You won the "+ listing.name + " bid for " + listing.highestBid;
+                var notif = {
+                    userID: winUserID, 
+                    listingID: listingID,
+                    description: description,
+                    date: date 
+                };
+
+                db.insertOne(Notification, notif, function(result) {
+
+                });
+            });
+
+            // Losers notification
+            db.findOne(Listing, { _id: listingID }, {}, function (listing){
+                db.findMany(Participation, {listingId: listingID}, function(listing) {
+                    for(var i = 0; i <listing.length; i++) {
+                        if(listing[i].user._id != winUserID) {
+                            var description = "You lost the " + listing.name + " bid";
+                            var notif = {
+                                userID: listing[i].user._id,
+                                listingID: listingID,
+                                description: description,
+                                date: date
+                            };
+
+                            db.insertOne(Notification, notif, function (result) {
+
+                            });
+                        }
+                    }
+                });
+            });
+
+            
+            db.findMany(Participation, {listingId: listingID}, function(listing) {
+                if(listing.length != null || listing.length != 0) {
+                    for(var i = 0; i <listing.length; i++) {
+                        if(listing[i].user._id != winUserID) {
+                            db.findOne(Listing, { _id: listingID }, {}, function (listing){
+                                var description = "You lost the "+ listing.name + " bid";
+                                var notif = {
+                                    userID: listing[i].user._id, 
+                                    listingID: listingID,
+                                    description: description,
+                                    date: date 
+                                };
+                
+                                db.insertOne(Notification, notif, function(result) {
+                
+                                });
+                            });
+    
+                        }
+                    }
+                }
+               
+            });
+            
             return res.json(lastParticipant ? lastParticipant.user._id : null);
 
         } catch (err) {

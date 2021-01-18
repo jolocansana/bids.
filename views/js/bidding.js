@@ -50,11 +50,13 @@ function outputAndCloseBiddings(biddings) {
     $('#bid-card').hide();
     $('#bid-closed').show();
 
-    $('#clockdiv').html(`
-        <div class="col-12 text-center">
+    $('#clockdiv').remove();
+    $('#time-left').append(`
+        <div class="text-center" style="text-align: center; margin-top: 8px">
             <h3 class="text-uppercase">Bidding CLosed</h3>
         </div>
-    `)
+    `);
+
 
 
     return true;
@@ -209,11 +211,12 @@ $(function () {
 
     } else {
 
-        $('#clockdiv').html(`
-            <div class="col-12 text-center">
-                <h3 class="text-uppercase">Bidding Closed</h3>
+        $('#clockdiv').remove();
+        $('#time-left').append(`
+            <div class="text-center" style="text-align: center; margin-top: 8px">
+                <h3 class="text-uppercase">Bidding CLosed</h3>
             </div>
-        `)
+        `);
 
         $('#bid-closed').show();
     } 

@@ -7,14 +7,27 @@
                 });
                 $("#navNoSession").prop('hidden', true);
                 $("#navSession").prop('hidden', false);
+
+                $.get('/getNotifications', null, function (result) {
+                  if(result.length==0)
+                  $("#notifs").append('<p class="dropdown-item">No new notifications.</p>');
+                    for(var i = 0; i < result.length; i++) {
+                      console.log(result);
+                        $("#notifs").append('<a class="dropdown-item" href="listingItem?id=' + result[i].listingID + '">'+ result[i].description + '</a>');
+                    }
+                });
             }
             else{
                 $("#navNoSession").prop('hidden', false);
                 $("#navSession").prop('hidden', true);
             }
         });
+
+       
     });
 </script>
+
+<script src="https://use.fontawesome.com/ace75e1302.js"></script>
 
 <div class="container">
     <nav>
@@ -42,14 +55,29 @@
                     <a class="nav-link" href="login">Login</a>              
                 </div>
                 <div class="dropdown" id="navSession" hidden>
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                        <p id="navName" style="display:inline"> </p>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/orderPending">Order History</a>
-                    <a class="dropdown-item" type="button" data-toggle="modal" data-target="#passwordUpdateModal">Change Password</a>
-                    <a class="dropdown-item" href="/logout">Logout</a>
-                    </div>
+                    <div class="row">
+                        <div class="dropdown">
+                            <a class="" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="far fa-bell" style="font-size: 24px; color: black; margin-top: 10px"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="notificationDropdown" id="notifs">
+                            </div>
+                        </div>
+
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <p id="navName" style="display:inline"> </p>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/createListing">Create a Listing</a>
+                                <a class="dropdown-item" href="/orderPending">Order History</a>
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                            </div>
+                        </div>
+                        
+                    </div>  
                 </div>
             </div>
         </div>
