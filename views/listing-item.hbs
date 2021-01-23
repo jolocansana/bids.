@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bids.</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <script src="/js/home.js"></script>
+
+
+
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/nav.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css">
+    <link rel="stylesheet" type="text/css" href="/css/productCard.css">
+    <link rel="stylesheet" type="text/css" href="/css/hover.css">
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
+    <link rel="stylesheet" href="/css/mystyles.css">
+</head>
+
+<body>
+    {{> navbar}}
+
+    <div class="container">
+        <div id="closing-soon">
+            <div class="row product-row d-flex flex-wrap justify-content-center text-center">
+
+            </div>
+
+            {{#if listingStatus }}
+            <div class="container">
+                <div class="main">
+                    <div class="px-lg-4 px-md-4 px-sm-4 mb-3 ml-lg-4 ml-md-4">
+                        <h1 class="h1 font-weight-bold">{{ listing.name }}</h1>
+                        <input type="text" id="listing-id" style="display: none;" value="{{ listing._id }}">
+                        <input type="text" id="listing-end-date" style="display: none;" value="{{ listing.endDate }}">
+                        <input type="text" id="user-id" style="display: none;" value="{{ participant }}">
+                        <input type="text" id="bid-increase-amount" style="display: none;"
+                            value="{{ listing.bidIncrease }}">
+                        <input type="text" id="buyout-price" style="display: none;" value="{{ listing.buyOutPrice }}">
+                        <input type="text" style="display: none;" id="listing-status" value="{{ listing.status }}">
+                        <input type="text" id="listing-start-date" style="display: none;"
+                            value="{{ listing.startDate }}">
+                        {{#if cond3 }}
+                        <input type="text" id="current-highest-bid" style="display: none;"
+                            value="{{ listing.startPrice }}">
+                        {{/if }}
+
+                        {{#unless cond3 }}
+                        <input type="text" id="current-highest-bid" style="display: none;"
+                            value="{{ listing.highestBid }}">
+                        {{/unless}}
+                        <!-- Images Carousel -->
+                        <section>
+                            <div class="rt-container">
+                                <div class="col-rt-12">
+                                    <div class='demo-container'>
+                                        <div class='carousel'>
+                                            {{#if cond1}}
+                                            <input checked='checked' class='carousel__activator'
+                                                id='carousel-slide-activator-1' name='carousel' type='radio'>
+                                            {{/if }}
+
+                                            <input class='carousel__activator' id='carousel-slide-activator-2'
+                                                name='carousel' type='radio'>
+                                            <input class='carousel__activator' id='carousel-slide-activator-3'
+                                                name='carousel' type='radio'>
+                                            <div class='carousel__controls'>
+                                                <label class='carousel__control carousel__control--forward'
+                                                    for='carousel-slide-activator-2'>
+                                                    👉
+                                                </label>
+                                            </div>
+
+                                            <div class='carousel__controls'>
+                                                <label class='carousel__control carousel__control--backward'
+                                                    for='carousel-slide-activator-1'>
+                                                    👈
+                                                </label>
+                                                {{#if cond2 }}
+                                                <label class='carousel__control carousel__control--forward'
+                                                    for='carousel-slide-activator-3'>
+                                                    👉
+                                                </label>
+                                                {{/if }}
+
+                                            </div>
+                                            <div class='carousel__controls'>
+                                                <label class='carousel__control carousel__control--backward'
+                                                    for='carousel-slide-activator-2'>
+                                                    👈
+                                                </label>
+                                            </div>
+                                            <div class='carousel__screen' style="margin-top: 30px">
+
+                                                <div id="carouselExampleControls" class="carousel slide"
+                                                    data-ride="carousel">
+                                                    <div class="carousel-inner">
+            
+
+                                                        {{#each listing.images as | url | }}
+                                                            <div class="carousel-item  active">
+                                                                <img src="uploads/{{url}}" class="d-block w-100 item-pic" alt="...">
+                                                            </div>
+                                                        {{/each }}
+                                                        
+                                                    </div>
+                                                    <a class="carousel-control-prev" href="#carouselExampleControls"
+                                                        role="button" data-slide="prev">
+                                                        <span class="carousel-control-prev-icon"
+                                                            aria-hidden="true"></span>
+                                                        <span class="sr-only" id="prev">Previous</span>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#carouselExampleControls"
+                                                        role="button" data-slide="next">
+                                                        <span class="carousel-control-next-icon"
+                                                            aria-hidden="true"></span>
+                                                        <span class="sr-only" id="next">Next</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        
+                        <!-- Item Details -->
+                        <div class="item-details mt-5">
+                            <div class="container-fluid" style="margin: 0; padding: 0;">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <h1 class="text-muted">item details</h1>
+                                        <p class="h4 font-weight-normal">{{ listing.description }}</p>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="jumbotron" id="time-left" style="padding: 0px;">
+                                            <small class="text-uppercase ml-3 mt-4" id="time-left-display">TIME
+                                                LEFT:</small>
+
+                                            <div id="clockdiv" class="row mb-4">
+                                                <div class="col-2">
+                                                    <span class="days"></span>
+                                                    <div class="smalltext">Days</div>
+                                                </div>
+                                                <div style="padding-bottom: ;">:</div>
+                                                <div class="col-2">
+                                                    <span class="hours"></span>
+                                                    <div class="smalltext">Hours</div>
+                                                </div>
+                                                :
+                                                <div class="col-2 mr-2">
+                                                    <span class="minutes"></span>
+                                                    <div class="smalltext">Minutes</div>
+                                                </div>
+                                                :
+                                                <div class="col-2">
+                                                    <span class="seconds"></span>
+                                                    <div class="smalltext">Seconds</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-8 align-self-center pb-5">
+                                        <p>
+                                            <span class="h4 font-weight-bold">tags</span>
+                                            <span class="ml-5 h4 font-weight-normal">{{ listing.tags }}</span>
+                                        </p>
+                                        <p class="mb-4">
+                                            <span class="h4 font-weight-bold">bids</span>
+                                            <span class="ml-5 h4 font-weight-normal">PHP {{ listing.bidIncrease }}.00
+                                                (+increments) </span>
+                                        </p>
+                                        <p>
+                                            <span class="h4 font-weight-bold">buy-out price</span>
+                                            <span class="ml-3 h4 font-weight-normal">PHP
+                                                {{ listing.buyOutPrice }}.00</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="jumbotron p-4 pb-5" id="seller-info">
+                                            <h4 class="h4 font-weight-bold mb-4">About the seller</h4>
+                                            <div class="row">
+                                                <div class="col-lg-7" style="width: 200px; height: 200px" id="dp">
+                                                    {{!-- <img src="{{ owner.profilePic}}" alt="seller" --}}
+                                                    {{!-- Placeholder image for now just uncomment the line above and comment --}}
+                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Shroud_at_PUBG_PGI_2018_%28cropped%29.jpg"
+                                                        alt="seller" class="seller-img">
+                                                </div>
+                                                <div class="col-lg-5 mt-3">
+                                                    <h4 id="seller-name" class="h4 mb-4 font-weight-bold">
+                                                        {{ owner.firstname }} {{ owner.lastname }}
+                                                    </h4>
+                                                    <p class="mb-0">Rating:</p>
+
+                                                    <h4 id="rating" class="mb-4">4/5</h4>
+                                                    <p class="font-weight-normal" id="seller-locations">
+                                                        {{ owner.address }} {{ owner.city }}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- bidding details -->
+                        <div class="bidding-details mt-5">
+                            <h1 class="text-muted mb-4">highest bid</h1>
+                            <div class="container-fluid"
+                                style="padding: 20px; margin: 0; height: 180px; overflow-y: auto;">
+                                <div class="highest-bid" id="highest-bid">
+
+                                </div>
+                                <div class="previous-bids" id="previous-bids">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="add-bid mt-5" id="bid-card" style="display: none;">
+                            <div class="jumbotron container-fluid p-5 px-5">
+                                <div class="row text-center">
+                                    <div class="col-lg-3">
+                                        <h2 class="font-weight-bold text-muted text-uppercase mt-1">
+                                            up the bid
+                                        </h2>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class="form">
+                                            <div class="row">
+                                                <div class="col-lg-8 text-right">
+
+                                                    {{#if cond3 }}
+                                                    <h1>PHP <span id="bid-amount">{{ listing.startPrice }}</span>.00
+                                                    </h1>
+                                                    {{/if }}
+
+                                                    {{#unless cond3 }}
+                                                    <h1>PHP <span id="bid-amount">{{ listing.highestBid }}</span>.00
+                                                    </h1>
+                                                    {{/unless }}
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <button type="button" id="decrease-bid-btn" class="btn btn-sm btn-dark mt-2" style="font-size: 20px; width: 30px">-</button>
+                                                    <button type="button" id="increase-bid-btn" class="btn btn-sm btn-dark mt-2" style="font-size: 20px; width: 30px;">+</button>
+                                                </div>
+                                            </div>
+                                            <div class="row d-flex"
+                                                style="margin: 0px; padding: 0px; text-align: center">
+                                                <p class="text-danger text-center" id="error-message"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 text-center px-5">
+                                        <div class="spinner-border text-primary" role="status" id="save-spinner"
+                                            style="display: none;">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                        <button id="bid-btn"
+                                            class="btn btn-lg btn-rounded btn-dark text-uppercase btn-block btn-sm">place
+                                            bid</button>
+
+                                        <button
+                                            class="btn btn-lg btn-rounded btn-primary text-uppercase btn-block btn-sm"
+                                            id="buyout-btn">Buy out item</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="add-bid mt-5" id="bid-closed" style="display: none;">
+                            <div class="jumbotron container-fluid p-5 px-5">
+                                <div class="row text-center">
+                                    <div class="col-lg-12 text-center">
+                                        <h2 class="font-weight-bold text-muted mt-1">
+                                            Bidding Closed
+                                        </h2>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            {{/if }}
+
+            {{#unless listingStatus }}
+            <div class="item-details" style="margin-top: 300px; margin-bottom: 150px;">
+                <div class="container-fluid" style="margin: 0; padding: 0;">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <h1 class="text-muted">404 Item Not Found :(</h1>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            {{/unless}}
+        </div>
+
+
+        {{> footer}}
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+            integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.4/qs.min.js"
+            integrity="sha512-BHtomM5XDcUy7tDNcrcX1Eh0RogdWiMdXl3wJcKB3PFekXb3l5aDzymaTher61u6vEZySnoC/SAj2Y/p918Y3w=="
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"
+            integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ=="
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/bidding.js"></script>
+
+</body>
+
+</html>

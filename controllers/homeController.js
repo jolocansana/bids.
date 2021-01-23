@@ -12,7 +12,6 @@ const homeController = {
 			});
 		});
 	},
-
 	getListings: function(req, res) {
 		
 	}

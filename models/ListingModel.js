@@ -21,6 +21,14 @@ var ListingSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    tags: {
+        type: String,
+        required: true
+    },
+    bidIncrease: {
+        type: Number,
+        required: true,
+    },
     images: {
         type: [String],
         required: false
@@ -39,11 +47,15 @@ var ListingSchema = new mongoose.Schema({
     },
     highestBid: {
         type: Number,
-        required: false
+        required: true,
+        default: 0
     },
     listingOwner: {
         type: String,
         required: true
+    },
+    soldToUser: {
+        type: String
     },
     productType: {
         type: String,
@@ -56,6 +68,14 @@ var ListingSchema = new mongoose.Schema({
         type: String,
         enum: ['active', 'inactive'],
         required: true
+    },
+    tags: {
+        type: String,
+        required: true
+    },
+    bidIncrease: {
+        type: Number,
+        required: true,
     }
 });
 
