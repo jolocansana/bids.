@@ -39,6 +39,7 @@ app.get('/getListings', homeController.getListings);
 app.get('/biddingHistoryActive', biddingHistoryActive.getActive);
 app.get('/biddingHistoryCompleted', biddingHistoryCompleted.getCompleted);
 app.get('/biddingHistoryLost', biddingHistoryLost.getLost);
+app.post('/report', biddingHistoryCompleted.report);
 
 // Bidding item
 app.get('/createListing', listingConrtoller.createListingPage);

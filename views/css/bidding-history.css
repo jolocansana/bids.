@@ -108,3 +108,57 @@
     color: black;
     font-weight: bold;
 }
+
+.report-button {
+    width: 180px;
+    height: 40px;
+    font-size: 18px;
+    color: white;
+    background: #000000;
+    border: 0px;
+    border-radius: 30px;
+}
+
+.details {
+    margin-bottom: 10px;
+}
+
+.formtitle{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 49px;   
+    color: #000000;
+    margin-top: 20px;
+}
+
+.form-message {
+    padding-bottom: 120px;
+    height: 150px;
+}
+
+textarea:focus,
+.dropdown:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {   
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 1px 1px rgba(255, 255, 255, 0.075) inset, 0 0 8px rgba(139, 139, 139, 0.6);
+  outline: 0 none;
+}
+
+.modal {
+    margin-top: 3%;
+}
