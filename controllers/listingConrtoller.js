@@ -127,6 +127,31 @@ const bidController = {
                 highestBidder: `${user.firstname} ${user.lastname}`
             });
 
+            // Create notification
+            var date = Date.now();
+
+            db.findOne(Listing, { _id: req.params._id }, {}, function (listing){
+                db.findMany(Participation, {listingId: listing._id}, {}, function(results) {
+                    var added = ["hello"];
+                    for(var i = 0; i < results.length; i++) {
+                        if((results[i].user._id != req.session._id) && !(added.includes(String(results[i].user._id)))) {
+                            var description = "A higher bid was placed for the " + listing.name + " item" ;
+                            var notif = {
+                                userID: results[i].user._id,
+                                listingID: listing._id,
+                                description: description,
+                                date: date
+                            };
+                            added.push(String(results[i].user._id));  
+                            db.insertOne(Notification, notif, function (result) {    
+                                
+                            });
+                            
+                        }
+                    }
+                });
+            });
+
             return res.json(new_participation);
 
         } catch (err) { 
