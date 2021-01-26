@@ -23,7 +23,6 @@ const completedController = {
 			subject:'Reported : ' + req.body.name,
 			text: "Issue: " + req.body.problem + "\n" + req.body.desc + "\nReported by: " + user
 		};
-		console.log(mailOptions)
 		transporter.sendMail(mailOptions, function(error, info) {
 			if(error) {
 				console.log(info)
