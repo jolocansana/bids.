@@ -132,7 +132,7 @@ const bidController = {
 
             db.findOne(Listing, { _id: req.params._id }, {}, function (listing){
                 db.findMany(Participation, {listingId: listing._id}, {}, function(results) {
-                    var added = ["hello"];
+                    var added = [];
                     for(var i = 0; i < results.length; i++) {
                         if((results[i].user._id != req.session._id) && !(added.includes(String(results[i].user._id)))) {
                             var description = "A higher bid was placed for the " + listing.name + " item" ;
