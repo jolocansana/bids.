@@ -234,11 +234,11 @@ const bidController = {
             });
 
             // Losers notification
-            db.findOne(Listing, { _id: listingID }, {}, function (listing){
-                db.findMany(Participation, {listingId: listingID}, function(listing) {
+            db.findOne(Listing, { _id: listingID }, {}, function (result){
+                db.findMany(Participation, {listingId: listingID}, {}, function(listing) {
                     for(var i = 0; i <listing.length; i++) {
                         if(listing[i].user._id != winUserID) {
-                            var description = "You lost the " + listing.name + " bid";
+                            var description = "You lost the " + result.name + " bid";
                             var notif = {
                                 userID: listing[i].user._id,
                                 listingID: listingID,
