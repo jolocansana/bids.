@@ -218,8 +218,8 @@ const bidController = {
 
 
 
-
             db.findOne(Listing, { _id: listingID }, {}, function (listing){
+                console.log("Bid Winner: " + lastParticipant.user.firstname);
                 var description = "You won the "+ listing.name + " bid for " + listing.highestBid;
                 var notif = {
                     userID: winUserID, 
