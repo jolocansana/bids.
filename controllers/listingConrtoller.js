@@ -255,7 +255,7 @@ const bidController = {
             });
 
             
-            db.findMany(Participation, {listingId: listingID}, function(listing) {
+            db.findMany(Participation, {listingId: listingID},{}, function(listing) {
                 if(listing.length != null || listing.length != 0) {
                     for(var i = 0; i <listing.length; i++) {
                         if(listing[i].user._id != winUserID) {
