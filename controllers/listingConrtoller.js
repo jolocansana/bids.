@@ -255,29 +255,29 @@ const bidController = {
             });
 
             
-            db.findMany(Participation, {listingId: listingID},{}, function(listing) {
-                if(listing.length != null || listing.length != 0) {
-                    for(var i = 0; i <listing.length; i++) {
-                        if(listing[i].user._id != winUserID) {
-                            db.findOne(Listing, { _id: listingID }, {}, function (listing){
-                                var description = "You lost the "+ listing.name + " bid";
-                                var notif = {
-                                    userID: listing[i].user._id, 
-                                    listingID: listingID,
-                                    description: description,
-                                    date: date 
-                                };
+            // db.findMany(Participation, {listingId: listingID},{}, function(listing) {
+            //     if(listing.length != null || listing.length != 0) {
+            //         for(var i = 0; i <listing.length; i++) {
+            //             if(listing[i].user._id != winUserID) {
+            //                 db.findOne(Listing, { _id: listingID }, {}, function (listing){
+            //                     var description = "You lost the "+ listing.name + " bid";
+            //                     var notif = {
+            //                         userID: listing[i].user._id, 
+            //                         listingID: listingID,
+            //                         description: description,
+            //                         date: date 
+            //                     };
                 
-                                db.insertOne(Notification, notif, function(result) {
+            //                     db.insertOne(Notification, notif, function(result) {
                 
-                                });
-                            });
+            //                     });
+            //                 });
     
-                        }
-                    }
-                }
+            //             }
+            //         }
+            //     }
                
-            });
+            // });
             
             return res.json(lastParticipant ? lastParticipant.user._id : null);
 
