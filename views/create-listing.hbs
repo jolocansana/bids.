@@ -47,38 +47,47 @@
                        <div class="form-group">
                            <label for="name">Name</label>
                            <input type="text" class="form-control" id="name" placeholder="Enter product name">
+                            <small id="namemsg" class="form-text text-muted"></small>
                        </div>
                        <div class="form-group">
                            <label for="description">Description</label>
                            <input type="text" class="form-control" id="description" minlength="5" placeholder="Description of product, minimum of 5 characters">
+                            <small id="descriptionmsg" class="form-text text-muted"></small>
                        </div>
                        <div class="form-group">
                            <label for="brand">Brand</label>
                            <input type="text" class="form-control" id="brand" placeholder="Enter brand of your product">
+                            <small id="brandmsg" class="form-text text-muted"></small>
                        </div>
                        <div class="form-group">
                            <label for="tags">Tags</label>
                            <input type="text" id="tags" class="form-control" minlength="5" placeholder="Tags related to your product, minimum of 5 characters">
+                            <small id="tagsmsg" class="form-text text-muted"></small>
                        </div>
                        <div class="form-group">
                            <label for="startPrice">Start Price</label>
                            <input type="number" class="form-control" min="1" id="startPrice" placeholder="Enter start price, minimum of 1 Php">
+                            <small id="startPricemsg" class="form-text text-muted"></small>
                        </div>
                        <div class="form-group">
                            <label for="buyOutPrice">Buy-out Price</label>
                            <input type="number" class="form-control" min="1" id="buyOutPrice" placeholder="Buy out price must be greater than start price">
+                            <small id="buyOutPricemsg" class="form-text text-muted"></small>
                        </div>
                        <div class="form-group">
                            <label for="tags">Bid Increase Amount</label>
                            <input type="number" id="bidIncrease" class="form-control" placeholder="Enter bid increment value">
+                            <small id="bidIncreasemsg" class="form-text text-muted"></small>
                        </div>
                        <div class="form-group">
                            <label for="startDate">Start Date</label>
                            <input type="datetime-local" class="form-control" id="startDate" placeholder="Start date must be not earlier than today">
+                            <small id="startDatemsg" class="form-text text-muted"></small>
                        </div>
                        <div class="form-group">
                            <label for="endDate">End Date</label>
                            <input type="datetime-local" class="form-control" id="endDate" placeholder="End date must be greater than start date">
+                            <small id="endDatemsg" class="form-text text-muted"></small>
                        </div>
                        <div class="form-group">
                            <label for="productType">Product Type</label>
@@ -97,14 +106,16 @@
                                <option value="music">Music</option>
                                <option value="pets">Pets</option>
                            </select>
+                           <small id="productTypemsg" class="form-text text-muted"></small>
                        </div>
                        <div class="form-group">
                            <label for="images">Product Images</label>
                            <input type="file" id="images" name="images[]" class="form-control-file" multiple>
+                            <small id="imagesmsg" class="form-text text-muted"></small>
                        </div>
                        <div class="form-group text-center" id="error-display" style="display: none;">
                            <p class="m-0 p-0 text-danger" id="error-message"></p>
-                       </div>
+                        </div>
                        <div class="form-group text-center mt-5">
                             <div class="spinner-border text-primary" role="status" id="save-spinner" style="display: none;">
                                 <span class="sr-only">Loading...</span>

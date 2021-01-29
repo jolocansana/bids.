@@ -61,6 +61,7 @@ $(function() {
 });
 
 $(document).ready(function() {
+    
 
     function isValidBuyOut(field, callback) {
         var start = parseInt(validator.trim($('#startPrice').val()));
@@ -69,6 +70,7 @@ $(document).ready(function() {
             if(field.is($('#startPrice'))) {
                 $('#startPrice').removeClass('is-valid');
                 $('#startPrice').addClass('is-invalid');
+                $('#startPricemsg').text('Start price must be greater than 1.');
                 return callback(false);
             }
         }
@@ -76,6 +78,7 @@ $(document).ready(function() {
             if(field.is($('#buyOutPrice'))) {
                 $('#buyOutPrice').removeClass('is-valid');
                 $('#buyOutPrice').addClass('is-invalid');
+                $('#buyOutPricemsg').text('Buyout price must be greater than 1.');
                 return callback(false);
             }
         }
@@ -91,6 +94,7 @@ $(document).ready(function() {
             if(field.is($('#buyOutPrice'))||field.is($('#startPrice'))) {
                 $('#buyOutPrice').removeClass('is-valid');
                 $('#buyOutPrice').addClass('is-invalid');
+                $('#buyOutPricemsg').text('Buyout price must be greater or equal to the start price.');
             }
             $("#save").prop('disabled', true);
             return callback(false);
@@ -104,6 +108,7 @@ $(document).ready(function() {
             if(field.is($('#description'))) {
                 $('#description').removeClass('is-invalid');
                 $('#description').addClass('is-valid');
+                $('#descriptionmsg').text('');
             }
             return true;
         }
@@ -111,6 +116,7 @@ $(document).ready(function() {
             if(field.is($('#description'))) {
                 $('#description').removeClass('is-valid');
                 $('#description').addClass('is-invalid');
+                $('#descriptionmsg').text('Description should have a minimum length of 5.');
             }
             return false;
         }
@@ -123,6 +129,7 @@ $(document).ready(function() {
             if(field.is($('#tags'))) {
                 $('#tags').removeClass('is-invalid');
                 $('#tags').addClass('is-valid');
+                $('#tagsmsg').text('');
             }
             return true;
         }
@@ -130,6 +137,7 @@ $(document).ready(function() {
             if(field.is($('#tags'))) {
                 $('#tags').removeClass('is-valid');
                 $('#tags').addClass('is-invalid');
+                $('#tagsmsg').text('Tags should have a minimum length of 5.');
             }
             return false;
         }
@@ -168,6 +176,7 @@ $(document).ready(function() {
             if(field.is($('#startDate'))){
                 $('#startDate').removeClass('is-valid');
                 $('#startDate').addClass('is-invalid');
+                $('#startDatemsg').text('Start date and time should be greater than current date and time. ');
                 return callback(false);
             }
         }
@@ -175,6 +184,7 @@ $(document).ready(function() {
             if(field.is($('#endDate'))){
                 $('#endDate').removeClass('is-valid');
                 $('#endDate').addClass('is-invalid');
+                $('#endDatemsg').text('End date and time should be greater than current date and time.');
                 return callback(false);
             }
         }
@@ -182,6 +192,7 @@ $(document).ready(function() {
             if(field.is($('#endDate'))) {
                 $('#endDate').removeClass('is-invalid');
                 $('#endDate').addClass('is-valid');
+                $('#endDatemsg').text('');
             }
             $("#save").prop('disabled', false);
             return callback(true);
@@ -190,6 +201,7 @@ $(document).ready(function() {
             if(field.is($('#endDate'))) {
                 $('#endDate').removeClass('is-valid');
                 $('#endDate').addClass('is-invalid');
+                $('#endDatemsg').text('End date and time should be greater than current date and time.');
             }
             $("#save").prop('disabled', true);
             return callback(false);
@@ -207,6 +219,7 @@ $(document).ready(function() {
             if(field.is($('#bidIncrease'))) {
                 $('#bidIncrease').removeClass('is-invalid');
                 $('#bidIncrease').addClass('is-valid');
+                $('#bidIncreasemsg').text('');
             }
             $("#save").prop('disabled', false);
             return callback(true);
@@ -215,17 +228,19 @@ $(document).ready(function() {
             if(field.is($('#bidIncrease'))) {
                 $('#bidIncrease').removeClass('is-valid');
                 $('#bidIncrease').addClass('is-invalid');
+                $('#bidIncreasemsg').text('Bid increase should be between start and buyout price.');
             }
             $("#save").prop('disabled', true);
             return callback(false);
         }
     }
 
-    function validateField(field){
+    function validateField(field, error){
         var value = validator.trim(field.val());
         var empty = validator.isEmpty(value);
 
         if(!empty){
+            error.text('')
             field.removeClass('is-invalid');
             field.addClass('is-valid');
             var validDesc = isValidDescription(field)
@@ -246,75 +261,76 @@ $(document).ready(function() {
         else{
             field.removeClass('is-valid');
             field.addClass('is-invalid');
+            error.text('Field should not be empty.')
         }
     }
 
     $("#name").keyup(function(){
-        validateField($('#name'));
+        validateField($('#name'),$('#namemsg'));
     })
     $("#description").keyup(function(){
-        validateField($('#description'));
+        validateField($('#description'), $('#descriptionmsg'));
     })
     $("#brand").keyup(function(){
-        validateField($('#brand'));
+        validateField($('#brand'), $('#brandmsg'));
     })
     $("#tags").keyup(function(){
-        validateField($('#tags'));
+        validateField($('#tags'), $('#tagsmsg'));
     })
     $("#startPrice").keyup(function(){
-        validateField($('#startPrice'));
+        validateField($('#startPrice'), $('#startPricemsg'));
     })
     $("#buyOutPrice").keyup(function(){
-        validateField($('#buyOutPrice'));
+        validateField($('#buyOutPrice'), $('#buyOutPricemsg'));
     })
     $("#bidIncrease").keyup(function(){
-        validateField($('#bidIncrease'));
+        validateField($('#bidIncrease'), $('#bidIncreasemsg'));
     })
     $("#startDate").blur(function(){
-        validateField($('#startDate'));
+        validateField($('#startDate'), $('#startDatemsg'));
     })
     $("#endDate").blur(function(){
-        validateField($('#endDate'));
+        validateField($('#endDate'), $('#endDatemsg'));
     })
     $("#productType").click(function(){
-        validateField($('#productType'));
+        validateField($('#productType'), $('#productTypemsg'));
     })
     $("#images").blur(function(){
-        validateField($('#images'));
+        validateField($('#images'), $('#imagesmsg'));
     })
 
     $("#name").change(function(){
-        validateField($('#name'));
+        validateField($('#name'), $('#namemsg'));
     })
     $("#description").change(function(){
-        validateField($('#description'));
+        validateField($('#description'), $('#descriptionmsg'));
     })
     $("#brand").change(function(){
-        validateField($('#brand'));
+        validateField($('#brand'), $('#brandmsg'));
     })
     $("#tags").change(function(){
-        validateField($('#tags'));
+        validateField($('#tags'), $('#tagsmsg'));
     })
     $("#startPrice").change(function(){
-        validateField($('#startPrice'));
+        validateField($('#startPrice'), $('#startPricemsg'));
     })
     $("#buyOutPrice").change(function(){
-        validateField($('#buyOutPrice'));
+        validateField($('#buyOutPrice'), $('#buyOutPricemsg'));
     })
     $("#bidIncrease").change(function(){
-        validateField($('#bidIncrease'));
+        validateField($('#bidIncrease'), $('#bidIncreasemsg'));
     })
     $("#startDate").change(function(){
-        validateField($('#startDate'));
+        validateField($('#startDate'), $('#startDatemsg'));
     })
     $("#endDate").change(function(){
-        validateField($('#endDate'));
+        validateField($('#endDate'), $('#endDatemsg'));
     })
     $("#productType").change(function(){
-        validateField($('#productType'));
+        validateField($('#productType'), $('#productTypemsg'));
     })
     $("#images").change(function(){
-        validateField($('#images'));
+        validateField($('#images'), $('#imagesmsg'));
     })
 
 })

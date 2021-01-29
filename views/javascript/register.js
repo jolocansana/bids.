@@ -31,8 +31,8 @@ $(document).ready(function() {
         if(isValidEmail) {
             $.get('/getCheckEmail', {email: email}, function (result) {
                 if(result.email != email && !validator.isEmpty(email)) {
-
                     if(field.is($('#email'))) {
+                        $("#emailmsg").text("");
                         $('#email').removeClass('is-invalid');
                         $('#email').addClass('is-valid');
                     }
@@ -41,6 +41,7 @@ $(document).ready(function() {
                 }
                 else {
                     if(field.is($('#email'))) {
+                        $("#emailmsg").text("Email should be unique.");
                         $('#email').removeClass('is-valid');
                         $('#email').addClass('is-invalid');
 
@@ -52,7 +53,7 @@ $(document).ready(function() {
         }
         else {
             if(field.is($('#email'))) {
-
+                $("#emailmsg").text("Email should be a valid email.");
                if(validator.isEmpty(email)) {
                     if(field.is($('#email'))) {
                         $('#email').removeClass('is-valid');
@@ -77,14 +78,24 @@ $(document).ready(function() {
 
         if (password.length < 7) {
             flag = false;
+            if(field.is($('#password')))
+                $("#passwordmsg").text("Password should be minimum of 7 characters.");
         } else if (password.length > 50) {
             flag = false;
+            if(field.is($('#password')))
+                $("#passwordmsg").text("Password should not be greater than 50 characters.");
         } else if (password.search(/\d/) == -1) {
             flag = false;
+            if(field.is($('#password')))
+                $("#passwordmsg").text("Password should contain alphabets and numbers.");
         } else if (password.search(/[a-zA-Z]/) == -1) {
             flag = false;
+            if(field.is($('#password')))
+                $("#passwordmsg").text("Password should contain alphabets.");
         } else if (password.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\+]/) != -1) {
             flag = false;
+                if(field.is($('#password')))
+            $("#passwordmsg").text("Password should be contain numbers.");
         }
 
         if(password == confirmpassword && (!validator.isEmpty(password) && !validator.isEmpty(confirmpassword)) && flag){ 
@@ -103,7 +114,7 @@ $(document).ready(function() {
                 $('#password').addClass('is-invalid');
                 $('#cpassword').removeClass('is-valid');
                 $('#cpassword').addClass('is-invalid');
-                $("#msg").text("Passwords should match and must contain a combination of alphabets and numbers. Minimum of 7 characters.");
+                $("#cpasswordmsg").text("Passwords should match.");
             }
             return false;
         }
@@ -116,6 +127,7 @@ $(document).ready(function() {
             if(field.is($('#phonenum'))) {
                 $('#phonenum').removeClass('is-valid');
                 $('#phonenum').addClass('is-invalid');
+                $("#phonenummsg").text("Phone number must be valid.");
             }
             return callback(false);
         }
@@ -123,18 +135,20 @@ $(document).ready(function() {
             if(field.is($('#phonenum'))) {
                 $('#phonenum').removeClass('is-invalid');
                 $('#phonenum').addClass('is-valid');
+                $("#phonenummsg").text("");
             }
             return callback(true);
         }
     }
 
-    function validateField(field){
+    function validateField(field, error){
         var value = validator.trim(field.val());
         var empty = validator.isEmpty(value);
 
         if(!empty){
             field.removeClass('is-invalid');
             field.addClass('is-valid');
+            error.text('');
             var pass = isValidPassword(field);
             
             isValidEmail(field, function(validEmail){
@@ -151,83 +165,84 @@ $(document).ready(function() {
         else{
             field.removeClass('is-valid');
             field.addClass('is-invalid');
+            error.text('Field should not be empty.');
         }
     }
 
     $("#firstName").keyup(function(){
-        validateField($('#firstName'));
+        validateField($('#firstName'), $('#firstNamemsg'));
     })
 
     $("#lastName").keyup(function(){
-        validateField($('#lastName'))
+        validateField($('#lastName'), $('#lastNamemsg'))
     })
 
     $("#email").keyup(function(){
-        validateField($('#email'));
+        validateField($('#email'), $('#emailmsg'));
     })
 
     $("#username").keyup(function(){
-        validateField($('#username'));
+        validateField($('#username'), $('#usernamemsg'));
     })
 
     $("#phonenum").keyup(function(){
-        validateField($('#phonenum'));
+        validateField($('#phonenum'), $('#phonenummsg'));
     })
 
     $("#password").keyup(function(){
-        validateField($('#password'))
+        validateField($('#password'), $('#passwordmsg'))
     })
 
     $("#cpassword").keyup(function(){
-        validateField($('#cpassword'))
+        validateField($('#cpassword'), $('#cpasswordmsg'))
     })
 
     $("#address").keyup(function(){
-        validateField($('#address'));
+        validateField($('#address'), $('#addressmsg'));
     })
 
     $("#city").keyup(function(){
-        validateField($('#city'));
+        validateField($('#city'), $('#citymsg'));
     })
 
     $("#firstName").change(function(){
-        validateField($('#firstName'));
+        validateField($('#firstName'), $('#firstNamemsg'));
     })
 
     $("#lastName").change(function(){
-        validateField($('#lastName'))
+        validateField($('#lastName'), $('#lastNamemsg'))
     })
 
     $("#email").change(function(){
-        validateField($('#email'));
+        validateField($('#email'), $('#emailmsg'));
     })
 
     $("#username").change(function(){
-        validateField($('#username'));
+        validateField($('#username'), $('#usernamemsg'));
     })
 
     $("#phonenum").change(function(){
-        validateField($('#phonenum'));
+        validateField($('#phonenum'), $('#phonenummsg'));
     })
 
     $("#password").change(function(){
-        validateField($('#password'))
+        validateField($('#password'), $('#passwordmsg'))
     })
 
     $("#cpassword").change(function(){
-        validateField($('#cpassword'))
+        validateField($('#cpassword'), $('#cpasswordmsg'))
     })
 
     $("#birthday").blur(function(){
-        validateField($('#birthday'))
+        validateField($('#birthday'), $('#birthdaymsg'))
     })
 
     $("#address").change(function(){
-        validateField($('#address'));
+        validateField($('#address'), $('#addressmsg'));
     })
 
     $("#city").change(function(){
-        validateField($('#city'));
+        validateField($('#city'), $('#citymsg'));
     })
 
 });
