@@ -144,101 +144,49 @@
                                 </div>
                             </div>
                         </section>
-                        
-                        <!-- Item Details -->
-                        <div class="item-details mt-5">
-                            <div class="container-fluid" style="margin-left: 10px; padding: 0;">
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <h1 class="text-muted">item details</h1>
-                                        <p class="h4 font-weight-normal">{{ listing.description }}</p>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="jumbotron" id="time-left" style="padding: 0px;">
-                                            <small class="text-uppercase ml-3 mt-4" id="time-left-display">TIME
-                                                LEFT:</small>
-
-                                            <div id="clockdiv" class="row mb-4">
-                                                <div class="col-2">
-                                                    <span class="days"></span>
-                                                    <div class="smalltext">Days</div>
-                                                </div>
-                                                <div style="padding-bottom: ;">:</div>
-                                                <div class="col-2">
-                                                    <span class="hours"></span>
-                                                    <div class="smalltext">Hours</div>
-                                                </div>
-                                                :
-                                                <div class="col-2 mr-2">
-                                                    <span class="minutes"></span>
-                                                    <div class="smalltext">Minutes</div>
-                                                </div>
-                                                :
-                                                <div class="col-2">
-                                                    <span class="seconds"></span>
-                                                    <div class="smalltext">Seconds</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-8 align-self-center pb-5">
-                                        <p>
-                                            <span class="h4 font-weight-bold">tags</span>
-                                            <span class="ml-5 h4 font-weight-normal">{{ listing.tags }}</span>
-                                        </p>
-                                        <p class="mb-4">
-                                            <span class="h4 font-weight-bold">bids</span>
-                                            <span class="ml-5 h4 font-weight-normal">PHP {{ listing.bidIncrease }}.00
-                                                (+increments) </span>
-                                        </p>
-                                        <p>
-                                            <span class="h4 font-weight-bold">buy-out price</span>
-                                            <span class="ml-3 h4 font-weight-normal">PHP
-                                                {{ listing.buyOutPrice }}.00</span>
-                                        </p>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="jumbotron p-4 pb-5" id="seller-info">
-                                            <h4 class="h4 font-weight-bold mb-4">About the seller</h4>
-                                            <div class="row">
-                                                <div class="col-lg-7" style="width: 200px; height: 200px" id="dp">
-                                                    {{!-- <img src="{{ owner.profilePic}}" alt="seller" --}}
-                                                    {{!-- Placeholder image for now just uncomment the line above and comment --}}
-                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Shroud_at_PUBG_PGI_2018_%28cropped%29.jpg"
-                                                        alt="seller" class="seller-img">
-                                                </div>
-                                                <div class="col-lg-5 mt-3">
-                                                    <h4 id="seller-name" class="h4 mb-4 font-weight-bold">
-                                                        {{ owner.firstname }} {{ owner.lastname }}
-                                                    </h4>
-                                                    <p class="mb-0">Rating:</p>
-
-                                                    <h4 id="rating" class="mb-4">4/5</h4>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
 
                         <!-- bidding details -->
-                        <div class="bidding-details mt-5">
-                            <h1 class="text-muted mb-4">highest bid</h1>
-                            <div class="container-fluid"
-                                style="padding: 20px; margin: 0; height: 180px; overflow-y: auto;">
-                                <div class="highest-bid" id="highest-bid">
-
-                                </div>
-                                <div class="previous-bids" id="previous-bids">
-
+                        <div class="row mt-5">
+                          <div class="col-lg-8">
+                            <div class="bidding-details">
+                                <h1 class="text-muted">highest bid</h1>
+                                <div class="py-3"
+                                    style="margin: 0; height: 180px">
+                                    <div class="highest-bid" id="highest-bid">
+                                    </div>
+                                    <div class="previous-bids" id="previous-bids">
+                                    </div>
                                 </div>
                             </div>
+                          </div>
+                          <div class="col-lg-4">
+                            <div class="jumbotron" id="time-left" style="padding: 0px;">
+                                <small class="text-uppercase ml-3 mt-4" id="time-left-display">TIME
+                                    LEFT:</small>
+  
+                                <div id="clockdiv" class="row mb-4">
+                                    <div class="col-2">
+                                        <span class="days"></span>
+                                        <div class="smalltext">Days</div>
+                                    </div>
+                                    <div style="padding-bottom: ;">:</div>
+                                    <div class="col-2">
+                                        <span class="hours"></span>
+                                        <div class="smalltext">Hours</div>
+                                    </div>
+                                    :
+                                    <div class="col-2 mr-2">
+                                        <span class="minutes"></span>
+                                        <div class="smalltext">Minutes</div>
+                                    </div>
+                                    :
+                                    <div class="col-2">
+                                        <span class="seconds"></span>
+                                        <div class="smalltext">Seconds</div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
                         </div>
 
                         <div class="add-bid mt-5" id="bid-card" style="display: none;">
@@ -303,6 +251,58 @@
                                     </div>
                                 </div>
 
+                            </div>
+                        </div>
+                        
+                        <!-- Item Details -->
+                        <div class="item-details mt-5">
+                            <div class="container-fluid" style="margin-left: 10px; padding: 0;">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h1 class="text-muted">item details</h1>
+                                        <p class="h4 font-weight-normal">{{ listing.description }}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-8 align-self-center pb-5">
+                                        <p>
+                                            <span class="h4 font-weight-bold">tags</span>
+                                            <span class="ml-5 h4 font-weight-normal">{{ listing.tags }}</span>
+                                        </p>
+                                        <p class="mb-4">
+                                            <span class="h4 font-weight-bold">bids</span>
+                                            <span class="ml-5 h4 font-weight-normal">PHP {{ listing.bidIncrease }}.00
+                                                (+increments) </span>
+                                        </p>
+                                        <p>
+                                            <span class="h4 font-weight-bold">buy-out price</span>
+                                            <span class="ml-3 h4 font-weight-normal">PHP
+                                                {{ listing.buyOutPrice }}.00</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="jumbotron p-4 pb-5" id="seller-info">
+                                            <h4 class="h4 font-weight-bold mb-4">About the seller</h4>
+                                            <div class="row">
+                                                <div class="col-lg-7" style="width: 200px; height: 200px" id="dp">
+                                                    {{!-- <img src="{{ owner.profilePic}}" alt="seller" --}}
+                                                    {{!-- Placeholder image for now just uncomment the line above and comment --}}
+                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Shroud_at_PUBG_PGI_2018_%28cropped%29.jpg"
+                                                        alt="seller" class="seller-img">
+                                                </div>
+                                                <div class="col-lg-5 mt-3">
+                                                    <h4 id="seller-name" class="h4 mb-4 font-weight-bold">
+                                                        {{ owner.firstname }} {{ owner.lastname }}
+                                                    </h4>
+                                                    <p class="mb-0">Rating:</p>
+
+                                                    <h4 id="rating" class="mb-4">4/5</h4>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
