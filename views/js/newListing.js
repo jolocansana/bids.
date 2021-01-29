@@ -61,7 +61,7 @@ $(function() {
 });
 
 $(document).ready(function() {
-    
+
 
     function isValidBuyOut(field, callback) {
         var start = parseInt(validator.trim($('#startPrice').val()));
@@ -245,10 +245,13 @@ $(document).ready(function() {
             field.addClass('is-valid');
             var validDesc = isValidDescription(field)
             var validTags = isValidTags(field)
+
+            var picValue = validator.trim($('#images').val())
+            var picEmpty = validator.isEmpty(picValue)
             isValidBuyOut(field, function(validBuyOut){
                 isValidDate(field, function(validDate) {
                     isValidBidIncrease(field, function(validIncrease){
-                        if(validBuyOut && validDate && validDesc && validTags && validIncrease){
+                        if(validBuyOut && validDate && validDesc && validTags && validIncrease && !picEmpty){
                             $("#save").prop('disabled', false);
                         }
                         else {
