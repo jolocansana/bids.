@@ -56,3 +56,6 @@ app.post('/postListing', listingConrtoller.postListing)
 app.post('/listing/addBidding/:_id', listingConrtoller.postBidding);
 app.post('/listing/buyoutBidding/:_id', listingConrtoller.buyoutBidding);
 app.post('/listing/closeBidding/:_id', listingConrtoller.closeBidding);
+
+// About page
+app.get('/about', homeController.getAbout);

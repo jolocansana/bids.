@@ -14,6 +14,9 @@ const homeController = {
 	},
 	getListings: function(req, res) {
 		
+	},
+	getAbout: function(req,res) {
+		res.render('about', {});
 	}
 }
 
