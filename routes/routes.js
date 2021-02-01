@@ -26,6 +26,14 @@ app.get('/getCheckEmail', registerController.getCheckEmail);
 app.get('/logout', logoutController.getLogout);
 app.post('/changePassword', registerController.postChangePassword);
 
+// Static Pages
+app.get('/privacy', (req,res) => {
+  res.render('privacy');
+})
+app.get('/terms', (req,res) => {
+  res.render('terms');
+})
+
 // Navbar
 app.get('/getNavbar', navbarController.getNavbar);
 app.get('/getNotifications', navbarController.getNotifications);

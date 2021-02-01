@@ -37,16 +37,22 @@
     {{> navbar}}
     <div class="container">
         <div id="closing-soon">
-            <h2 class="d-flex justify-content-end subtitle">open</h2>
-            <h2 class="d-flex justify-content-end subtitle">bids</h2>
-
-            <div class="row product-row d-flex flex-wrap" id="list">
-                {{#each listings}}
-                <a href="/listingItem?id={{ _id }}" target="_blank" style="text-decoration: none; color: black;">
-                    {{> productCard name=name highestBid=highestBid images=images}}
-                </a>
-                {{/each}}
-            </div>
+          <h1 class='mt-5'>Privacy Policy</h1>
+          <h3 class='mt-5'>Your privacy is important to us. We want to ensure you that your information is safe and will not be used for any malice against you and the service.</h3>
+          <h4 class='mt-5'>Information we collect</h4>
+          <ul class='mt-3'>
+            <li>Users information such as Full Name, Email, and Contact Information such as Social Media links to Facbeook, Instagram.</li>
+            <li>Product Details such as pictures of the products, name of product, type of product, price range, start and end dates of bids</li>
+          </ul>
+          <h4 class='mt-5'>How your information will be used</h4>
+          <ul class='mt-3'>
+            <li>Users information will be used post every successfull transaction, that is when another user has won the bid a seller has placed. Your user information helps the winning bidder to start contact with you to discuss how the item is going to be exchanged and how payment will go about.</li>
+            <li>Product Details will be used by the bidding system of the service, that is to display the bids for potential buyers to view and ultimately place a bid on the item.</li>
+          </ul>
+          <span class="mt-5">
+            Data gathered by the system is and will only be used as explained in the aforementioned.
+          </span>
+        </div>
 
         </div>
 
