@@ -246,7 +246,7 @@ const bidController = {
                                 db.insertOne(Notification, notif, function(result) {
                 
                                 });
-                            });
+                            }); 
     
                         }
                     }
