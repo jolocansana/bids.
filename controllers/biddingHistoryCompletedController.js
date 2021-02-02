@@ -25,7 +25,6 @@ const completedController = {
 		};
 		transporter.sendMail(mailOptions, function(error, info) {
 			if(error) {
-				console.log(info)
 				res.send(false);
 			}
 			else {
