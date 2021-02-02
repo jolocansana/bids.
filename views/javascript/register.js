@@ -114,7 +114,8 @@ $(document).ready(function() {
                 $('#password').addClass('is-invalid');
                 $('#cpassword').removeClass('is-valid');
                 $('#cpassword').addClass('is-invalid');
-                $("#cpasswordmsg").text("Passwords should match.");
+                if(password != confirmpassword)
+                    $("#cpasswordmsg").text("Passwords should match.");
             }
             return false;
         }
