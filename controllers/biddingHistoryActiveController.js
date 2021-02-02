@@ -49,6 +49,6 @@ function msToTime(duration) {
 	minutes = (minutes < 10) ? "0" + minutes : minutes;
   
 	return days + "d:"+hours + "hr:" + minutes + "min";
-  }
+}
 
 module.exports = activeController;
