@@ -1,31 +1,3 @@
-<script>
-    $(document).ready(function() {
-        $.get('/getNavbar', null, function (result) {
-            if(result){
-                $.get('/getName', null, function (result) {
-                    $("#navName").text(result);
-                });
-                $("#navNoSession").prop('hidden', true);
-                $("#navSession").prop('hidden', false);
-
-                $.get('/getNotifications', null, function (result) {
-                  if(result.length==0)
-                  $("#notifs").append('<p class="dropdown-item">No new notifications.</p>');
-                    for(var i = 0; i < result.length; i++) {
-                      console.log(result);
-                        $("#notifs").append('<a class="dropdown-item" href="listingItem?id=' + result[i].listingID + '">'+ result[i].description + '</a>');
-                    }
-                });
-            }
-            else{
-                $("#navNoSession").prop('hidden', false);
-                $("#navSession").prop('hidden', true);
-            }
-        });
-
-
-    });
-</script>
 
 <script src="https://use.fontawesome.com/ace75e1302.js"></script>
 
@@ -89,19 +61,22 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document" style='max-width: 50vw'>
     <div class="modal-content">
-      <div class="modal-header" style='padding: 0'>
-        <input type='text' placeholder='Search...' style='width:100%; padding: 1em; border: 0; border-radius: .3rem'/>
+      <div class="modal-header" style='padding: 0; position:relative;'>
+        <input id="searchBar" type='text' placeholder='Search...' style='width:100%; padding: 1em; border: 0; border-radius: .3rem'/>
+        <button class="btn" id="searchBtn" style="top: 0; right: 0;position: absolute; background-color:black; color:white; height:100%">
+          <i class="fas fa-search"></i>
+        </button>
       </div>
       <div class="modal-body">
         <div class="flex" style='margin: 3em; max-width: 100%'>
           <h4>categories</h4>
           <div class="row mt-4">
-            <div class='col-4'>top</div>
+            <div class='col-4'><a id="topCat">top</a></div>
             <div class='col-4'>bottom</div>
             <div class='col-4'>shoes</div>
           </div>
           <div class="row mt-4">
-            <div class='col-4'>electornics</div>
+            <div class='col-4'>electronics</div>
             <div class='col-4'>decorative</div>
             <div class='col-4'>atheletic</div>
           </div>
@@ -143,3 +118,38 @@
     </div>
   </div>
 </div>
+
+
+<script>
+    $(document).ready(function() {
+        $('#topCat').attr("href", "/s?filter=top")
+
+        $.get('/getNavbar', null, function (result) {
+            if(result){
+                $.get('/getName', null, function (result) {
+                    $("#navName").text(result);
+                });
+                $("#navNoSession").prop('hidden', true);
+                $("#navSession").prop('hidden', false);
+
+                $.get('/getNotifications', null, function (result) {
+                  if(result.length==0)
+                  $("#notifs").append('<p class="dropdown-item">No new notifications.</p>');
+                    for(var i = 0; i < result.length; i++) {
+                      console.log(result);
+                        $("#notifs").append('<a class="dropdown-item" href="listingItem?id=' + result[i].listingID + '">'+ result[i].description + '</a>');
+                    }
+                });
+            }
+            else{
+                $("#navNoSession").prop('hidden', false);
+                $("#navSession").prop('hidden', true);
+            }
+        });
+
+        $('#searchBtn').click( () =>{
+          console.log($('#searchBar').val())
+        })
+
+    });
+</script>
