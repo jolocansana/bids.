@@ -26,6 +26,14 @@ app.get('/getCheckEmail', registerController.getCheckEmail);
 app.get('/logout', logoutController.getLogout);
 app.post('/changePassword', registerController.postChangePassword);
 
+// Static Pages
+app.get('/privacy', (req,res) => {
+  res.render('privacy');
+})
+app.get('/terms', (req,res) => {
+  res.render('terms');
+})
+
 // Navbar
 app.get('/getNavbar', navbarController.getNavbar);
 app.get('/getNotifications', navbarController.getNotifications);
@@ -48,3 +56,6 @@ app.post('/postListing', listingConrtoller.postListing)
 app.post('/listing/addBidding/:_id', listingConrtoller.postBidding);
 app.post('/listing/buyoutBidding/:_id', listingConrtoller.buyoutBidding);
 app.post('/listing/closeBidding/:_id', listingConrtoller.closeBidding);
+
+// About page
+app.get('/about', homeController.getAbout);

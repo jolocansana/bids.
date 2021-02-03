@@ -127,6 +127,31 @@ const bidController = {
                 highestBidder: `${user.firstname} ${user.lastname}`
             });
 
+            // Create notification
+            var date = Date.now();
+
+            db.findOne(Listing, { _id: req.params._id }, {}, function (listing){
+                db.findMany(Participation, {listingId: listing._id}, {}, function(results) {
+                    var added = [];
+                    for(var i = 0; i < results.length; i++) {
+                        if((results[i].user._id != req.session._id) && !(added.includes(String(results[i].user._id)))) {
+                            var description = "A higher bid was placed for the " + listing.name + " item" ;
+                            var notif = {
+                                userID: results[i].user._id,
+                                listingID: listing._id,
+                                description: description,
+                                date: date
+                            };
+                            added.push(String(results[i].user._id));  
+                            db.insertOne(Notification, notif, function (result) {    
+                                
+                            });
+                            
+                        }
+                    }
+                });
+            });
+
             return res.json(new_participation);
 
         } catch (err) { 
@@ -163,6 +188,48 @@ const bidController = {
                 status: 'inactive'
             });
 
+             //  Win notification
+            //  var winUserID = user._id;
+            //  var listingID = req.params._id;
+            //  var date = Date.now();
+ 
+ 
+ 
+            //  db.findOne(Listing, { _id: listingID }, {}, function (listing){
+            //      var description = "You won the "+ listing.name + " bid for " + listing.buyOutPrice;
+            //      var notif = {
+            //          userID: winUserID, 
+            //          listingID: listingID,
+            //          description: description,
+            //          date: date 
+            //      };
+ 
+            //      db.insertOne(Notification, notif, function(result) {
+ 
+            //      });
+            //  });
+ 
+            //  // Losers notification
+            //  db.findOne(Listing, { _id: listingID }, {}, function (result){
+            //      db.findMany(Participation, {listingId: listingID}, {}, function(listing) {
+            //          for(var i = 0; i <listing.length; i++) {
+            //              if(String(listing[i].user._id) != String(winUserID)) {
+            //                  var description = "You lost the " + result.name + " bid";
+            //                  var notif = {
+            //                      userID: listing[i].user._id,
+            //                      listingID: listingID,
+            //                      description: description,
+            //                      date: date
+            //                  };
+ 
+            //                  db.insertOne(Notification, notif, function (result) {
+ 
+            //                  });
+            //              }
+            //          }
+            //      });
+            //  });
+
             return res.json(new_participation);
 
         } catch(err) {
@@ -174,7 +241,7 @@ const bidController = {
     },
     closeBidding: async function (req, res) {
         try {
-
+            console.log("bidding-closed");
             const lastParticipant = await Participation.findOne({
                 listingId: req.params._id
             }).sort({ createdAt: -1, bids: 1 }).limit(1);
@@ -193,7 +260,6 @@ const bidController = {
 
 
 
-
             db.findOne(Listing, { _id: listingID }, {}, function (listing){
                 var description = "You won the "+ listing.name + " bid for " + listing.highestBid;
                 var notif = {
@@ -209,11 +275,11 @@ const bidController = {
             });
 
             // Losers notification
-            db.findOne(Listing, { _id: listingID }, {}, function (listing){
-                db.findMany(Participation, {listingId: listingID}, function(listing) {
+            db.findOne(Listing, { _id: listingID }, {}, function (result){
+                db.findMany(Participation, {listingId: listingID}, {}, function(listing) {
                     for(var i = 0; i <listing.length; i++) {
-                        if(listing[i].user._id != winUserID) {
-                            var description = "You lost the " + listing.name + " bid";
+                        if(String(listing[i].user._id) != String(winUserID)) {
+                            var description = "You lost the " + result.name + " bid";
                             var notif = {
                                 userID: listing[i].user._id,
                                 listingID: listingID,
@@ -230,29 +296,29 @@ const bidController = {
             });
 
             
-            db.findMany(Participation, {listingId: listingID}, function(listing) {
-                if(listing.length != null || listing.length != 0) {
-                    for(var i = 0; i <listing.length; i++) {
-                        if(listing[i].user._id != winUserID) {
-                            db.findOne(Listing, { _id: listingID }, {}, function (listing){
-                                var description = "You lost the "+ listing.name + " bid";
-                                var notif = {
-                                    userID: listing[i].user._id, 
-                                    listingID: listingID,
-                                    description: description,
-                                    date: date 
-                                };
+            // db.findMany(Participation, {listingId: listingID},{}, function(listing) {
+            //     if(listing.length != null || listing.length != 0) {
+            //         for(var i = 0; i <listing.length; i++) {
+            //             if(listing[i].user._id != winUserID) {
+            //                 db.findOne(Listing, { _id: listingID }, {}, function (listing){
+            //                     var description = "You lost the "+ listing.name + " bid";
+            //                     var notif = {
+            //                         userID: listing[i].user._id, 
+            //                         listingID: listingID,
+            //                         description: description,
+            //                         date: date 
+            //                     };
                 
-                                db.insertOne(Notification, notif, function(result) {
+            //                     db.insertOne(Notification, notif, function(result) {
                 
-                                });
-                            });
+            //                     });
+            //                 });
     
-                        }
-                    }
-                }
+            //             }
+            //         }
+            //     }
                
-            });
+            // });
             
             return res.json(lastParticipant ? lastParticipant.user._id : null);
 

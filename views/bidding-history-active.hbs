@@ -39,37 +39,37 @@
     <div class="container">
         <div class="order-list">
 
-            {{!-- {{#each orders}} --}}
+            {{#each orders}}
             <div class="order" id="sample">
                 <div class="row d-flex align-items-center">
                     <div class="col-2">
-                        <img src="https://i.pinimg.com/564x/4b/6f/ec/4b6fec352ad65acf6c1265201432dfa1.jpg" class="product-icon item-pic">
+                        <img src='uploads/{{image}}' class="product-icon item-pic">
                     </div>
                     <div class="col-4 order-details">
                         <div class="row">
-                            <p class="product-name">Product Name</p>
+                            <p class="product-name">{{name}}</p>
                         </div>
                         <div class="row">
-                            <p class="product-total">Latest Bid: 100 PHP</p>
+                            <p class="product-total">Latest Bid: {{highestBid}} PHP</p>
                         </div>
                         <div class="row">
-                            <p class="product-total">by <span class="title">You</span> </p>
+                            <p class="product-total">by <span class="title">{{highestBidder}}</span> </p>
                         </div>
                     </div>
-                    <div class="col-3 justify-content-end">
-                         <p class="product-total">Time Left <span class="title"> 20 minutes</span> </p>
+                    <div class="col-4 justify-content-end">
+                         <p class="product-total">Time Left <span class="title"> {{remaining}}</span> </p>
                     </div>
-                    <div class="col-3 d-flex justify-content-center">
+                    <div class="col-1 d-flex justify-content-center">
                         <div class="row d-flex justify-content-center">
                             <div class = "col right-col">
-                            <button type="button" class="btn btn-light cancel-button" id="sample">SEE BID</button>
+                            <button onclick="window.location.href='/listingItem?id={{_id}}'" type="button" class="btn btn-light cancel-button" id="sample">SEE BID</button>
                             </div>
                         </div>
                         
                     </div>
                 </div>
             </div>
-            {{!-- {{/each}} --}}
+            {{/each}}
         </div>
     </div>
 

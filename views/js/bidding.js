@@ -153,6 +153,14 @@ function outputBiddings(biddings) {
                     </div>
                 </div>
             `);
+    } else {
+      $('#highest-bid').html(`
+        <div class="row mt-2">
+            <div class="col-lg-6">
+                <h3 class="font-weight-bold">No bidders yet!</h3>
+            </div>
+        </div>
+      `);
     }
 
     let otherBids = '';
