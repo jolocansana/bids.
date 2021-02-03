@@ -37,10 +37,12 @@
     {{> navbar}}
     <div class="container">
         <div id="closing-soon">
-            <h2 class="d-flex justify-content-end subtitle">closing</h2>
-            <h2 class="d-flex justify-content-end subtitle">soon</h2>
+            <div class="my-5">
+            	<h2 class="d-flex justify-content-start subtitle">open</h2>
+            	<h2 class="d-flex justify-content-start subtitle">bids</h2>
+            </div>
 
-            <div class="row product-row d-flex flex-wrap" id="list">
+            <div class="row product-row d-flex flex-wrap justify-content-center" id="list">
                 {{#each listings}}
                 <a href="/listingItem?id={{ _id }}" target="_blank" style="text-decoration: none; color: black;">
                     {{> productCard name=name highestBid=highestBid images=images}}
