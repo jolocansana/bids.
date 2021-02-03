@@ -1,14 +1,42 @@
+<script>
+    $(document).ready(function() {
+        $.get('/getNavbar', null, function (result) {
+            if(result){
+                $.get('/getName', null, function (result) {
+                    $("#navName").text(result);
+                });
+                $("#navNoSession").prop('hidden', true);
+                $("#navSession").prop('hidden', false);
+
+                $.get('/getNotifications', null, function (result) {
+                  if(result.length==0)
+                  $("#notifs").append('<p class="dropdown-item">No new notifications.</p>');
+                    for(var i = 0; i < result.length; i++) {
+                      console.log(result);
+                        $("#notifs").append('<a class="dropdown-item" href="listingItem?id=' + result[i].listingID + '">'+ result[i].description + '</a>');
+                    }
+                });
+            }
+            else{
+                $("#navNoSession").prop('hidden', false);
+                $("#navSession").prop('hidden', true);
+            }
+        });
+
+
+    });
+</script>
 
 <script src="https://use.fontawesome.com/ace75e1302.js"></script>
 
 <div class="container">
     <nav>
-        <div class="row fixed-top white">
-            <div class="col-3 d-flex justify-content-start">
+        <div class="fixed-top white row d-flex justify-content-between">
+            <div class="d-flex rt">
                 <a href="/" class="logolink"><h1 class="logo">Bids.</h1></a>
             </div>
 
-            <div class="col-6 d-flex justify-content-center align-items-center">
+            <div class="d-flex ter align-items-center">
                 {{!-- <div class="d-flex" >
                     <form class="searchbar" method="get" action="/search">
                         <input class="search_input" type="text" name="searchInput" id="searchInput" placeholder="Search...">
@@ -17,17 +45,18 @@
                     <!-- Button trigger modal -->
 
                 </div> --}}
-                <button type="button" class="btn btn-light" style="padding: .5em 10em;" data-toggle="modal" data-target="#exampleModal">
+                <button type="button" class="btn btn-light d-none d-lg-block" style="padding: .5em 10em;" data-toggle="modal" data-target="#exampleModal">
                       Search
                 </button>
             </div>
 
-            <div class="col-3 d-flex justify-content-end userNav" >
+            <div class="d-flex mr-5 userNav">
                 <div id="navNoSession" hidden>
                     <a class="nav-link" href="login">Login</a>
                 </div>
                 <div class="dropdown" id="navSession" hidden>
                     <div class="row">
+                        <button class="fa fa-search d-block d-lg-none mr-3" style='border: 0; background-color: transparent; font-size: 24px; color: black;' aria-hidden="true" data-toggle="modal" data-target="#exampleModal"></button>
                         <div class="dropdown">
                             <a class="" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
@@ -48,7 +77,6 @@
                                 <a class="dropdown-item" href="/logout">Logout</a>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -58,29 +86,17 @@
 </div>
 
 <!-- Search Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document" style='max-width: 50vw'>
+<div class="modal fade col-12" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered col-12" role="document" style='min-width: 50vw'>
     <div class="modal-content">
-      <div class="modal-header" style='padding: 0; position:relative;'>
+      <div class="modal-header" style='padding: 0'>
         <input id="searchBar" type='text' placeholder='Search...' style='width:100%; padding: 1em; border: 0; border-radius: .3rem'/>
         <button class="btn" id="searchBtn" style="top: 0; right: 0;position: absolute; background-color:black; color:white; height:100%">
           <i class="fas fa-search"></i>
         </button>
       </div>
       <div class="modal-body">
-        <div class="flex" style='margin: 3em; max-width: 100%'>
-          <h4>categories</h4>
-          <div class="row mt-4">
-            <div class='col-4'><a id="topCat">top</a></div>
-            <div class='col-4'>bottom</div>
-            <div class='col-4'>shoes</div>
-          </div>
-          <div class="row mt-4">
-            <div class='col-4'>electronics</div>
-            <div class='col-4'>decorative</div>
-            <div class='col-4'>atheletic</div>
-          </div>
-        </div>
+        <h4>categories</h4>
       </div>
     </div>
   </div>
@@ -118,38 +134,3 @@
     </div>
   </div>
 </div>
-
-
-<script>
-    $(document).ready(function() {
-        $('#topCat').attr("href", "/s?filter=top")
-
-        $.get('/getNavbar', null, function (result) {
-            if(result){
-                $.get('/getName', null, function (result) {
-                    $("#navName").text(result);
-                });
-                $("#navNoSession").prop('hidden', true);
-                $("#navSession").prop('hidden', false);
-
-                $.get('/getNotifications', null, function (result) {
-                  if(result.length==0)
-                  $("#notifs").append('<p class="dropdown-item">No new notifications.</p>');
-                    for(var i = 0; i < result.length; i++) {
-                      console.log(result);
-                        $("#notifs").append('<a class="dropdown-item" href="listingItem?id=' + result[i].listingID + '">'+ result[i].description + '</a>');
-                    }
-                });
-            }
-            else{
-                $("#navNoSession").prop('hidden', false);
-                $("#navSession").prop('hidden', true);
-            }
-        });
-
-        $('#searchBtn').click( () =>{
-          console.log($('#searchBar').val())
-        })
-
-    });
-</script>
