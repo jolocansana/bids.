@@ -39,21 +39,21 @@
     <div class="container">
         <div class="order-list">
 
-            {{!-- {{#each orders}} --}}
+            {{#each orders}}
             <div class="order" id="sample">
                 <div class="row d-flex align-items-center">
                     <div class="col-2">
-                        <img src="https://i.pinimg.com/564x/4b/6f/ec/4b6fec352ad65acf6c1265201432dfa1.jpg" class="product-icon item-pic">
+                        <img src="uploads/{{image}}" class="product-icon item-pic">
                     </div>
                     <div class="col-4 order-details">
                         <div class="row">
-                            <p class="product-name">Product Name</p>
+                            <p class="product-name">{{name}}</p>
                         </div>
                         <div class="row">
-                            <p class="product-total">Bid Price: 100 PHP</p>
+                            <p class="product-total">Bid Price: {{highestBid}} PHP</p>
                         </div>
                         <div class="row">
-                            <p class="product-total">by <span class="title">Dog</span> </p>
+                            <p class="product-total">by <span class="title">{{highestBidder}}</span> </p>
                         </div>
                     </div>
                     <div class="col-3 justify-content-end">
@@ -61,15 +61,12 @@
                             <p class="product-total">Completed on</p>
                          </div>
                          <div class="row">
-                             <p class="product-total"><span class="title">December 20, 2020</span> </p>
-                         </div>
-                         <div class="row">
-                             <p class="product-total"><span class="title">10:30 AM</span> </p>
+                             <p class="product-total"><span class="title">{{endDate}}</span> </p>
                          </div>
                     </div>
                 </div>
             </div>
-            {{!-- {{/each}} --}}
+            {{/each}}
         </div>
     </div>
 

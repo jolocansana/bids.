@@ -3,10 +3,11 @@ const Listing = require("../models/ListingModel.js");
 
 const homeController = {
 	home: function(req,res){
-		var query = {};
+		var query = {status: "active"};
 		var projection = {};
 
-		db.findMany(Listing, null, projection, function(results) {
+		db.findMany(Listing, query, projection, function(results) {
+
 			res.render('home', {
 				listings:results
 			});

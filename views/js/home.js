@@ -1,9 +1,6 @@
 $(document).ready(function() {
     // console.log('hello');
     // loadProducts();
-<<<<<<< HEAD
-=======
-
     $('#update-password-btn').on('click', function() {
 
         $('#pass-id-group').hide();
@@ -40,7 +37,6 @@ $(document).ready(function() {
         
     });
 
->>>>>>> bid-notification
 });
 
 
