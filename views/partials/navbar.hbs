@@ -52,7 +52,10 @@
 
             <div class="d-flex mr-5 userNav">
                 <div id="navNoSession" hidden>
+                  <div class="row">
+                    <button class="fa fa-search d-block d-lg-none mr-3" style='border: 0; background-color: transparent; font-size: 24px; color: black;' aria-hidden="true" data-toggle="modal" data-target="#exampleModal"></button>
                     <a class="nav-link" href="login">Login</a>
+                  </div>
                 </div>
                 <div class="dropdown" id="navSession" hidden>
                     <div class="row">
@@ -90,13 +93,56 @@
   <div class="modal-dialog modal-dialog-centered col-12" role="document" style='min-width: 50vw'>
     <div class="modal-content">
       <div class="modal-header" style='padding: 0'>
-        <input id="searchBar" type='text' placeholder='Search...' style='width:100%; padding: 1em; border: 0; border-radius: .3rem'/>
-        <button class="btn" id="searchBtn" style="top: 0; right: 0;position: absolute; background-color:black; color:white; height:100%">
-          <i class="fas fa-search"></i>
-        </button>
+        <div class="input-group">
+          <input type="text"  style="height:50px"class="form-control" placeholder="Search..." aria-label="" aria-describedby="basic-addon1">
+          <div class="input-group-append">
+            <button class="btn" type="button" style="background-color: black; color: white"><i class="fas fa-search" ></i></button>
+          </div>
+        </div>
       </div>
       <div class="modal-body">
         <h4>categories</h4>
+        <div class="row">
+          <div class="col-4 col-md-3 py-2">
+            <a class="category" href="/s?filter=clothes">clothes</a>
+          </div>
+          <div class="col-4 col-md-3 py-2">
+            <a class="category" href="/s?filter=food">food</a>
+          </div>
+          <div class="col-4 col-md-3 py-2">
+            <a class="category" href="/s?filter=electronics">electronics</a>
+          </div>
+          <div class="col-4 col-md-3 py-2">
+            <a class="category" href="/s?filter=tickets">tickets</a>
+          </div>
+          <div class="col-4 col-md-3 py-2">
+            <a class="category" href="/s?filter=furniture">furniture</a>
+          </div>
+          <div class="col-4 col-md-3 py-2">
+            <a class="category" href="/s?filter=beauty">beauty</a>
+          </div>
+          <div class="col-4 col-md-3 py-2">
+            <a class="category" href="/s?filter=books">books</a>
+          </div>
+          <div class="col-4 col-md-3 py-2">
+            <a class="category" href="/s?filter=hobbies">hobbies</a>
+          </div>
+          <div class="col-4 col-md-3 py-2">
+            <a class="category" href="/s?filter=accessories">accessories</a>
+          </div>
+          <div class="col-4 col-md-3 py-2">
+            <a class="category" href="/s?filter=media">media</a>
+          </div>
+          <div class="col-4 col-md-3 py-2">
+            <a class="category" href="/s?filter=music">music</a>
+          </div>
+          <div class="col-4 col-md-3 py-2">
+            <a class="category" href="/s?filter=sports">sports</a>
+          </div>
+          <div class="col-4 col-md-3 py-2">
+            <a class="category" href="/s?filter=pets">pets</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

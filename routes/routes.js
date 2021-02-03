@@ -45,7 +45,7 @@ app.get('/', homeController.home);
 app.get('/getListings', homeController.getListings);
 
 // Search and Filter
-app.post('/s', searchController.getSearch);
+app.get('/s', searchController.getSearch);
 
 // Bidding History
 app.get('/biddingHistoryActive', biddingHistoryActive.getActive);
