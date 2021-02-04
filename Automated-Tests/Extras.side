@@ -1,0 +1,307 @@
+{
+  "id": "b48daf48-606f-4bb5-8be5-0b1701e7ea66",
+  "version": "2.0",
+  "name": "Extras",
+  "url": "http://localhost:3000",
+  "tests": [{
+    "id": "f8854a35-4f55-4b76-bf9b-27a285b4a608",
+    "name": "Privacy Policy",
+    "commands": [{
+      "id": "260eba9e-11ea-432c-83c7-c84128307e1b",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a45c4556-37a2-4a77-a621-cb217c72a7c9",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "734x824",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "813f9979-3b95-4ec3-b661-7e7195c752b2",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Privacy Policy",
+      "targets": [
+        ["linkText=Privacy Policy", "linkText"],
+        ["css=.row:nth-child(3) > .footerlinks:nth-child(1)", "css:finder"],
+        ["xpath=//a[contains(text(),'Privacy Policy')]", "xpath:link"],
+        ["xpath=//a[contains(@href, 'privacy')]", "xpath:href"],
+        ["xpath=//div[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Privacy Policy')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a5a1853e-b66e-49fb-8658-993b18849cb7",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.mt-5:nth-child(1)",
+      "targets": [
+        ["css=.mt-5:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='closing-soon']/h1", "xpath:idRelative"],
+        ["xpath=//div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Privacy Policy')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "80564de0-7b27-4ae1-a771-50a773af7ce6",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.mt-5:nth-child(2)",
+      "targets": [
+        ["css=.mt-5:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='closing-soon']/h3", "xpath:idRelative"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Your privacy is important to us. We want to ensure you that your information is safe and will not be used for any malice against you and the service.')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "28169d82-211b-48e8-b7ae-656afe2235a2",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.mt-5:nth-child(1)",
+      "targets": [
+        ["css=.mt-5:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='closing-soon']/h1", "xpath:idRelative"],
+        ["xpath=//div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Privacy Policy')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "418d9278-6555-4c3b-a27f-e5ee23f7265b",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "css=.justify-content-end:nth-child(1)",
+      "targets": [
+        ["css=.justify-content-end:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='closing-soon']/h2", "xpath:idRelative"],
+        ["xpath=//h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'open')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "eb304d35-af13-4668-99c2-cde348389d4f",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "ad043d7c-e6af-45ad-991c-59b82e939bbb",
+    "name": "Terms and Conditions",
+    "commands": [{
+      "id": "959fd2c8-cdeb-469d-b0d6-086abf3e2aad",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "239a0418-46dd-4599-9b9e-1268dab02faf",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "734x824",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8431234f-9ef5-413a-badc-71f7b9331349",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Terms and Conditions",
+      "targets": [
+        ["linkText=Terms and Conditions", "linkText"],
+        ["css=.footerlinks:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Terms and Conditions')]", "xpath:link"],
+        ["xpath=//a[contains(@href, 'terms')]", "xpath:href"],
+        ["xpath=//div[3]/a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Terms and Conditions')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8c4ba6bc-49b3-47b4-b03c-173da225db15",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.mt-5:nth-child(1)",
+      "targets": [
+        ["css=.mt-5:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='closing-soon']/h1", "xpath:idRelative"],
+        ["xpath=//div/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Terms and Conditions')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "303f7a88-e4bb-46be-841a-875b3f742bb1",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.mt-5:nth-child(2)",
+      "targets": [
+        ["css=.mt-5:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='closing-soon']/h3", "xpath:idRelative"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'It’s important to establish what you can expect from us as you use Bids. services, and what we expect from you')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "51e86586-5928-4494-96a5-79828100a7a6",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.mt-5:nth-child(3)",
+      "targets": [
+        ["css=.mt-5:nth-child(3)", "css:finder"],
+        ["xpath=//div[@id='closing-soon']/h4", "xpath:idRelative"],
+        ["xpath=//div[8]/div/h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'What you can expect from us and the service')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a23774c4-4ac1-4582-b475-a8c0826728a0",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "css=.justify-content-end:nth-child(1)",
+      "targets": [
+        ["css=.justify-content-end:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='closing-soon']/h2", "xpath:idRelative"],
+        ["xpath=//h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'open')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e9f96282-2acf-43f4-a85e-3ab17e4488a9",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "60c03bd8-de27-49c5-a646-b457f828ee70",
+    "name": "Ansible",
+    "commands": [{
+      "id": "fdd7d995-c439-4959-a961-396395188a69",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "420dc5bb-204e-4e7b-a19c-8702e8dbdb96",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "734x824",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "78ff27e4-7da0-45f7-a89d-049b547f0e12",
+      "comment": "",
+      "command": "click",
+      "target": "id=copyright",
+      "targets": [
+        ["id=copyright", "id"],
+        ["css=#copyright", "css:finder"],
+        ["xpath=//h1[@id='copyright']", "xpath:attributes"],
+        ["xpath=//div[4]/a/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Ansible ©')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a2953253-9bda-45a6-a1f3-c375658e4f24",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.row:nth-child(9) > .col-3:nth-child(1) .member-pic",
+      "targets": [
+        ["css=.row:nth-child(9) > .col-3:nth-child(1) .member-pic", "css:finder"],
+        ["xpath=//img[contains(@src,'https://scontent.fmnl13-1.fna.fbcdn.net/v/t1.0-9/81147735_3229344750414516_5558860082541756416_o.jpg?_nc_cat=100&ccb=2&_nc_sid=174925&_nc_ohc=oHRiiKbpVjQAX8YdxU8&_nc_ht=scontent.fmnl13-1.fna&oh=af3d1085435999f7d730d3cf47e7ebda&oe=6038A64E')]", "xpath:img"],
+        ["xpath=//div[4]/div/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4ac22781-0df1-44c1-bde9-2bcabe857763",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.row:nth-child(9) > .col-3:nth-child(2) .member-pic",
+      "targets": [
+        ["css=.row:nth-child(9) > .col-3:nth-child(2) .member-pic", "css:finder"],
+        ["xpath=//img[contains(@src,'https://scontent.fmnl13-1.fna.fbcdn.net/v/t1.0-9/53850207_2242620379386440_6982660334079180800_n.jpg?_nc_cat=100&ccb=2&_nc_sid=174925&_nc_ohc=QirfqU89WccAX8gqjU2&_nc_ht=scontent.fmnl13-1.fna&oh=99a1b8cec625e8f97da26898e1dd3daa&oe=6038632B')]", "xpath:img"],
+        ["xpath=//div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b977493b-f6ce-46c9-8f2f-fa7b0f7e2399",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.row:nth-child(9) > .col-3:nth-child(3) .member-pic",
+      "targets": [
+        ["css=.row:nth-child(9) > .col-3:nth-child(3) .member-pic", "css:finder"],
+        ["xpath=//img[contains(@src,'https://media.discordapp.net/attachments/694405737698295828/804715669564162118/unknown.png')]", "xpath:img"],
+        ["xpath=//div[4]/div[3]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1109dd29-34a6-4d01-89cf-2ad19d177a8d",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.bold:nth-child(8)",
+      "targets": [
+        ["css=.bold:nth-child(8)", "css:finder"],
+        ["xpath=//h2[3]", "xpath:position"],
+        ["xpath=//h2[contains(.,'Team Members')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6d234b26-7d4f-4ddf-919e-c3f1cc54d743",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.row:nth-child(11) > .col-3:nth-child(1) .member-pic",
+      "targets": [
+        ["css=.row:nth-child(11) > .col-3:nth-child(1) .member-pic", "css:finder"],
+        ["xpath=//img[contains(@src,'https://scontent.fmnl13-2.fna.fbcdn.net/v/t1.0-9/49051489_1973633626053943_7014738461265494016_n.jpg?_nc_cat=109&ccb=2&_nc_sid=174925&_nc_ohc=Td2n9sJYHLwAX-qQcSP&_nc_ht=scontent.fmnl13-2.fna&oh=d336d8e996358ed45939d0bb2602689e&oe=60391D6D')]", "xpath:img"],
+        ["xpath=//div[5]/div/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "128ddf31-4803-4f8f-8f47-8973dd8b968a",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.col-12 > p",
+      "targets": [
+        ["css=.col-12 > p", "css:finder"],
+        ["xpath=//div[3]/div/p", "xpath:position"],
+        ["xpath=//p[contains(.,'A group formed as a requirement for one of our courses, STSWENG. This webapp is the front of the application of industry software engineering practices we learned from the course such as DevOps, and CI/CD.')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "745f81fa-038c-4374-be89-42a6effc3ed8",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "css=.justify-content-end:nth-child(1)",
+      "targets": [
+        ["css=.justify-content-end:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='closing-soon']/h2", "xpath:idRelative"],
+        ["xpath=//h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'open')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f7c2da6e-780e-43ac-989d-cdbcea547904",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "3cf36329-7d2e-4e97-ba50-72bdb6251cfc",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["f8854a35-4f55-4b76-bf9b-27a285b4a608"]
+  }],
+  "urls": ["http://localhost:3000/"],
+  "plugins": []
+}

@@ -1,0 +1,93 @@
+{
+  "id": "8b5ff640-4f3e-4e2a-a626-db37e6964a91",
+  "version": "2.0",
+  "name": "LOGOUT",
+  "url": "http://localhost:3000",
+  "tests": [{
+    "id": "d9e65831-efd3-49b9-b76b-d0fb3f9d8eea",
+    "name": "Successful Logout",
+    "commands": [{
+      "id": "5b4720cc-58c1-435a-80fe-22c19fe16128",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4ddc9d9b-c07d-4d54-b6e7-e3154222b77c",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "linkText=Login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8548040c-7836-49e2-aadc-e474665a6563",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=navbarDropdown",
+      "targets": [
+        ["id=navbarDropdown", "id"],
+        ["linkText=Jeddy", "linkText"],
+        ["css=#navbarDropdown", "css:finder"],
+        ["xpath=//a[@id='navbarDropdown']", "xpath:attributes"],
+        ["xpath=//div[@id='navSession']/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '#')])[2]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"]
+      ],
+      "value": "Jeddy"
+    }, {
+      "id": "2d00e3b0-b325-4be9-90db-76b8f2ab5c34",
+      "comment": "",
+      "command": "click",
+      "target": "id=navName",
+      "targets": [
+        ["id=navName", "id"],
+        ["css=#navName", "css:finder"],
+        ["xpath=//p[@id='navName']", "xpath:attributes"],
+        ["xpath=//a[@id='navbarDropdown']/p", "xpath:idRelative"],
+        ["xpath=//p", "xpath:position"],
+        ["xpath=//p[contains(.,'Jeddy')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "50a9d8d3-5969-464b-bc56-b3ffd1dc9483",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=.dropdown-item:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//div[@id='navSession']/div/a[2]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/logout')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3566f0ef-68e2-4978-844f-e8bad4fe0c68",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "linkText=Login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bdf838ce-7492-4d96-8160-2510e821517f",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "9277ab24-534b-4cea-8ef1-d24ef22f9995",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["d9e65831-efd3-49b9-b76b-d0fb3f9d8eea"]
+  }],
+  "urls": ["http://localhost:3000/"],
+  "plugins": []
+}
