@@ -49,7 +49,11 @@
 
                 </div> --}}
                 <button type="button" class="btn btn-light d-none d-lg-block" style="padding: .5em 10em;" data-toggle="modal" data-target="#exampleModal">
-                      Search
+                      {{#if search}}
+                        {{search}}
+                      {{else}}
+                        Search
+                      {{/if}}
                 </button>
             </div>
 
