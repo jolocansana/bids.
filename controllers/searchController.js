@@ -28,7 +28,7 @@ const searchController = {
                     active: active,
                     closed: closed,
                     search: req.query.key,
-                    found: (results.length > 0),
+                    found: (active.length > 0 && closed.length > 0),
                 });
             }
                 

@@ -36,12 +36,11 @@
 <body>
     {{> navbar}}
     <div class="container">
-        {{#if found}}
             <div id="closing-soon">
-                
                 <div class="my-5">
                     <h2 class="subtitle" style="text-align:center">category: {{category}} </h2>
                 </div>
+            {{#if found}}
             {{#if active}}
                 <div class="my-5">
                     <h2 class="subtitle" style="line-height:0.9">open<br/>bids</h2>
@@ -72,7 +71,7 @@
             </div>
             {{/if}}
         {{else}}
-            <div id="closing-soon" class="my-5">
+            <div id="closing-soon" style="margin-top: 200px">
                 <h2 class="subtitle" style="text-align:center">nothing found</h2>
             </div>
         {{/if}}
