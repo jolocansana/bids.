@@ -19,9 +19,15 @@ const socketio = require('socket.io');
 const app = express();
 const port = envPort.port || 3000; 
 
+
 app.set('view engine', 'hbs');
 app.use(express.static(__dirname + '/views'));
 hbs.registerPartials(__dirname + '/views/partials');
+
+// Helpers
+hbs.registerHelper('indexIsZero', function(value) {
+    return value == 0;
+});
 
 app.use(express.urlencoded({extended:true}));
 
