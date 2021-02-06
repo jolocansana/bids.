@@ -29,10 +29,22 @@
     <!-- Body -->
     <div class="container" id="header">
         <h1 id="od-history">bidding history</h1>
-        <div class="order-tabs">
+        <div class="order-tabs d-none d-lg-block">
             <a href="biddingHistoryActive" class="order-tab selected-tab" title = "active">active</a>
             <a href="biddingHistoryCompleted" class="order-tab" title = "completed">completed</a>
             <a href="biddingHistoryLost" class="order-tab" title = "lost">lost</a>
+        </div>
+        <div class="dropdown d-block d-lg-none">
+          <button class="btn btn-secondary dropdown-toggle"
+          type="button" id="dropdownMenu1" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+            Status
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <a href="biddingHistoryActive" class="dropdown-item">active</a>
+          <a href="biddingHistoryCompleted" class="dropdown-item">completed</a>
+          <a href="biddingHistoryLost" class="dropdown-item">lost</a>
+          </div>
         </div>
     </div>
 
