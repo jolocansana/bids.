@@ -36,23 +36,45 @@
 <body>
     {{> navbar}}
     <div class="container">
-        <div id="closing-soon">
-            <div class="my-5">
-            	<h2 class="d-flex justify-content-start subtitle">open</h2>
-            	<h2 class="d-flex justify-content-start subtitle">bids</h2>
+            <div id="closing-soon">
+                <div class="my-5">
+                    <h2 class="subtitle" style="text-align:center">category: {{category}} </h2>
+                </div>
+            {{#if found}}
+            {{#if active}}
+                <div class="my-5">
+                    <h2 class="subtitle" style="line-height:0.9">open<br/>bids</h2>
+                </div>
+
+                <div class="row product-row d-flex flex-wrap justify-content-center" id="list">
+                    {{#each active}}
+                    <a href="/listingItem?id={{ o_id }}" target="_blank" style="text-decoration: none; color: black;">
+                        {{> productCard name=name highestBid=highestBid images=images}}
+                    </a>
+                    {{/each}}
+                </div>
+            {{/if}}
             </div>
+            {{#if closed}}
+            <div id="open-bids">
+                <div class="my-5" style="text-align:right;">
+                    <h2 class="subtitle" style="line-height:0.9">closed<br/>bids</h2>
+                </div>
 
-            <div class="row product-row d-flex flex-wrap justify-content-center" id="list">
-                {{#each listings}}
-                <a href="/listingItem?id={{ _id }}" target="_blank" style="text-decoration: none; color: black;">
-                    {{> productCard name=name highestBid=highestBid images=images}}
-                </a>
-                {{/each}}
+                <div class="row product-row d-flex flex-wrap justify-content-center" id="list">
+                    {{#each closed}}
+                    <a href="/listingItem?id={{ _id }}" target="_blank" style="text-decoration: none; color: black;">
+                        {{> productCard name=name highestBid=highestBid images=images}}
+                    </a>
+                    {{/each}}
+                </div>
             </div>
-
-        </div>
-
-
+            {{/if}}
+        {{else}}
+            <div id="closing-soon" style="margin-top: 200px">
+                <h2 class="subtitle" style="text-align:center">nothing found</h2>
+            </div>
+        {{/if}}
 
     {{> footer}}
 

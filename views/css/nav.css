@@ -90,6 +90,14 @@
     margin-left: -30px;
 }
 
+.category {
+    color: #212529;
+}
+
+.category:hover {
+    color: black;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus,

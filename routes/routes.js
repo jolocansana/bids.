@@ -6,6 +6,7 @@ const registerController = require('../controllers/registerController.js');
 const navbarController = require('../controllers/navbarController.js');
 const logoutController = require('../controllers/logoutController.js');
 
+const searchController = require('../controllers/searchController.js')
 const listingConrtoller = require('../controllers/listingConrtoller');
 const biddingHistoryActive = require('../controllers/biddingHistoryActiveController.js');
 const biddingHistoryCompleted = require('../controllers/biddingHistoryCompletedController.js');
@@ -42,6 +43,10 @@ app.get('/getName', navbarController.getName);
 // Home
 app.get('/', homeController.home);
 app.get('/getListings', homeController.getListings);
+
+// Search and Filter
+app.get('/s', searchController.getSearch);
+app.get('/f', searchController.getFilter);
 
 // Bidding History
 app.get('/biddingHistoryActive', biddingHistoryActive.getActive);

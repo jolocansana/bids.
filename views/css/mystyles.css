@@ -16,9 +16,13 @@
 
 .title {
   margin-top: 10%;
-  margin-left: 60px;
   margin-bottom: 30px;
 }
+@media only screen and (min-width: 768px) {
+  .title {
+    margin-left: 60px;
+  }
+};
 
 .rounded-img {
   width: 50px;
