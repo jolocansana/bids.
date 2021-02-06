@@ -3,7 +3,7 @@ const Joi = require('joi');
 module.exports = function (req) {
     
     const schema = Joi.object({
-        name: Joi.string().min(2).max(200).required(),
+        name: Joi.string().max(200).required(),
         brand: Joi.string().min(2).max(200).required(),
         startPrice: Joi.number().greater(0).required().messages({
             'number.base': `"start price" should be a type of 'number'`,

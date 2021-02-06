@@ -50,6 +50,9 @@ var ListingSchema = new mongoose.Schema({
         required: true,
         default: 0
     },
+    highestBidderId: {
+        type: mongoose.Schema.Types.ObjectId
+    },
     listingOwner: {
         type: String,
         required: true

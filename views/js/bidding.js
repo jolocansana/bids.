@@ -51,9 +51,11 @@ function outputAndCloseBiddings(biddings) {
     $('#bid-closed').show();
 
     $('#clockdiv').remove();
-    $('#time-left').append(`
-        <div class="text-center" style="text-align: center; margin-top: 8px">
-            <h3 class="text-uppercase">Bidding CLosed</h3>
+    $('#time-left').html(`
+        <div class="" style="margin-top: 8px">
+            <small class="text-uppercase ml-3 mt-4" id="time-left-display" style="text-align: left;">TIME
+            LEFT:</small>
+            <h3 class="text-uppercase mt-2" style="text-align: center;">Bidding CLosed</h3>
         </div>
     `);
 
@@ -220,9 +222,10 @@ $(function () {
     } else {
 
         $('#clockdiv').remove();
-        $('#time-left').append(`
-            <div class="text-center" style="text-align: center; margin-top: 8px">
-                <h3 class="text-uppercase">Bidding CLosed</h3>
+        $('#time-left').html(`
+            <div class="" style="margin-top: 8px">
+                <small class="text-uppercase ml-3 mt-4" id="time-left-display" style="text-align: left;">TIME LEFT:</small>
+                <h3 class="text-uppercase mt-2" style="text-align: center;">Bidding CLosed</h3>
             </div>
         `);
 

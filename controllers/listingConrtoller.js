@@ -5,6 +5,7 @@ const Participation = require('../models/ParticipationModel');
 const User = require('../models/UserModel');
 const Notification = require('../models/NotificationModel');
 const listingValidation = require('../utils/listingValidation');
+const listingUpdateValidation = require('../utils/listingUpdateValidation');
 
 var storage = multer.diskStorage({
     destination:'views/uploads/',
@@ -33,7 +34,7 @@ const bidController = {
                 return res.status(400).json(error.details[0].message);
             }
 
-            if(req.body.bidIncrease < 5) return res.status(400).json(`"buy-out price" field requries value to be greater than or equal to 5`);
+            if(req.body.bidIncrease < 5) return res.status(400).json(`"bid-increase amount" field requries value to be greater than or equal to 5`);
 
             let today = new Date();
 
@@ -66,6 +67,13 @@ const bidController = {
                 .catch(err => console.log('error: ', err));
 
         })
+    },
+    putListing: async function (req, res) {
+        const { error } = listingUpdateValidation(req.body);
+        if(error) {
+            console.log(error.details[0].message);
+            return res.status(400).json(error.details[0].message);
+        }
     },
     createListingPage: function (req, res) {
         res.render('create-listing');
@@ -124,7 +132,8 @@ const bidController = {
                 _id: req.params._id
             }, {
                 highestBid: req.body.bid_amount,
-                highestBidder: `${user.firstname} ${user.lastname}`
+                highestBidder: `${user.firstname} ${user.lastname}`,
+                highestBidderId: user._id
             });
 
             return res.json(new_participation);
@@ -160,7 +169,8 @@ const bidController = {
                 highestBid: req.body.buyout_price,
                 highestBidder: `${user.firstname} ${user.lastname}`,
                 soldToUser: user._id,
-                status: 'inactive'
+                status: 'inactive',
+                highestBidderId: user._id,
             });
 
             return res.json(new_participation);
@@ -175,23 +185,26 @@ const bidController = {
     closeBidding: async function (req, res) {
         try {
 
-            const lastParticipant = await Participation.findOne({
-                listingId: req.params._id
-            }).sort({ createdAt: -1, bids: 1 }).limit(1);
+            // sorts by latest participant
+            // const lastParticipant = await Participation.findOne({
+            //     listingId: req.params._id
+            // }).sort({ createdAt: -1, bids: 1 }).limit(1);
+
+            const findListing = await Listing.findOne({
+                _id: req.params._id
+            })
 
             const closeListing = await Listing.updateOne({
                 _id: req.params._id
             }, {
                 status: 'inactive',
-                soldToUser: lastParticipant ? lastParticipant.user._id : null
+                soldToUser: findListing.highestBidderId
             });
 
             //  Win notification
-            var winUserID = lastParticipant.user._id;
+            var winUserID = findListing.highestBidderId;
             var listingID = req.params._id;
             var date = Date.now();
-
-
 
 
             db.findOne(Listing, { _id: listingID }, {}, function (listing){
@@ -254,7 +267,7 @@ const bidController = {
                
             });
             
-            return res.json(lastParticipant ? lastParticipant.user._id : null);
+            return res.json(findListing.highestBidderId ? findListing.highestBidderId : null);
 
         } catch (err) {
             console.log(err);
