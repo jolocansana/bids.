@@ -58,6 +58,7 @@ app.post('/report', biddingHistoryCompleted.report);
 // Seller listings
 app.get('/listingHistoryActive', yourListingController.getActive);
 app.get('/listingHistoryClosed', yourListingController.getCompleted);
+app.get('/getWinnerInfo', yourListingController.getWinnerInfo);
 
 // Edit profile and See Contact Info
 app.get('/editProfile', contactInfoController.edit);

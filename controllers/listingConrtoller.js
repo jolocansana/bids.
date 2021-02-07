@@ -238,8 +238,6 @@ const bidController = {
             });
 
             
-
-              Win notification
              var winUserID = user._id;
              var listingID = req.params._id;
              var date = Date.now();

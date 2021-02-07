@@ -13,7 +13,7 @@
     
 
     <!-- JS, Popper.js, and jQuery -->
-     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
@@ -51,12 +51,18 @@
                         <div class="row">
                             <p class="product-name">{{name}}</p>
                         </div>
+                        {{#if highestBidder}}
                         <div class="row">
                             <p class="product-total">Bid Price: {{highestBid}} PHP</p>
                         </div>
                         <div class="row">
                             <p class="product-total">by <span class="title">{{highestBidder}}</span> </p>
                         </div>
+                        {{else}}
+                        <div class="row">
+                            <p class="product-total">No highest bidder.</p> 
+                        </div>
+                        {{/if}}
                     </div>
                     <div class="col-3 justify-content-end">
                          <div class="row">
@@ -73,36 +79,85 @@
                                     <button onclick="window.location.href='/listingItem?id={{_id}}'" type="button" class="btn btn-light cancel-button" id="sample">SEE BID DETAILS</button>
                                 </div>
                                 <div class="row">
-                                    <button type="button" class="btn btn-light cancel-button" data-bs-toggle="modal" data-bs-target="#contactModal">CONTACT</button>
+                                    <button type="button" onclick="getWinnerInfo('{{soldToUser}}')" class="btn btn-light report-button" data-toggle="modal" data-target="#contact-info" aria-expanded="false" aria-controls="contact-info">CONTACT</button>                                
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            
+        {{/each}}
+            
+        <div class="modal fade" id="contact-info" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="title">report success.</h1>
+                        <h1 class="title">winner details</h1>
                     </div>
                     <div class="modal-body">
-                        <div class="col-1"></div>
-                        <div class="col-10">
-                            <h1 class="formtitle">Thank you for your feedback.</h1>
+                        <div class="row">
+                            <div class="col-4">
+                                Name:
+                            </div>
+                            <div class="col-8" style="text-align:right;">
+                                <span id="winnerName">Trisha Pelagio</span>
+                            </div>
                         </div>
-                        <div class="col-1"></div>
+                        <div class="row">
+                            <div class="col-4">
+                                Email:
+                            </div>
+                            <div class="col-8" style="text-align:right;">
+                                <span id="winnerEmail">wow@gmail.com</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Phone:
+                            </div>
+                            <div class="col-8" style="text-align:right;">
+                                <span id="winnerPhone">0891209382</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Address:
+                            </div>
+                            <div class="col-8" style="text-align:right;">
+                                <span id="winnerAddress">9501 Bassoon Dr</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                City:
+                            </div>
+                            <div class="col-8" style="text-align:right;">
+                                <span id="winnerCity">Houston</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Okay</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" enabled>Okay</button>
                     </div>
                     </div>
                 </div>
             </div>
-        {{/each}}
-            
         </div>
     </div>
+    <script>
+        function getWinnerInfo(id){
+            $.get("/getWinnerInfo?soldToUser=" + id, function(data, status){
+                const { firstname, lastname, phonenum, email, address, city } = data
+                console.log(data)
+                $('#winnerName').html(firstname + " " + lastname)
+                $('#winnerEmail').html(email)
+                $('#winnerPhone').html(phonenum)
+                $('#winnerAddress').html(address)
+                $('#winnerCity').html(city)
+            })
+        }
+    </script>
 
     {{> footer}}
 </body>
