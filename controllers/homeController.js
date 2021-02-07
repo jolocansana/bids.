@@ -51,11 +51,9 @@ const homeController = {
 						var date = Date.now();
 
 						try {
-							let updateWinner = Participation.updateOne({ listingId: listingID, "user._id": winUserID }, {
-								status: 'won'
-							});
+							db.updateOne(Participation,{ listingId: listingID, "user._id": winUserID }, {status: 'won'});
 
-							let updateLosers = Participation.update({ listingId: listingID, "user._id": { $ne: winUserID } }, {
+							db.update({ listingId: listingID, "user._id": { $ne: winUserID } }, {
 								status: "lost"
 							});
 						} catch (err) {
