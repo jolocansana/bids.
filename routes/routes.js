@@ -6,11 +6,13 @@ const registerController = require('../controllers/registerController.js');
 const navbarController = require('../controllers/navbarController.js');
 const logoutController = require('../controllers/logoutController.js');
 
-const searchController = require('../controllers/searchController.js')
+const searchController = require('../controllers/searchController.js');
 const listingConrtoller = require('../controllers/listingConrtoller');
 const biddingHistoryActive = require('../controllers/biddingHistoryActiveController.js');
 const biddingHistoryCompleted = require('../controllers/biddingHistoryCompletedController.js');
 const biddingHistoryLost = require('../controllers/biddingHistoryLostController.js');
+const yourListingController = require('../controllers/yourListingController.js');
+const contactInfoController = require('../controllers/contactInfoController.js');
 
 const app = express();
 
@@ -42,7 +44,6 @@ app.get('/getName', navbarController.getName);
 
 // Home
 app.get('/', homeController.home);
-app.get('/getListings', homeController.getListings);
 
 // Search and Filter
 app.get('/s', searchController.getSearch);
@@ -53,6 +54,14 @@ app.get('/biddingHistoryActive', biddingHistoryActive.getActive);
 app.get('/biddingHistoryCompleted', biddingHistoryCompleted.getCompleted);
 app.get('/biddingHistoryLost', biddingHistoryLost.getLost);
 app.post('/report', biddingHistoryCompleted.report);
+
+// Seller listings
+app.get('/listingHistoryActive', yourListingController.getActive);
+app.get('/listingHistoryClosed', yourListingController.getCompleted);
+
+// Edit profile and See Contact Info
+app.get('/editProfile', contactInfoController.edit);
+app.post('/edit', contactInfoController.editProfile);
 
 // Bidding item
 app.get('/createListing', listingConrtoller.createListingPage);

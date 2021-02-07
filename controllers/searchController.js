@@ -12,7 +12,7 @@ const searchController = {
                 const options = {
                     limit: 100, // don't return more results than you need!
                     allowTypo: true, // if you don't care about allowing typos
-                    threshold: -10000, // don't return bad results
+                    threshold: -1000, // don't return bad results
                     keys: ['name', 'tags']
                   }
                 const sorted = fuzzysort.go(req.query.key, results, options )
@@ -22,13 +22,14 @@ const searchController = {
                 var closed = sorted.filter(function(r) {
                     return r.obj.status == 'inactive'
                 })
+                console.log((active.length > 0 || closed.length > 0))
                 
                 res.render('search-results', {
                     category: null,
                     active: active,
                     closed: closed,
                     search: req.query.key,
-                    found: (active.length > 0 && closed.length > 0),
+                    found: (active.length > 0 || closed.length > 0),
                 });
             }
                 

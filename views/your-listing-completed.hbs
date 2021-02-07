@@ -23,30 +23,20 @@
     <link rel="stylesheet" type="text/css" href="/css/footer.css">
     <link rel="stylesheet" type="text/css" href="/css/bidding-history.css">
 
+    <!-- Local JS -->
+    <script src="javascript/validator.min.js" type="text/javascript"></script>
+    <script src="javascript/bidding-history-completed.js"></script>
+
 </head>
 <body>
     {{> navbar}}
     <!-- Body -->
     <div class="container" id="header">
-        <h1 id="od-history">bidding history</h1>
-        <div class="order-tabs d-none d-lg-block">
-            <a href="biddingHistoryActive" class="order-tab selected-tab" title = "active">active</a>
-            <a href="biddingHistoryCompleted" class="order-tab" title = "completed">completed</a>
-            <a href="biddingHistoryLost" class="order-tab" title = "lost">lost</a>
+        <h1 id="od-history">my listings</h1>
+        <div>
+            <a href="/listingHistoryActive" class="order-tab" title = "active">active</a>
+            <a href="/listingHistoryClosed" class="order-tab selected-tab" title = "completed">completed</a>
         </div>
-        <div class="dropdown d-block d-lg-none">
-          <button class="btn btn-secondary dropdown-toggle"
-          type="button" id="dropdownMenu1" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-            Status
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-          <a href="biddingHistoryActive" class="dropdown-item">active</a>
-          <a href="biddingHistoryCompleted" class="dropdown-item">completed</a>
-          <a href="biddingHistoryLost" class="dropdown-item">lost</a>
-          </div>
-        </div>
-    </div>
 
     <div class="container">
         <div class="order-list">
@@ -55,57 +45,65 @@
             <div class="order" id="sample">
                 <div class="row d-flex align-items-center">
                     <div class="col-2">
-                        <img src='uploads/{{image}}' class="product-icon item-pic">
+                        <img src="uploads/{{image}}" class="product-icon item-pic">
                     </div>
                     <div class="col-4 order-details">
                         <div class="row">
                             <p class="product-name">{{name}}</p>
                         </div>
                         <div class="row">
-                            <p class="product-total">Latest Bid: {{highestBid}} PHP</p>
+                            <p class="product-total">Bid Price: {{highestBid}} PHP</p>
                         </div>
                         <div class="row">
                             <p class="product-total">by <span class="title">{{highestBidder}}</span> </p>
                         </div>
                     </div>
-                    <div class="col-4 justify-content-end">
-                         <p class="product-total">Time Left <span class="title" id="time{{_id}}"></span> </p>
+                    <div class="col-3 justify-content-end">
+                         <div class="row">
+                            <p class="product-total">Completed on</p>
+                         </div>
+                         <div class="row">
+                             <p class="product-total"><span class="title">{{endDate}}</span> </p>
+                         </div>
                     </div>
-                    <div class="col-1 d-flex justify-content-center">
+                    <div class="col-3 d-flex justify-content-center">
                         <div class="row d-flex justify-content-center">
                             <div class = "col right-col">
-                            <button onclick="window.location.href='/listingItem?id={{_id}}'" type="button" class="btn btn-light cancel-button" id="sample">SEE BID</button>
+                                <div class="row details">
+                                    <button onclick="window.location.href='/listingItem?id={{_id}}'" type="button" class="btn btn-light cancel-button" id="sample">SEE BID DETAILS</button>
+                                </div>
+                                <div class="row">
+                                    <button type="button" class="btn btn-light cancel-button" data-bs-toggle="modal" data-bs-target="#contactModal">CONTACT</button>
+                                </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>
-            {{/each}}
+            <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="title">report success.</h1>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-1"></div>
+                        <div class="col-10">
+                            <h1 class="formtitle">Thank you for your feedback.</h1>
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Okay</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+            
         </div>
     </div>
 
     {{> footer}}
-    <script>
-        {{#each orders}}
-            Timer("{{endDate}}","{{_id}}")
-        {{/each}}
-
-        function Timer(endDate, id){
-            var date = new Date(endDate) // parse end date
-            var timer = setInterval(function() {
-                var distance = date.getTime() - new Date().getTime()
-                if (distance <= 0)
-                    distance = 0
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                var asString = days + "d:" + hours + "hr:" + minutes + "min:" + seconds + "s"
-                $('#time' + id).html(asString)
-            }, 1000)
-        }
-        
-    </script>
 </body>
 </html>

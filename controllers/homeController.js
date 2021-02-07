@@ -7,7 +7,7 @@ const homeController = {
 		var projection = {};
 
 		db.findMany(Listing, query, projection, function(results) {
-
+			
 			res.render('home', {
 				listings:results
 			});
