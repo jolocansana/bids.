@@ -6,8 +6,7 @@ const Participation = require('../models/ParticipationModel');
 
 const homeController = {
 	home:  function(req,res){
-		var query = {status: "active"};
-		var projection = {};
+		
 
 
 		db.findMany(Listing, {}, {}, function (results) {
@@ -101,10 +100,11 @@ const homeController = {
 			}
 		});
 
-
+		var query = {status: "active"};
+		var projection = {};
+		
 		// Show the current listings
 		db.findMany(Listing, query, projection, function(results) {
-			
 			res.render('home', {
 				listings:results
 			});
