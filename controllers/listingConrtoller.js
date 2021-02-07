@@ -186,7 +186,6 @@ const bidController = {
             if(err.error) {
                 if(err.status == 400) return res.status(400).json(err.message);
             } else return res.status(500).json('Internal Server Error');
-            
         }
     },
     buyoutBidding: async function (req, res) {

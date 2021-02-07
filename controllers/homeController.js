@@ -10,7 +10,7 @@ const homeController = {
 		
 		// Show the current listings
 		db.findMany(Listing, query, projection, function(results) {
-
+			
 			res.render('home', {
 				listings:results
 			});
