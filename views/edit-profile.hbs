@@ -89,7 +89,7 @@
                     </div>
                     <button type="submit" class="btn btn-dark submit" id="submitbtn">edit</button>
                 </form>
-                <form class="my-5" action='/postChangePassword'>
+                <form class="my-5">
                     <div class="form-group">
                         <label for="InputPassword">Password</label>
                         <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
@@ -100,7 +100,10 @@
                         <input type="password" class="form-control" id="cpassword" placeholder="Confirm your password">
                         <small id="cpasswordmsg" class="form-text text-muted"></small>
                     </div>
-                    <button type="submit" class="btn btn-dark submit" id="submitbtn">change password</button>
+                    <div class="form-group text-center" id="pass-id-group" style="display: none;">
+                        <p id="pass-id-texts" class="mt-0 mb-0 text-danger">Error here</p>
+                    </div>
+                    <button type="button" class="btn btn-dark submit" id="changePasswordSubmit">change password</button>
                 </form>
             </div>
             <div class="col-1"></div>
@@ -108,5 +111,50 @@
     </div>
     
     {{> footer}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"
+        integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        $(document).ready(function() {
+            // console.log('hello');
+            // loadProducts();
+            $('#changePasswordSubmit').on('click', function() {
+
+                $('#pass-id-group').hide();
+                $('#pass-id-texts').html('');
+
+                var password = $('#password').val();
+                var confirm_password = $('#cpassword').val();
+
+                body = { password, confirm_password };
+
+                $.ajax({
+                    method: 'post',
+                    url: '/changePassword',
+                    data: body,
+                    success: function() {
+                        Swal.fire(
+                            'Success!',
+                            'Password updated',
+                            'success'
+                        ).then(() => {
+                            $('#password').val('');
+                            $('#cpassword').val('');
+                        })
+                    },
+                    error: function(err) {
+                        console.log(err);
+                        if(err.status == 400) {
+                            $('#pass-id-texts').html(err.responseJSON);
+                            $('#pass-id-group').show();
+                        }
+                    }
+                })
+                
+            });
+
+        });
+    </script>
 </body>
 </html>

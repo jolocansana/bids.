@@ -12,7 +12,6 @@
                   if(result.length==0)
                   $("#notifs").append('<p class="dropdown-item">No new notifications.</p>');
                     for(var i = 0; i < result.length; i++) {
-                      console.log(result);
                         $("#notifs").append('<a class="dropdown-item" href="listingItem?id=' + result[i].listingID + '">'+ result[i].description + '</a>');
                     }
                 });
@@ -90,6 +89,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/createListing">Create a Listing</a>
                                 <a class="dropdown-item" href="/biddingHistoryActive">Order History</a>
+                                {{!-- <a class="dropdown-item" type="button" data-toggle="modal" data-target="#passwordUpdateModal">Update Password</a> --}}
                                 <a class="dropdown-item" href="/listingHistoryActive">My Listings</a>
                                 <a class="dropdown-item" href="/editProfile">Edit Profile</a>
                                 <a class="dropdown-item" href="/logout">Logout</a>

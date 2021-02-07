@@ -1,7 +1,7 @@
 $(document).ready(function() {
     // console.log('hello');
     // loadProducts();
-    $('#update-password-btn').on('click', function() {
+    $('#changePasswordSubmit').on('click', function() {
 
         $('#pass-id-group').hide();
         $('#pass-id-text').html('');
@@ -39,14 +39,3 @@ $(document).ready(function() {
 
 });
 
-
-// Load the products
-// function loadProducts() {
-//     var list = $("#list");
-//     $.get('/getListings', {}, function(data, status) {
-//        for(var i = 0; i < data.length; i++) {
-//            list.append("{{> productCard}}");
-//        }
-     
-//     });
-// }
