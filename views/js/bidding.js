@@ -269,40 +269,48 @@ $(function () {
         var bid_amount = $('#bid-amount').html();
         bid_amount = parseInt(bid_amount);
 
-        $.ajax({
-            url: `/listing/addBidding/${listingId}`,
-            type: 'POST',
-            data: {
-                bid_amount: bid_amount
-            },
-            success: function (result) {
-                console.log('new bid: ', result);
-                
-                $('#save-spinner').hide();
-                $('#bid-btn').show();
+        let buyout_price = $('#buyout-price').val();
 
-                // emit new bid 
+        buyout_price = parseInt(buyout_price);
 
-                socket.emit('addedNewBid', { user_id: user_id, new_bid: result, _id: listingId });
-
-                $('#current-highest-bid').val(bid_amount);
-
-
-            },
-            statusCode: {
-                400: function (data) {
-                    alert(data.responseJSON);
+        if(bid_amount >= buyout_price) {
+            buyOutBid(buyout_price);
+        } else {
+            $.ajax({
+                url: `/listing/addBidding/${listingId}`,
+                type: 'POST',
+                data: {
+                    bid_amount: bid_amount
+                },
+                success: function (result) {
+                    console.log('new bid: ', result);
+                    
                     $('#save-spinner').hide();
                     $('#bid-btn').show();
+    
+                    // emit new bid 
+    
+                    socket.emit('addedNewBid', { user_id: user_id, new_bid: result, _id: listingId });
+    
+                    $('#current-highest-bid').val(bid_amount);
+    
+    
                 },
-                500: function () {
-                    alert('Internal Server Error');
+                statusCode: {
+                    400: function (data) {
+                        alert(data.responseJSON);
+                        $('#save-spinner').hide();
+                        $('#bid-btn').show();
+                    },
+                    500: function () {
+                        alert('Internal Server Error');
+                    }
+                },
+                error: function (err) {
+                    console.log(err)
                 }
-            },
-            error: function (err) {
-                console.log(err)
-            }
-        })
+            })
+        }
 
     });
 
@@ -366,41 +374,89 @@ $(function () {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                $.ajax({
-                    url: `/listing/buyoutBidding/${listingId}`,
-                    type: 'POST',
-                    data: {
-                        buyout_price: buyout_price
-                    },
-                    success: function (result) {
-                        console.log('new bid: ', result);
-                        // emit new bid 
-        
-                        socket.emit('addedBuyoutBid', { user_id: user_id, new_bid: result, _id: listingId });
-        
-                        $('#current-highest-bid').val(buyout_price);
-        
-                        Swal.fire(
-                            'Congratulations!',
-                            'You won the auction to this item',
-                            'success'
-                        )
-                    },
-                    statusCode: {
-                        400: function (data) {
-                            alert(data.responseJSON);
-                        },
-                        500: function () {
-                            alert('Internal Server Error');
-                        }
-                    },
-                    error: function (err) {
-                        console.log(err)
-                    }
-                })
+                buyOutBid(buyout_price);
         
             }
         })
     });
+
+    $('#update-btn').on('click', function() {
+
+        let name = $('#name').val();
+        let description = $('#description').val();
+        let brand = $('#brand').val();
+        let tags = $('#tags').val();
+        let productType = $('#productType').val();
+        let listing_id = $('#listing-id').val();
+
+        const body = {
+            name, description, brand, tags, productType
+        }
+
+        $.ajax({
+            url: `/updateListing/${listing_id}`,
+            type: 'PUT',
+            data: body,
+            success: function (result) {
+                Swal.fire(
+                    'Success!',
+                    'Listing details updated',
+                    'success'
+                )
+                location.reload();
+            },
+            statusCode: {
+                400: function (data) {
+                    $('#update-error-message').html(data.responseJSON);
+                    $('#update-error-display').show();
+                },
+                500: function () {
+                    alert('Internal Server Error');
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+
+    });
+
+    function buyOutBid(buyOutPrice) {
+        $.ajax({
+            url: `/listing/buyoutBidding/${listingId}`,
+            type: 'POST',
+            data: {
+                buyout_price: buyOutPrice
+            },
+            success: function (result) {
+                console.log('new bid: ', result);
+                // emit new bid 
+
+                socket.emit('addedBuyoutBid', { user_id: user_id, new_bid: result, _id: listingId });
+
+                $('#current-highest-bid').val(buyOutPrice);
+
+                Swal.fire(
+                    'Congratulations!',
+                    'You won the auction to this item',
+                    'success'
+                )
+
+                return
+            },
+            statusCode: {
+                400: function (data) {
+                    alert(data.responseJSON);
+                },
+                500: function () {
+                    alert('Internal Server Error');
+                }
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+        
+    }
 
 });

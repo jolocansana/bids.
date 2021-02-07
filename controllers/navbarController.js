@@ -21,8 +21,7 @@ const navbarController = {
     getNotifications: function(req, res) {
         if(req.session.email){
            db.findMany(Notification,{userID:req.session._id},{}, function(notifications) {
-               console.log(notifications);
-                notifications.sort((a, b) => a.date - b.date);
+                notifications.sort((a, b) => b.date - a.date);
                 result = notifications.slice(0,5);
                 res.send(result);
            });

@@ -3,7 +3,7 @@
 }
 
 #od-history {
-    font-size: 72px;
+    font-size: 55px;
     font-weight: 800;
 }
 
@@ -60,8 +60,8 @@
 .product-name {
     font-weight: bold;
     font-size: 22px;
-    line-height: 1rem;
-    margin-bottom: 20px;
+    line-height: 1.5rem;
+    margin-bottom: 10px;
     color: black;
     text-decoration: none;
 }

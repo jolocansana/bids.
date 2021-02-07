@@ -6,6 +6,7 @@ const registerController = require('../controllers/registerController.js');
 const navbarController = require('../controllers/navbarController.js');
 const logoutController = require('../controllers/logoutController.js');
 
+const searchController = require('../controllers/searchController.js')
 const listingConrtoller = require('../controllers/listingConrtoller');
 const biddingHistoryActive = require('../controllers/biddingHistoryActiveController.js');
 const biddingHistoryCompleted = require('../controllers/biddingHistoryCompletedController.js');
@@ -26,6 +27,14 @@ app.get('/getCheckEmail', registerController.getCheckEmail);
 app.get('/logout', logoutController.getLogout);
 app.post('/changePassword', registerController.postChangePassword);
 
+// Static Pages
+app.get('/privacy', (req,res) => {
+  res.render('privacy');
+})
+app.get('/terms', (req,res) => {
+  res.render('terms');
+})
+
 // Navbar
 app.get('/getNavbar', navbarController.getNavbar);
 app.get('/getNotifications', navbarController.getNotifications);
@@ -34,6 +43,10 @@ app.get('/getName', navbarController.getName);
 // Home
 app.get('/', homeController.home);
 app.get('/getListings', homeController.getListings);
+
+// Search and Filter
+app.get('/s', searchController.getSearch);
+app.get('/f', searchController.getFilter);
 
 // Bidding History
 app.get('/biddingHistoryActive', biddingHistoryActive.getActive);
@@ -48,4 +61,7 @@ app.post('/postListing', listingConrtoller.postListing)
 app.post('/listing/addBidding/:_id', listingConrtoller.postBidding);
 app.post('/listing/buyoutBidding/:_id', listingConrtoller.buyoutBidding);
 app.post('/listing/closeBidding/:_id', listingConrtoller.closeBidding);
-app.put('/updateListing', listingConrtoller.putListing);
+app.put('/updateListing/:_id', listingConrtoller.putListing);
+
+// About page
+app.get('/about', homeController.getAbout);

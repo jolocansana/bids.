@@ -50,7 +50,16 @@ io.on('connection', socket => {
     
     
     socket.on('getBidding', ({ user_id, _id }) => {
-        userJoin(socket.id, user_id, _id)
+        let isGuest = false;
+        let userId;
+
+        if(user_id == '') {
+            isGuest = true;
+            userId = socket.id
+        } else {
+            userId = user_id
+        }
+        userJoin(socket.id, userId, _id, isGuest)
             .then((user) => {
                 socket.join(user.room);
 
