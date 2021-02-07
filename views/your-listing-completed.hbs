@@ -73,67 +73,33 @@
                                     <button onclick="window.location.href='/listingItem?id={{_id}}'" type="button" class="btn btn-light cancel-button" id="sample">SEE BID DETAILS</button>
                                 </div>
                                 <div class="row">
-                                    <button onclick="window.location.replace='/contactInfo" type="button" class="btn btn-light cancel-button">CONTACT</button>
+                                    <button type="button" class="btn btn-light cancel-button" data-bs-toggle="modal" data-bs-target="#contactModal">CONTACT</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-                <div class="modal fade" id="report-order-{{_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="title">report success.</h1>
+                    </div>
                     <div class="modal-body">
-                        <div class="container">        
-                            <div class="row">
-                                <div class="col-1"></div>
-                                <div class="col-10">
-                                    <h1 class="title">report.</h1>
-                                        <h1 class="formtitle">select a problem</h1>
-                                        <select name="reporttype" class="form-control search-rounded input-form dropdown" id="problem-{{_id}}">
-                                            <option value="Copyright Infringement">Copyright Infringement</option>
-                                            <option value="Prohibited Items">Prohibited Items</option>
-                                            <option value="Listing Policy Violation">Listing Policy Violation</option>
-                                            <option value="Offensive Product">Offensive Product</option>
-                                            <option value="Fraudulent Listing">Fraudulent Listing</option>
-                                            <option value="Transaction Problem">Transaction Problem</option>
-                                            <option value="Others">Others</option>
-                                        </select>
-                                        <h1 class="formtitle">describe the problem</h1>
-                                        <input type="text" class="form-control search-rounded input-form form-message" id="form-message-{{_id}}" placeholder="Description" name="desc">
-                                        
-                                </div>
-                                <div class="col-1"></div>
-                            </div>
+                        <div class="col-1"></div>
+                        <div class="col-10">
+                            <h1 class="formtitle">Thank you for your feedback.</h1>
                         </div>
+                        <div class="col-1"></div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button class="submitMessage btnreport btn btn-dark" name="{{_id}}">Report</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Okay</button>
                     </div>
                     </div>
-                </div>
-                </div>
-            <div class="modal fade" id="reportDone" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="title">report success.</h1>
-                </div>
-                <div class="modal-body">
-                    <div class="col-1"></div>
-                    <div class="col-10">
-                        <h1 class="formtitle">Thank you for your feedback.</h1>
-                    </div>
-                    <div class="col-1"></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Okay</button>
-                </div>
                 </div>
             </div>
-            </div>
-            {{/each}}
+        {{/each}}
             
         </div>
     </div>
