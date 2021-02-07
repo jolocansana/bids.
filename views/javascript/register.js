@@ -245,6 +245,7 @@ $(document).ready(function() {
     $("#city").change(function(){
         validateField($('#city'), $('#citymsg'));
     })
+    
 
 });
 

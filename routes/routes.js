@@ -12,7 +12,6 @@ const biddingHistoryActive = require('../controllers/biddingHistoryActiveControl
 const biddingHistoryCompleted = require('../controllers/biddingHistoryCompletedController.js');
 const biddingHistoryLost = require('../controllers/biddingHistoryLostController.js');
 const yourListingController = require('../controllers/yourListingController.js');
-const contactInfoController = require('../controllers/contactInfoController.js');
 
 const app = express();
 
@@ -59,10 +58,6 @@ app.post('/report', biddingHistoryCompleted.report);
 app.get('/listingHistoryActive', yourListingController.getActive);
 app.get('/listingHistoryClosed', yourListingController.getCompleted);
 app.get('/getWinnerInfo', yourListingController.getWinnerInfo);
-
-// Edit profile and See Contact Info
-app.get('/editProfile', contactInfoController.edit);
-app.post('/edit', contactInfoController.editProfile);
 
 // Bidding item
 app.get('/createListing', listingConrtoller.createListingPage);

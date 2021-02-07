@@ -273,6 +273,7 @@
                                         <p>
                                             <span class="h4 font-weight-bold">seller</span>
                                             <span class="ml-3 h4 font-weight-normal">{{ owner.firstname }} {{ owner.lastname }}</span>
+                                            <button type="button" onclick="getWinnerInfo('{{owner._id}}')" class="btn btn-dark report-button ml-3" data-toggle="modal" data-target="#contact-info" aria-expanded="false" aria-controls="contact-info">CONTACT</button>
                                         </p>
                                         <p>
                                             <span class="h4 font-weight-bold">tags</span>
@@ -373,6 +374,75 @@
             </div>
         {{/if }}
 
+        <div class="modal fade" id="contact-info" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="title">contact details</h1>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row my-2">
+                            <div class="col-4">
+                                Name:
+                            </div>
+                            <div class="col-8" style="text-align:right;">
+                                <span id="winnerName">Trisha Pelagio</span>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-4">
+                                Email:
+                            </div>
+                            <div class="col-8" style="text-align:right;">
+                                <span id="winnerEmail">wow@gmail.com</span>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-4">
+                                Phone:
+                            </div>
+                            <div class="col-8" style="text-align:right;">
+                                <span id="winnerPhone">0891209382</span>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-4">
+                                Address:
+                            </div>
+                            <div class="col-8" style="text-align:right;">
+                                <span id="winnerAddress">9501 Bassoon Dr</span>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-4">
+                                City:
+                            </div>
+                            <div class="col-8" style="text-align:right;">
+                                <span id="winnerCity">Houston</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" enabled>Okay</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function getWinnerInfo(id){
+                $.get("/getWinnerInfo?soldToUser=" + id, function(data, status){
+                    const { firstname, lastname, phonenum, email, address, city } = data
+                    console.log(data)
+                    $('#winnerName').html(firstname + " " + lastname)
+                    $('#winnerEmail').html(email)
+                    $('#winnerPhone').html(phonenum)
+                    $('#winnerAddress').html(address)
+                    $('#winnerCity').html(city)
+                })
+            }
+        </script>
 
         {{> footer}}
 
