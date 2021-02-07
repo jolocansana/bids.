@@ -11,6 +11,7 @@ const listingConrtoller = require('../controllers/listingConrtoller');
 const biddingHistoryActive = require('../controllers/biddingHistoryActiveController.js');
 const biddingHistoryCompleted = require('../controllers/biddingHistoryCompletedController.js');
 const biddingHistoryLost = require('../controllers/biddingHistoryLostController.js');
+const yourListingController = require('../controllers/yourListingController.js')
 
 const app = express();
 
@@ -53,6 +54,10 @@ app.get('/biddingHistoryActive', biddingHistoryActive.getActive);
 app.get('/biddingHistoryCompleted', biddingHistoryCompleted.getCompleted);
 app.get('/biddingHistoryLost', biddingHistoryLost.getLost);
 app.post('/report', biddingHistoryCompleted.report);
+
+// Seller listings
+app.get('/listingHistoryActive', yourListingController.getActive);
+app.get('/listingHistoryClosed', yourListingController.getCompleted);
 
 // Bidding item
 app.get('/createListing', listingConrtoller.createListingPage);
