@@ -25,6 +25,7 @@ const activeController = {
                 }
                 listings.push(listing)
             }
+            listings.sort((a,b) => (a.endDate > b.endDate) ? 1 : -1)
             res.render('your-listing-active', {orders:listings})
         })
 
@@ -32,7 +33,7 @@ const activeController = {
     getCompleted: function(req, res) {
         var userID = req.session._id
 			
-        db.findMany(Listing, {listingOwner:userID, status:'inactive'}, null, function(results) {
+        db.findMany(Listing, {listingOwner:userID, status:'inactive'}, {}, function(results) {
             var listings = []
             for (var i=0; i<results.length ; i++){ 
                 var image = results[i].images[0]
@@ -51,6 +52,7 @@ const activeController = {
                 }
                 listings.push(listing)
             }
+            listings.sort((a,b) => (a.endDate > b.endDate) ? 1 : -1)
             res.render('your-listing-completed', {orders:listings})
         })
 		

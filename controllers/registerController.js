@@ -26,7 +26,7 @@ const registerController = {
 		var birthday = req.body.birthday
 		var rating = null
 		var address = req.body.address
-		var city = req.body.address
+		var city = req.body.city
 		var description = ''
         bcrypt.hash(password, saltRounds, function(err, hash) {
             var user = {
