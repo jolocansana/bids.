@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <div class="col-4 justify-content-end">
-                         <p class="product-total">Time Left <span class="title"> {{remaining}}</span> </p>
+                         <p class="product-total">Time Left <span class="title" id="time{{_id}}"></span> </p>
                     </div>
                     <div class="col-1 d-flex justify-content-center">
                         <div class="row d-flex justify-content-center">
@@ -87,7 +87,25 @@
 
     {{> footer}}
     <script>
-        console.log({{orders}})
+        {{#each orders}}
+            Timer("{{endDate}}","{{_id}}")
+        {{/each}}
+
+        function Timer(endDate, id){
+            var date = new Date(endDate) // parse end date
+            var timer = setInterval(function() {
+                var distance = date.getTime() - new Date().getTime()
+                if (distance <= 0)
+                    distance = 0
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                var asString = days + "d:" + hours + "hr:" + minutes + "min:" + seconds + "s"
+                $('#time' + id).html(asString)
+            }, 1000)
+        }
+        
     </script>
 </body>
 </html>
