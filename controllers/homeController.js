@@ -14,71 +14,90 @@ const homeController = {
 			for (var i = 0; i < results.length; i++) {
 				var listID = results[i]._id;
 				var closeNow = Date.now();
+				if ((Date.parse(results[i].endDate) < closeNow) && (results[i].status == "active")) {
+					
 
-				if ((results[i].endDate < closeNow) && (results[i].status == "active")) {
 					const findListing =  Listing.findOne({
 						_id: listID
 					})
+					console.log(results[i]);
 
-					const closeListing =  Listing.updateOne({
-						_id: listID
-					}, {
-						status: 'inactive',
-						soldToUser: findListing.highestBidderId,
-						endDate: new Date()
-					});
+					if(findListing.highestBidderId != undefined){
+						// Listing.updateOne({
+						// 	_id: listID
+						// }, {
+						// 	status: 'inactive',
+						// 	soldToUser: findListing.highestBidderId
+						// });
+						db.updateOne(Listing, {_id: listID}, {status: "inactive", soldToUser:findListing.highestBidderId});
+
+					}
+					else {
+						// Listing.updateOne({
+						// 	_id: listID
+						// }, {
+						// 	status: 'inactive'
+						// });
+						db.updateOne(Listing, {_id: listID}, {status: "inactive"});
+					}
+					
 
 					//  Win notification
+					
 					var winUserID = findListing.highestBidderId;
-					var listingID = listID
-					var date = Date.now();
 
-					try {
-						let updateWinner =  Participation.updateOne({ listingId: listingID, "user._id": winUserID }, {
-							status: 'won'
+					if(winUserID != undefined) {
+						var listingID = listID
+						var date = Date.now();
+
+						try {
+							let updateWinner = Participation.updateOne({ listingId: listingID, "user._id": winUserID }, {
+								status: 'won'
+							});
+
+							let updateLosers = Participation.update({ listingId: listingID, "user._id": { $ne: winUserID } }, {
+								status: "lost"
+							});
+						} catch (err) {
+							console.log(err);
+						}
+
+						db.findOne(Listing, { _id: listingID }, {}, function (listing) {
+							var description = "You won the " + listing.name + " bid for " + listing.highestBid;
+							var notif = {
+								userID: winUserID,
+								listingID: listingID,
+								description: description,
+								date: date
+							};
+
+							db.insertOne(Notification, notif, function (result) {
+
+							});
 						});
 
-						let updateLosers =  Participation.update({ listingId: listingID, "user._id": { $ne: winUserID } }, {
-							status: "lost"
-						});
-					} catch (err) {
-						console.log(err);
-					}
+						// Losers notification
+						db.findOne(Listing, { _id: listingID }, {}, function (result) {
+							db.findMany(Participation, { listingId: listingID }, {}, function (listing) {
+								for (var i = 0; i < listing.length; i++) {
+									if (String(listing[i].user._id) != String(winUserID)) {
+										var description = "You lost the " + result.name + " bid";
+										var notif = {
+											userID: listing[i].user._id,
+											listingID: listingID,
+											description: description,
+											date: date
+										};
 
-					db.findOne(Listing, { _id: listingID }, {}, function (listing) {
-						var description = "You won the " + listing.name + " bid for " + listing.highestBid;
-						var notif = {
-							userID: winUserID,
-							listingID: listingID,
-							description: description,
-							date: date
-						};
+										db.insertOne(Notification, notif, function (result) {
 
-						db.insertOne(Notification, notif, function (result) {
-
-						});
-					});
-
-					// Losers notification
-					db.findOne(Listing, { _id: listingID }, {}, function (result) {
-						db.findMany(Participation, { listingId: listingID }, {}, function (listing) {
-							for (var i = 0; i < listing.length; i++) {
-								if (String(listing[i].user._id) != String(winUserID)) {
-									var description = "You lost the " + result.name + " bid";
-									var notif = {
-										userID: listing[i].user._id,
-										listingID: listingID,
-										description: description,
-										date: date
-									};
-
-									db.insertOne(Notification, notif, function (result) {
-
-									});
+										});
+									}
 								}
-							}
+							});
 						});
-					});
+					}
+					
 				}
 
 			}
