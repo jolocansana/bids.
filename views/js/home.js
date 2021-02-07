@@ -1,7 +1,7 @@
 $(document).ready(function() {
     // console.log('hello');
     // loadProducts();
-    $('#update-password-btn').on('click', function() {
+    $('#changePasswordSubmit').on('click', function() {
 
         $('#pass-id-group').hide();
         $('#pass-id-text').html('');
