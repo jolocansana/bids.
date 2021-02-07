@@ -6,6 +6,9 @@ const homeController = {
 		var query = {status: "active"};
 		var projection = {};
 
+
+		
+		// Show the current listings
 		db.findMany(Listing, query, projection, function(results) {
 
 			res.render('home', {
