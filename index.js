@@ -19,9 +19,15 @@ const socketio = require('socket.io');
 const app = express();
 const port = envPort.port || 3000; 
 
+
 app.set('view engine', 'hbs');
 app.use(express.static(__dirname + '/views'));
 hbs.registerPartials(__dirname + '/views/partials');
+
+// Helpers
+hbs.registerHelper('indexIsZero', function(value) {
+    return value == 0;
+});
 
 app.use(express.urlencoded({extended:true}));
 
@@ -50,7 +56,16 @@ io.on('connection', socket => {
     
     
     socket.on('getBidding', ({ user_id, _id }) => {
-        userJoin(socket.id, user_id, _id)
+        let isGuest = false;
+        let userId;
+
+        if(user_id == '') {
+            isGuest = true;
+            userId = socket.id
+        } else {
+            userId = user_id
+        }
+        userJoin(socket.id, userId, _id, isGuest)
             .then((user) => {
                 socket.join(user.room);
 

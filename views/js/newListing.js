@@ -169,9 +169,6 @@ $(document).ready(function() {
         else
             date = date + today.getMinutes()
 
-        console.log(start)
-        console.log(date)
-
         if(start<date){
             if(field.is($('#startDate'))){
                 $('#startDate').removeClass('is-valid');
@@ -201,7 +198,7 @@ $(document).ready(function() {
             if(field.is($('#endDate'))) {
                 $('#endDate').removeClass('is-valid');
                 $('#endDate').addClass('is-invalid');
-                $('#endDatemsg').text('End date and time should be greater than current date and time.');
+                $('#endDatemsg').text('End date and time should be greater than start date and time.');
             }
             $("#save").prop('disabled', true);
             return callback(false);

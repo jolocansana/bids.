@@ -51,7 +51,14 @@
             <div class="container">
                 <div class="main">
                     <div class="px-lg-4 px-md-4 px-sm-4 mb-3 ml-lg-4 ml-md-4">
-                        <h1 class="h1 font-weight-bold">{{ listing.name }}</h1>
+                        <h1 class="h1 font-weight-bold">{{ listing.name }}
+
+                            {{#if isOwner }}
+                            <button style="border-radius: 50%;" class="btn btn-rounded btn-lg btn-outline-primary ml-4" data-toggle="modal" data-target="#updateModal">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </button>
+                            {{/if }}
+                        </h1>
                         <input type="text" id="listing-id" style="display: none;" value="{{ listing._id }}">
                         <input type="text" id="listing-end-date" style="display: none;" value="{{ listing.endDate }}">
                         <input type="text" id="user-id" style="display: none;" value="{{ participant }}">
@@ -118,8 +125,8 @@
                                                     <div class="carousel-inner">
             
 
-                                                        {{#each listing.images as | url | }}
-                                                            <div class="carousel-item  active">
+                                                        {{#each listing.images as | url | }}      
+                                                            <div class="carousel-item  {{#if @first}}active{{/if}}">
                                                                 <img src="uploads/{{url}}" class="d-block w-100 item-pic" alt="...">
                                                             </div>
                                                         {{/each }}
@@ -189,6 +196,7 @@
                           </div>
                         </div>
 
+                        {{#if isLoggedIn }}
                         <div class="add-bid mt-5" id="bid-card" style="display: none;">
                             <div class="jumbotron container-fluid p-5 px-5">
                                 <div class="row text-center">
@@ -240,6 +248,7 @@
 
                             </div>
                         </div>
+                        {{/if }}
 
                         <div class="add-bid mt-5" id="bid-closed" style="display: none;">
                             <div class="jumbotron container-fluid p-5 px-5">
@@ -264,6 +273,7 @@
                                         <p>
                                             <span class="h4 font-weight-bold">seller</span>
                                             <span class="ml-3 h4 font-weight-normal">{{ owner.firstname }} {{ owner.lastname }}</span>
+                                            <button type="button" onclick="getWinnerInfo('{{owner._id}}')" class="btn btn-dark report-button ml-3" data-toggle="modal" data-target="#contact-info" aria-expanded="false" aria-controls="contact-info">CONTACT</button>
                                         </p>
                                         <p>
                                             <span class="h4 font-weight-bold">tags</span>
@@ -304,6 +314,135 @@
             {{/unless}}
         </div>
 
+        {{#if isOwner }}
+        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Update Listing</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <input type="text" class="form-control" id="description" value="{{ listing.description }}" minlength="5" placeholder="Description of product, minimum of 5 characters">
+                                    <small id="descriptionmsg" class="form-text text-muted"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="brand">Brand</label>
+                                <input type="text" class="form-control" id="brand" value="{{ listing.brand }}" placeholder="Enter brand of your product">
+                                    <small id="brandmsg" class="form-text text-muted"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="tags">Tags</label>
+                                <input type="text" id="tags" class="form-control" value="{{ listing.tags }}" minlength="5" placeholder="Tags related to your product, minimum of 5 characters">
+                                    <small id="tagsmsg" class="form-text text-muted"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="productType">Product Type</label>
+                                <select id="productType" class="form-control">
+                                    <option value="clothes">Clothes</option>
+                                    <option value="food">Food</option>
+                                    <option value="electronics">Electronics</option>
+                                    <option value="tickets">Tickets</option>
+                                    <option value="furniture">Furniture</option>
+                                    <option value="beauty">Beauty</option>
+                                    <option value="books">Books</option>
+                                    <option value="hobbies">Hobbies</option>
+                                    <option value="sports">Sports</option>
+                                    <option value="accessories">Accessories</option>
+                                    <option value="media">Media</option>
+                                    <option value="music">Music</option>
+                                    <option value="pets">Pets</option>
+                                </select>
+                                <small id="productTypemsg" class="form-text text-muted"></small>
+                            </div>
+                            <div class="form-group text-center" id="update-error-display" style="display: none;">
+                                <p class="m-0 p-0 text-danger" id="update-error-message"></p>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-warning" id="update-btn">Update</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        {{/if }}
+
+        <div class="modal fade" id="contact-info" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="title">contact details</h1>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row my-2">
+                            <div class="col-4">
+                                Name:
+                            </div>
+                            <div class="col-8" style="text-align:right;">
+                                <span id="winnerName">Trisha Pelagio</span>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-4">
+                                Email:
+                            </div>
+                            <div class="col-8" style="text-align:right;">
+                                <span id="winnerEmail">wow@gmail.com</span>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-4">
+                                Phone:
+                            </div>
+                            <div class="col-8" style="text-align:right;">
+                                <span id="winnerPhone">0891209382</span>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-4">
+                                Address:
+                            </div>
+                            <div class="col-8" style="text-align:right;">
+                                <span id="winnerAddress">9501 Bassoon Dr</span>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-4">
+                                City:
+                            </div>
+                            <div class="col-8" style="text-align:right;">
+                                <span id="winnerCity">Houston</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" enabled>Okay</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function getWinnerInfo(id){
+                $.get("/getWinnerInfo?soldToUser=" + id, function(data, status){
+                    const { firstname, lastname, phonenum, email, address, city } = data
+                    console.log(data)
+                    $('#winnerName').html(firstname + " " + lastname)
+                    $('#winnerEmail').html(email)
+                    $('#winnerPhone').html(phonenum)
+                    $('#winnerAddress').html(address)
+                    $('#winnerCity').html(city)
+                })
+            }
+        </script>
 
         {{> footer}}
 
@@ -320,7 +459,6 @@
 
         <script src="/socket.io/socket.io.js"></script>
         <script src="/js/bidding.js"></script>
-
 </body>
 
 </html>

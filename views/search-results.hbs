@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bids.</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <script src="/js/home.js"></script>
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/nav.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css">
+    <link rel="stylesheet" type="text/css" href="/css/productCard.css">
+    <link rel="stylesheet" type="text/css" href="/css/hover.css">
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
+
+</head>
+<body>
+    {{> navbar}}
+    <div class="container">
+            <div id="closing-soon">
+                <div class="my-5">
+                    <h2 class="subtitle" style="text-align:center">search results</h2>
+                </div>
+        {{#if found}}
+            {{#if active}}
+                <div class="my-5">
+                    <h2 class="subtitle" style="line-height:0.9">open<br/>bids</h2>
+                </div>
+
+                <div class="row product-row d-flex flex-wrap justify-content-center" id="list">
+                    {{#each active}}
+                    <a href="/listingItem?id={{ obj._id }}" target="_blank" style="text-decoration: none; color: black;">
+                        {{> productCard name=obj.name highestBid=obj.highestBid images=obj.images}}
+                    </a>
+                    {{/each}}
+                </div>
+            {{/if}}
+            </div>
+            {{#if closed}}
+            <div id="open-bids">
+                <div class="my-5" style="text-align:right;">
+                    <h2 class="subtitle" style="line-height:0.9">closed<br/>bids</h2>
+                </div>
+
+                <div class="row product-row d-flex flex-wrap justify-content-center" id="list">
+                    {{#each closed}}
+                    <a href="/listingItem?id={{ obj._id }}" target="_blank" style="text-decoration: none; color: black;">
+                        {{> productCard name=obj.name highestBid=obj.highestBid images=obj.images}}
+                    </a>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+        {{else}}
+            <div id="closing-soon" style="margin-top:150px">
+                <h2 class="subtitle" style="text-align:center">nothing found</h2>
+            </div>
+        {{/if}}
+
+    {{> footer}}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"
+        integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</body>
+
+</html>
