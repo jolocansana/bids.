@@ -76,7 +76,7 @@ const registerController = {
 		let updateUser = await User.updateOne({ _id: user_id }, { password: hash })
 		if(!updateUser) return res.status(500).json('Internal Server Error');
 		
-		res.send(true);
+		res.redirect('/');
 	}
 }
 
