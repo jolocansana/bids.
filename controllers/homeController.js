@@ -19,7 +19,7 @@ const homeController = {
 					const findListing =  Listing.findOne({
 						_id: listID
 					})
-					console.log(results[i]);
+					console.log("highestbidder: " + findListing);
 
 					if(findListing.highestBidderId != undefined){
 						// Listing.updateOne({
@@ -44,20 +44,14 @@ const homeController = {
 					//  Win notification
 					
 					var winUserID = findListing.highestBidderId;
-
-
 					var listingID = listID
 					var date = Date.now();
 
-					try {
-						db.updateOne(Participation, { listingId: listingID, _id: winUserID }, { status: 'won' });
+					
+					db.updateOne(Participation, { listingId: listingID, _id: winUserID }, { status: 'won' });
 
-						db.update({ listingId: listingID, _id: { $ne: winUserID } }, {
-							status: "lost"
-						});
-					} catch (err) {
-						console.log(err);
-					}
+					db.updateOne(Participation, { listingId: listingID, _id: { $ne: winUserID} }, {status: "lost"});
+				
 
 					db.findOne(Listing, { _id: listingID }, {}, function (listing) {
 						var description = "You won the " + listing.name + " bid for " + listing.highestBid;
