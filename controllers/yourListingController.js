@@ -1,6 +1,7 @@
 const db = require("../models/db.js");
 const Listing = require("../models/ListingModel.js");
 const Participation = require("../models/ParticipationModel.js");
+const User = require("../models/UserModel.js");
 
 const activeController = {
     getActive: function(req, res) {
@@ -35,19 +36,16 @@ const activeController = {
 			
         db.findMany(Listing, {listingOwner:userID, status:'inactive'}, {}, function(results) {
             var listings = []
+
             for (var i=0; i<results.length ; i++){ 
-                var image = results[i].images[0]
-                var name = results[i].name
-                var highestBid = results[i].highestBid
-                var highestBidder = results[i].highestBidder
-                var endDate = results[i].endDate.toDateString()
-                var _id = results[i]._id
+                var { images, name, highestBid, highestBidder, endDate, _id, soldToUser } = results[i]
                 var listing = {
-                    image: image,
+                    image: images[0],
                     name: name,
                     highestBid:highestBid,
                     highestBidder:highestBidder,
-                    endDate:endDate,
+                    endDate:endDate.toDateString(),
+                    soldToUser: soldToUser,
                     _id:_id
                 }
                 listings.push(listing)
@@ -57,40 +55,19 @@ const activeController = {
         })
 		
 	},
-	getTimes: function(req, res){
-		var useremail = req.session.email
-		db.findMany(Participation, {email:userEmail, status:'active'}, null, function(result) {
-			var ids = []
-			for(var i=0; i<result.length; i++)
-				ids.push(result[i].listingId)
-				
-			ids = [...new Set(ids)]
-			
-			db.findMany(Listing, {_id:ids}, {}, function(results) {
-				var orders = []
-				for (var i=0; i<results.length ; i++){ 
-
-					var image = results[i].images[0]
-					var name = results[i].name
-					var highestBid = results[i].highestBid
-					var highestBidder = results[i].highestBidder
-					var endDate = results[i].endDate.toString()
-					var _id = results[i]._id
-					var order = {
-						image: image,
-						name: name,
-						highestBid:highestBid,
-						highestBidder:highestBidder,
-						endDate:endDate,
-						_id:_id
-					}
-                    orders.push(order)
-                    console.log(endDate)
-				}
-				res.send(orders).status(200)
-			})
-		})	
-		
+	getWinnerInfo: function(req, res){
+            db.findOne(User, {_id: req.query.soldToUser}, {}, function(result){
+                const { firstname, lastname, phonenum, email, address, city } = result
+                const winner = {
+                    firstname: firstname,
+                    lastname: lastname,
+                    phonenum: phonenum,
+                    email: email,
+                    address: address,
+                    city: city
+                }
+                res.status(200).send(winner)
+            })
 	},
 }
 
