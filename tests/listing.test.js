@@ -37,12 +37,6 @@ describe('Create New Listing', () => {
         expect(error.details[0].message).toContain('to be empty')
     });
 
-    it('When "name" input length is less than 2 , prompt "2 characters long"', () => {
-        const { error } = listingValidation({ name: "a" });
-
-        expect(error.details[0].message).toContain('at least 2 characters')
-    });
-
     it('When "name" input length is more than 200 , prompt "less than or equal to"', () => {
         const { error } = listingValidation({
             name: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"

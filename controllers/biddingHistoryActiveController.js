@@ -11,7 +11,7 @@ const activeController = {
 				ids.push(result[i].listingId)
 				
 			ids = [...new Set(ids)]
-			
+
 			db.findMany(Listing, {_id:ids}, null, function(results) {
 				var orders = []
 				for (var i=0; i<results.length ; i++){ 
@@ -21,15 +21,13 @@ const activeController = {
 					var highestBid = results[i].highestBid
 					var highestBidder = results[i].highestBidder
 					var endDate = results[i].endDate.toString()
-					var remaining = Math.abs(new Date() - new Date(endDate.replace(/-/g,'/')));
-					var remaining = msToTime(remaining)
 					var _id = results[i]._id
 					var order = {
 						image: image,
 						name: name,
 						highestBid:highestBid,
 						highestBidder:highestBidder,
-						remaining:remaining,
+						endDate:endDate,
 						_id:_id
 					}
 					orders.push(order)

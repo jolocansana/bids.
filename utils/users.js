@@ -1,9 +1,14 @@
 const users = [];
 const User = require('../models/UserModel');
 
-async function userJoin(id, user_id, listingId) {
-    let user = await User.findOne({ _id: user_id }).sort('_id firstname lastname');
-    users.push({ id: id, user, room: listingId });
+async function userJoin(id, user_id, listingId, isGuest) {
+
+    if(!isGuest) {
+        let user = await User.findOne({ _id: user_id }).sort('_id firstname lastname');
+        users.push({ id: id, user, room: listingId });
+    } else {
+        users.push({ id: id, user: { _id: id }, room: listingId });
+    }
 
     return users;
 }
